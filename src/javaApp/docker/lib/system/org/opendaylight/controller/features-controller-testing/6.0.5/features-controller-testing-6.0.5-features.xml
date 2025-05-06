@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="features-controller-testing">
+    <repository>mvn:org.opendaylight.controller/odl-clustering-test-app/6.0.5/xml/features</repository>
+    <repository>mvn:org.opendaylight.controller/odl-mdsal-benchmark/6.0.5/xml/features</repository>
+    <feature name="features-controller-testing" description="OpenDaylight :: Controller :: Features to support CSIT testing" version="6.0.5">
+        <details>Controller CSIT Features</details>
+        <feature version="6.0.5" prerequisite="false" dependency="false">odl-clustering-test-app</feature>
+        <feature version="6.0.5" prerequisite="false" dependency="false">odl-mdsal-benchmark</feature>
+    </feature>
+</features>

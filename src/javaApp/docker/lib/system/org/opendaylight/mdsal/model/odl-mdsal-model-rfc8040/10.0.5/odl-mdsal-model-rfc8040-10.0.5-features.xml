@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-mdsal-model-rfc8040">
+    <repository>mvn:org.opendaylight.mdsal/odl-mdsal-binding-base/10.0.5/xml/features</repository>
+    <feature name="odl-mdsal-model-rfc8040" description="OpenDaylight :: MD-SAL :: Model :: RFC8040" version="10.0.5">
+        <details>Models from RFC8040</details>
+        <feature version="10.0.5" prerequisite="false" dependency="false">odl-mdsal-binding-base</feature>
+        <bundle>mvn:org.opendaylight.mdsal.binding.model.ietf/rfc8040/10.0.5</bundle>
+    </feature>
+</features>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="sdnr-wt-odlux-core-feature">
+    <feature name="sdnr-wt-odlux-core-feature" description="ccsdk-features :: sdnr-wt-odlux-core-feature" version="1.5.1">
+        <details>Root POM to be used in place of odlparent for CCSDK based projects</details>
+        <feature prerequisite="true" dependency="false">wrap</feature>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-odlux-core-provider/1.5.1</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-odlux-core-model/1.5.1</bundle>
+        <bundle>wrap:mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-odlux-framework/1.5.1</bundle>
+        <bundle>mvn:com.google.guava/guava/31.1-jre</bundle>
+        <bundle>mvn:com.google.guava/failureaccess/1.0.1</bundle>
+        <bundle>mvn:org.checkerframework/checker-qual/3.12.0</bundle>
+        <bundle>mvn:jakarta.servlet/jakarta.servlet-api/4.0.4</bundle>
+    </feature>
+</features>

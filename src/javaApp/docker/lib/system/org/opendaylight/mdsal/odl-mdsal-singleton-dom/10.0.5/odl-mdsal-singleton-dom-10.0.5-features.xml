@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-mdsal-singleton-dom">
+    <repository>mvn:org.opendaylight.mdsal/odl-mdsal-singleton-common/10.0.5/xml/features</repository>
+    <repository>mvn:org.opendaylight.mdsal/odl-mdsal-eos-dom/10.0.5/xml/features</repository>
+    <repository>mvn:org.opendaylight.mdsal/odl-mdsal-common/10.0.5/xml/features</repository>
+    <feature name="odl-mdsal-singleton-dom" description="OpenDaylight :: MD-SAL :: Singleton :: DOM" version="10.0.5">
+        <details>MD-SAL Cluster Singleton Service implementation</details>
+        <feature version="10.0.5" prerequisite="false" dependency="false">odl-mdsal-singleton-common</feature>
+        <feature version="10.0.5" prerequisite="false" dependency="false">odl-mdsal-eos-dom</feature>
+        <feature version="10.0.5" prerequisite="false" dependency="false">odl-mdsal-common</feature>
+        <bundle>mvn:org.opendaylight.mdsal/mdsal-singleton-dom-impl/10.0.5</bundle>
+    </feature>
+</features>

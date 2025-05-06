@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-mdsal-benchmark">
+    <repository>mvn:org.opendaylight.controller/odl-mdsal-broker/6.0.5/xml/features</repository>
+    <feature name="odl-mdsal-benchmark" description="OpenDaylight :: Controller :: Benchmarks" version="6.0.5">
+        <details>Controller benchmarks</details>
+        <feature version="6.0.5" prerequisite="false" dependency="false">odl-mdsal-broker</feature>
+        <bundle>mvn:org.opendaylight.controller/benchmark-api/6.0.5</bundle>
+        <bundle>mvn:org.opendaylight.controller/dsbenchmark/6.0.5</bundle>
+        <bundle>mvn:org.opendaylight.controller/ntfbenchmark/6.0.5</bundle>
+        <bundle>mvn:org.opendaylight.controller/rpcbenchmark/6.0.5</bundle>
+    </feature>
+</features>

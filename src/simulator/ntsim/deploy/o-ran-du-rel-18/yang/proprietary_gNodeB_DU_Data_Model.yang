@@ -1,0 +1,2521 @@
+module proprietary_gNodeB_DU_Data_Model  {
+yang-version 1.1;
+    namespace "urn:ietf:params:xml:ns:yang:smiv2:proprietary_gNodeB_DU_Data_Model";
+    prefix "proprietary-gnodeb-du-data-model";
+    organization
+        "ARICENT COMMUNICATIONS SOFTWARE";
+    contact
+        "DESCRIPTION
+        The proprietary  MIB module for MRP.";
+
+    revision 2012-09-05 {
+        description
+            "The proprietary MIB module for MRP.";
+
+    }
+container Proprietary_gNodeB_DU_Data_Model {
+container gNBDUParams {
+	leaf NROperationalMode {
+		description
+            "This object is used to configure NROperationalMode";
+            default "2";
+			 type uint32{
+              range "1..2";
+			}
+	}
+	container DUMGRProvsioningParams {
+		leaf logLevel {
+			description
+            		 "This object is used to configure logLevel";
+             		default "127";
+              		type uint32{
+               			range "1..127";
+				}
+			}
+		leaf SFNlogLevel {
+			description
+            "This object is used to configure SFNlogLevel";
+            default "0";
+			type uint32{
+                range "0..1";}
+
+		}
+		leaf gNBDUID {
+			description
+			"This object is used to configure ID of the gNB-DU";
+			default "1111";
+			type uint32{
+                range "0..1111";}
+
+		}
+		leaf gNBDUName {
+			description
+			"This object is used to configure ID of the gNBDUName";
+			default "1";
+			type string{
+                length "1..150";}
+		}
+		leaf F1setupRetryCount {
+			description
+			"This object is used to configure ID of the F1setupRetryCount";
+			default "0";
+			type uint32{
+                range "0..255";}
+		}
+		leaf F1setupSameCellRetryCount {
+			description
+				"This object is used to configure ID of the F1setupSameCellRetryCount";
+			default "0";
+			type uint32{
+				range "0..255";}
+		}
+
+		leaf F1SetupRetryWaitTimer {
+			description
+				"This object is used to configure ID of the F1SetupRetryWaitTimer";
+			default "0";
+			type uint32{
+				range "0..255";}
+		}
+
+		 leaf dmrsPortReuseCount {
+                        description
+                        "This object is used to configure ID of the dmrsPortReuseCount";
+                        default "0";
+                        type uint32{
+                range "0..255";}
+                }
+
+		leaf DUConfigUpdateRetryCount {
+			description
+			"This object is used to configure ID of the DUConfigUpdateRetryCount";
+			default "0";
+			type uint32{
+                range "0..3";}
+		}
+		container sharedMemoryConfig {
+			leaf sharedMemorySize {
+			description
+			"This object is used to configure ID of the sharedMemorySize";
+			default "10";
+			type uint32{
+                range "0..255";}
+			}
+			leaf maxLogFileSize {
+			description
+			"This object is used to configure ID of the maxLogFileSize";
+			default "10";
+			type uint32{
+                range "0..255";}
+			}
+			leaf LogFilePath {
+			description
+			"This object is used to configure ID of the LogFilePath";
+			default "10";
+			type string{
+                length "0..255";}
+			}
+			leaf maxLogFileCount {
+			description
+			"This object is used to configure ID of the maxLogFileCount";
+			default "10";
+			type string{
+                length "0..255";}
+			}
+		}/*sharedMemoryConfig*/
+		container guard_timers {
+			leaf DU_MGR_DF1AP_F1_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DF1AP_F1_SETUP_RETRY_WAIT_TIMER_VALUE {
+				description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_SETUP_RETRY_WAIT_TIMER_VALUE";
+				default "50";
+				type uint32{
+					range "50..65535";}
+			}
+			leaf DU_MGR_DF1AP_TIMER_SCTP_CONNECT_DURATION_VALUE {
+				description
+                                        "This object is used to configure ID of the DU_MGR_DF1AP_TIMER_SCTP_CONNECT_DURATION_VALUE";
+                                default "50";
+                                type uint32{
+                                        range "50..65535";}
+                        }
+
+			leaf DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}	
+			leaf DU_MGR_DF1AP_DU_CONFIG_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_DU_CONFIG_GUARD_TIMER_VALUE ";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DF1AP_UE_ADD_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DCPM_CELL_RECONFIG_GUARD_TIMER_VALUE{
+			description
+			"This object is used to configure ID of the DU_MGR_DCPM_CELL_RECONFIG_GUARD_TIMER_VALUE ";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DF1AP_UE_MOD_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DF1AP_UE_RELEASE_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}	
+			leaf DU_MGR_DCPM_CELL_SETUP_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DCPM_CELL_START_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}	
+			leaf DU_MGR_DCPM_CELL_DELETE_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}	
+			leaf DU_MGR_DCPM_CELL_STOP_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DCPM_UE_ADD_PROCEDUR_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}	
+			leaf DU_MGR_DCPM_UE_MOD_PROCEDUR_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DCPM_UE_REALESE_PROCEDUR_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}	
+			leaf DU_MGR_DCPM_LL_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DCPM_UE_RRC_SETUP_PROCEDURE_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DCPM_UE_ATTACH_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DCPM_RRC_REESTABLISH_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DCPM_MAC_SYNC_IND_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DCPM_RLF_HANDLING_PROCEDURE_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DCPM_CELL_KPI_DURATION_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50";
+			type uint32{
+                range "50..65535";}
+			}
+			leaf DU_MGR_DCPM_UE_RELEASE_GUARD_TIMER_VALUE {
+                        description
+                        "This object is used to configure ID of the DU_MGR_DCPM_UE_RELEASE_GUARD_TIMER_VALUE";
+                        default "50";
+                        type uint32{
+                range "50..65535";}
+                        }
+
+			leaf DU_MGR_DOAMH_GUARD_TIMER_VALUE {
+			description
+			"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+			default "50000";
+			type uint32{
+                range "50..65535";}
+			}
+		}/*guard_timers*/
+		
+		leaf UEreleasewhilebwpreconfig{
+			description
+				"This object is used to configure UEreleasewhilebwpreconfig";
+			default "127";
+			type uint32{
+				range "1..127";
+																															                    }
+
+		}/*UEreleasewhilebwpreconfig*/
+
+		}/*DUMGRProvsioningParams*/
+		container RlcProvsioningParams {
+			leaf logLevel {
+					description
+            				"This object is used to configure logLevel";
+             				default "127";
+              				type uint32{
+               				range "1..127";
+					}
+				}
+			leaf rlcMaxPacketSize  {
+                                        description
+                                        "This object is used to configure rlcMaxPacketSize";
+                                        default "127";
+                                        type uint32{
+                                        range "100..601";
+                                        }
+                                }
+
+			leaf qSizeFactorGbr {
+				description
+				"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE ";
+				default "6";
+				type uint32{
+					range "1..6";}
+			}
+			leaf qSizeFactorNgbr {
+				description
+				"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE ";
+				default "6";
+				type string{
+					length "1..6";}
+			}
+			leaf numWorkerThread {
+				description
+				"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE ";
+				default "6";
+				type string{
+					length "1..6";}
+			}
+			leaf healthTimeInterval {
+				description
+				"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE ";
+				default "6";
+				type string{
+					length "1..6";}
+			}
+			leaf logCategory {
+			description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "0";
+					type int64{
+						range "0..9223372036854775807";}
+				}
+			leaf DataBufferSize {
+				description
+				"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+				default "3500";
+				type uint32{
+			}
+            }
+			
+		}/*RlcProvsioningParams*/
+		container MacProvsioningParams {
+			leaf pmiInfoReadParam {
+                 description
+				"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+				default "0";
+				type uint32{
+					range "0..1";}
+			
+                 }              
+			container systemParam {
+				leaf logLevel {
+					description
+            				"This object is used to configure logLevel";
+             				default "127";
+              				type uint32{
+               				range "1..127";
+					}
+				}
+				leaf PhyUlDelayTimer{
+					description
+					"This object is used to configure PhyUlDelayTimer"; 
+					default "1";
+                                        type uint32{
+                                        range "1..4";
+                                        }
+ 
+				}
+				leaf caSupported {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "0";
+					type uint32{
+						range "0..1";}
+				}
+				leaf ulCASupported {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "0";
+					type uint32{
+						range "0..1";}
+				}
+				leaf UeInactivitySupported {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "0";
+					type uint32{
+						range "0..1";}
+				}
+				leaf srsEnabled {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "0";
+					type uint32{
+						range "0..1";}
+				}
+				leaf pos-ulSlotCheckEnabled {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "0";
+					type uint32{
+						range "0..1";}
+				}
+				leaf macThreadModel {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "0";
+					type uint32{
+						range "0..1";}
+				}
+				leaf isHostedCellPCell {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "1";
+					type uint32{
+						range "0..2";}
+				}
+				leaf CommonBeamSupported {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "1";
+					type uint32{
+						range "0..2";}
+				}
+				leaf healthTimeInterval {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "1";
+					type uint32{
+						range "0..2";}
+				}
+				leaf logCategory {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "0";
+					type int64{
+						range "0..9223372036854775807";}
+				}
+				leaf DataBufferSize {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "3500";
+					type uint32{
+						range "1500..65535";}
+				}
+				leaf PosSrsEnabled {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "1";
+					type uint32{
+						range "0..1";}
+				}
+				leaf measGapEnabled {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "1";
+					type uint32{
+						range "0..1";}
+				}
+				leaf CBGSegmentation {
+                                        description
+                                        "This object is used to configure ID of the CBGSegmentation";
+                                        default "1";
+                                        type uint32{
+                                                range "0..1";}
+                                }
+				leaf CsiRsNarrowBMEnabled {
+                                        description
+                                        "This object is used to configure ID of the CsiRsNarrowBMEnabled";
+                                        default "1";
+                                        type uint32{
+                                                range "0..1";}
+                                }
+				 leaf CsiRsL3MeasEnabled {
+                                        description
+                                        "This object is used to configure ID of the CsiRsL3MeasEnabled";
+                                        default "1";
+                                        type uint32{
+                                                range "0..1";}
+                                }
+				leaf staticPmiPairingForDLmuMIMO {
+                                        description
+                                        "This object is used to configure ID of the staticPmiPairingForDLmuMIMO";
+                                        default "1";
+                                        type uint32{
+                                                range "0..1";}
+                                }
+				leaf RANEventLoggingEnabled {
+                                        description
+                                        "This object is used to configure ID of the RANEventLoggingEnabled";
+                                        default "1";
+                                        type uint32{
+                                                range "0..1";}
+                                }
+				leaf K1MinValue {
+                                        description
+                                        "This object is used to configure ID of the  K1MinValue";
+                                        default "1";
+                                        type uint32{
+                                                range "0..1";}
+                                }	
+				leaf staticPmiValues {
+                                        description
+                                        "This object is used to configure ID of the staticPmiValues";
+                                        default "1";
+                                        type uint32{
+                                                range "0..1";}
+                                } 
+				leaf srsEnabled_r16{
+					default "0";
+					type uint32{
+						range "0..1";}
+				}
+			}/*systemParam*/
+			container RlclSystemParams {
+				leaf logLevel {
+					description
+            				"This object is used to configure logLevel";
+             				default "127";
+              				type uint32{
+               				range "1..127";
+					}
+				}
+				leaf logCategory {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "0";
+					type int64{
+					range "0..9223372036854775807";}
+				}
+				leaf CoreNumWorkerThread {
+					description
+					"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "0";
+					type uint32{
+						range "0..8";}
+				}
+			}/*RlclSystemParams*/
+			leaf NumSchedParms {
+				description
+				"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+					default "0";
+					type uint32{
+						range "0..8";}
+				}
+			container SchedParms {
+				container SystemInfoParams {
+					leaf CceAggrLevelSib {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..8";}
+					}
+					leaf logLevel {
+					description
+            				"This object is used to configure logLevel";
+             				default "127";
+              				type uint32{
+               				range "1..127";
+					}
+				}
+					leaf MinMcsIndexSib1 {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..9";}
+					}
+					leaf MaxMcsIndexSib1 {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..9";}
+					}
+					leaf VrbToPrbMappingSib1 {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+							type uint32{
+							range "0..2";}
+						}
+					leaf SlotTransmissionN0N1Sib1 {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+						range "0..2";}
+						}					
+					leaf PdschMappingTypeSib1 {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..3";}
+						}
+					leaf pdcch_power_offset {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "6000";
+						type uint32{
+							range "0..6000";}
+					}
+					leaf pdcch_dmrs_power_offset {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "6000";
+						type uint32{
+							range "0..6000";}
+					}
+					leaf pdsch_power_offset {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "9223372036854775807";
+						type uint64{
+							range "0..9223372036854775807";}
+					}
+                    leaf logCategory {
+                    description
+                    "This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+                    default "0";
+                    type int64{
+                    range "0..9223372036854775807";}
+                }
+
+					leaf pdsch_dmrs_power_offset {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "6000";
+						type uint32{
+							range "0..6000";}
+					}
+				container CqiThresholdParms {
+						description
+						"scheduling parameters related for CQI";
+				    }
+					leaf SchedulingPeriod {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "8";
+						type uint32{
+							range "0..8";}
+					}
+				}/*SystemInfoParams*/
+
+				container DlMuMimoConfig{
+						leaf MuMimoEnabled{
+							default "0";
+							type uint32{
+								range "0..8";}
+							}
+                         list MCSThresholdInfo{
+                    key "MCSThreshold64QAM2_2";
+                              leaf MCSThreshold64QAM2_2 {
+                                   description
+                                   "This object is used to configure MCSThreshold64QAM2_2";
+                                   default "1";
+                                     type string{
+                                      length  "1..28";}
+                                 }
+                              leaf MCSThreshold64QAM4_4  {
+                                    description
+                                     "This object is used to configure MCSThreshold64QAM4_4";
+                                   default "1,2,3";
+                                     type string{
+                                      length "1..28";}
+                                  }
+                               leaf MCSThreshold64QAM8_8  {
+                                     description
+                                     "This object is used to configure MCSThreshold64QAM8_8";
+                                   default "2,3,4,5,6,7,8";
+                                     type string{
+                                      length  "1..28";}
+                                }
+                              leaf MCSThreshold256QAM2_2  {
+                                  description
+                                     "This object is used to configure MCSThreshold256QAM2_2";
+                                   default "1";
+                                     type string{
+                                      length  "1..27";}
+                                 }
+                              leaf MCSThreshold256QAM4_4  {
+                                    description
+                                     "This object is used to configure MCSThreshold256QAM4_";
+                                   default "1,2,3";
+                                     type string{
+                                      length  "1..27";}
+                                }
+                            leaf MCSThreshold256QAM8_8  {
+                                    description
+                                     "This object is used to configure MCSThreshold256QAM4_";
+                                   default "2,3,4,5,6,7,8";
+                                     type string{
+                                      length  "1..27";}
+                                }
+                        }
+                        leaf QloadThreshold {
+                            description
+                             "This object is used to configure QloadThreshold";
+			    default "100";
+			    type uint32{
+				    range "0..4294967295 ";}
+			}
+			leaf MuMimoCsiType {
+				description
+					"This object is used to configure MuMimoCsiType";
+				default "1";
+				type int32{
+					range "0..1 ";}
+			}
+			leaf MaxMuMimoLayers {
+				description
+					"This object is used to configure MaxMuMimoLayers";
+				default "2";
+				type int32{
+					range "1..4 ";}
+			}
+
+			leaf MuMimoPairThreshold{
+				default "2";
+				type uint32{
+					range "0..20";}
+			}
+			leaf dmrsPortReuseCount{
+				default "2";
+				type uint32{
+					range "0..20";}
+			}
+
+			leaf MuMimoPmiThreshold {
+				description 
+					"This object is used to configure MuMimoPmiThreshold";
+				default "10";
+				type int32{
+					range "0..10";}
+			}
+			leaf NumUEPair {
+				description 
+					"This object is used to configure NumUEPairs";
+				default "2";
+				type int32{
+					range "2..8";}
+			}
+				}/*DlMuMimoConfig*/
+				container UlMuMimoConfig{
+
+					leaf MuMimoEnabled{
+						default "0";
+						type uint32{
+							range "0..8";}
+					}
+					leaf UlMcsAdjustmentFactor {
+						description
+							"This object is used to configure UlMcsAdjustmentFactor";
+						default "1";
+						type string{
+							length  "0..28";}
+					}
+					leaf minPairingMcsThreshold {
+						description
+							"This object is used to configure minPairingMcsThreshold";
+						default "1";
+						type string{
+							length  "0..28";}
+					}
+					leaf maxUlLayersForPairing {
+						description
+							"This object is used to configure maxUlLayersForPairing";
+						default "1";
+						type string{
+							length  "1..4";}
+					}
+					leaf numUeToPair {
+						description
+							"This object is used to configure numUeToPair";
+						default "1";
+						type string{
+							length  "1..4";}
+					}
+					leaf minBsrThresholdToPair {
+						description
+							"This object is used to configure minBsrThresholdToPair";
+						default "1";
+						type string{
+							length  "1..150000";}
+					}
+					leaf ulDmrsPortReuseCount {
+						description
+							"This object is used to configure ulDmrsPortReuseCount";
+						default "1";
+						type string{
+							length  "1..28";}
+					}
+					leaf crossCorrelationPairingThreshold {
+						description
+							"This object is used to configure crossCorrelationPairingThreshold";
+						default "1";
+						type string{
+							length  "1..28";}
+					}
+
+				}
+				leaf DlGain {
+					description
+						"This object is used to configure pdcch_power_offset";
+					default "1024";
+					type uint32{
+						range "0..1024";}
+				}
+				container DRBStatusNotifyParam{
+					leaf DRBStatusMonitoringTimer{
+						description
+							"This object is used to configure DRBStatusMonitoringTimer";
+						default "0";
+						type int32{
+						range "0..6";}
+					}
+                     leaf BitRateFluctuatingPerc{
+                        description
+                            "This object is used to configure BitRateFluctuatingPerc";
+                        default "0";
+                        type int32{
+                        range "0..6";}
+                    }
+
+					leaf BitRateFlutuatingPerc{
+						description
+							"This object is used to configure BitRateFlutuatingPerc";
+						default "5";
+						type int32{
+						range "1..10";}
+					}
+			}/*DRBStatusNotifyParam*/
+			    container CaInfoParams{
+						   leaf pcellBsrWeight{
+                              description
+                               "The object is used to configure pcellBsrWeight";
+                                 default "1";
+                                 type int32{
+                                  range "0..10000";}
+					
+							}
+						   leaf periodicityBoDistribution{
+								default "10";
+								type uint32{
+								range "1..100";
+								}
+							}
+						   leaf thresholdScellDistribution{
+								default "65535";
+								type uint32{
+								range "1000..65535";
+								}
+							}
+ 						   leaf thresholdScellDistributionUL{
+								default "65535";
+								type uint32{
+								range "1000..65535";
+								}
+							}
+				}/*CaInfoParams*/
+			    container RRUConfig {
+					leaf CommonDCLocation {
+						description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "65535";
+							type uint32{
+							range "0..65535";}
+					}
+					leaf TargetPrachFalseAlarmRate {
+						description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "0";
+							type uint32{
+								range "0..16";}
+					}
+					leaf ForceHarqCombination {
+						description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "0";
+							type uint32{
+								range "0..1";}
+					}
+					leaf PuschDataSuppressionDC {
+						description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "0";
+							type uint32{
+								range "0..1";}
+					}
+					leaf PuschChEstBypassDC {
+						description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "0";
+							type uint32{
+								range "0..1";}
+					}
+				}/*RRUConfig*/
+				list DLPdschPowerControl {
+					key "DLPdschPowerControlEnabled";
+					leaf DLPdschPowerControlEnabled {
+						description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "1";
+							type uint32{
+								range "0..1";}
+					}
+					container pdsch_power_control_cc {
+						list pdsch_aggr_pwr_offset_tuples {
+							key "pdsch_power_offset pdsch_dmrs_power_offset";
+							leaf pdsch_power_offset {
+							description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "18000";
+							type uint32{
+								range "0..20000";}
+							}
+							leaf pdsch_dmrs_power_offset {
+							description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "18000";
+							type uint32{
+								range "0..20000";}
+							}
+						
+						}/*pdsch_aggr_pwr_offset_tuples*/
+					
+					}/*pdsch_power_control_cc*/
+					container pdsch_power_control_ce {
+						list pdsch_aggr_pwr_offset_tuples {
+                          key "pdsch_power_offset pdsch_dmrs_power_offset";
+							leaf pdsch_power_offset {
+							description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "18000";
+							type uint32{
+								range "0..20000";}
+							}
+							leaf pdsch_dmrs_power_offset {
+							description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "18000";
+							type uint32{
+								range "0..20000";}
+							}
+						}/*pdsch_aggr_pwr_offset_tuples*/
+					}/*pdsch_power_control_ce */
+				}/*DLPdschPowerControl*/
+				container DLPdcchPowerControl {
+					leaf DLPdcchPowerControlEnabled {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "1";
+						type uint32{
+							range "0..1";}
+					}
+					leaf SmallDciThrehold {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "40";
+						type uint32{
+							range "0..40";}
+					}
+					leaf MediumDciThreshold {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "60";
+						type uint32{
+							range "0..60";}
+					}
+					container pdcch_power_control_cc {
+						
+						list pdcch_aggregation_power_offset {
+							key "count";
+							leaf count {
+									description
+									"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+									default "1";
+									type uint32{
+										range "1..5";}
+								}
+							list pdcch_aggr_pwr_offset_tuples {
+								key "aggregation_level pdcch_power_offset pdcch_dmrs_power_offset";
+								leaf aggregation_level {
+									description
+									"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+									default "1";
+									type uint32{
+										range "1..20000";}
+								}
+								leaf pdcch_power_offset {
+									description
+									"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+									default "0";
+									type uint32{
+										range "0..18000";}
+								}
+								leaf pdcch_dmrs_power_offset {
+									description
+									"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+									default "0";
+									type uint32{
+										range "0..18000";}
+								}
+							}/*pdcch_aggr_pwr_offset_tuples*/
+						
+						}/*pdcch_aggregation_power_offset*/
+					
+					}/*pdcch_power_control_cc*/
+					container pdcch_power_control_ce {
+						
+						list pdcch_aggregation_power_offset {
+							key "count";
+							leaf count {
+									description
+									"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+									default "1";
+									type uint32{
+										range "1..65535";}
+								}
+							list pdcch_aggr_pwr_offset_tuples {
+								key "aggregation_level pdcch_power_offset pdcch_dmrs_power_offset";
+								leaf aggregation_level {
+									description
+									"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+									default "1";
+									type uint32{
+										range "1..16";}
+								}
+								leaf pdcch_power_offset {
+									description
+									"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+									default "0";
+									type uint32{
+										range "0..18000";}
+								}
+								leaf pdcch_dmrs_power_offset {
+									description
+									"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+									default "0";
+									type uint32{
+										range "0..18000";}
+								}
+							}/*pdcch_aggr_pwr_offset_tuples*/
+						
+						}/*pdcch_aggregation_power_offset*/
+					
+					}/*pdcch_power_control_ce*/
+				}/*DLPdcchPowerControl*/
+				container TaInfoParams {
+					leaf TaAveragingFactor {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "20";
+						type uint32{
+							range "0..100";}
+					}
+					leaf TaOnPucch {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+                         range "0..1";}
+					}
+					leaf TaSyncTimerDelta {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..100";}
+					}
+				}/*TaInfoParams*/
+				container PagingInfoParams {
+					leaf cce_aggregation_level {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..9";}
+					}
+					leaf mcs_index {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..9";}
+					}
+					leaf vrb_to_prb_mapping {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..1";}
+					}
+					leaf tb_scaling {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..2";}
+					}
+					leaf pdcch_power_offset {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "6000";
+						type uint32{
+							range "0..7000";}
+					}
+					leaf pdsch_power_offset {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "6000";
+						type uint32{
+							range "0..7000";}
+					}
+					leaf pdcch_dmrs_power_offset {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "6000";
+						type uint32{
+							range "0..7000";}
+					}
+					leaf pdsch_dmrs_power_offset {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "6000";
+						type uint32{
+							range "0..7000";}
+					}
+					leaf paging_for_SI_modification {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..1";}
+					}
+				}/*PagingInfoParams*/
+				container DlLaInfoParmas {
+						leaf DlLaEnabled {
+							description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..1";}
+						}
+						leaf DlLaMode {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "6000";
+						type uint32{
+							range "0..65535";}
+						}
+						leaf DlLaTriggerTimer {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "6000";
+						type uint32{
+							range "0..65535";}
+						}
+						leaf DlLaPktCount {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "6000";
+						type uint32{
+							range "0..65535";}
+						}
+						leaf DlLaCQIReportCount {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "6000";
+						type uint32{
+							range "0..65535";}
+						}
+						leaf DlLaBlerSamplesCount {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "6000";
+						type uint32{
+							range "1..65535";}
+						}
+						leaf DlLaTargetBler {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "10";
+						type uint32{
+							range "0..100";}
+						}
+						leaf DlLaIirCoefficient {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "80";
+						type uint32{
+							range "0..100";}
+						}
+						leaf DlLaBlerScalingValue {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "80";
+						type uint32{
+							range "0..100";}
+						}
+						leaf DlLaUlToDlFeedback {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "80";
+						type uint32{
+							range "0..100";}
+						}
+						leaf DlLaCQIToMCSTable64Qam {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type string{
+							length "0..256";}
+						}
+						leaf DlLaCQIToMCSTable256Qam {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type string{
+							length "0..256";}
+						}
+						leaf DlLaCQIToMCSTableLowScQam {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type string{
+							length "0..256";}
+						}
+						leaf DlLaRiSwitchLowToHighSamples {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "80";
+						type string{
+							length "0..256";}
+						}
+						leaf DlLaRiSwitchHighToLowSamples {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "80";
+						type string{
+							length "0..255";}
+						}
+				}/*DlLaInfoParmas*/
+				container UlLaInfoParmas {
+					leaf UlLaEnabled {
+					description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type string{
+                        length "0..1";}					
+}   
+					leaf sinrReportForUlLa {
+						description
+						"This object is used to configure NROperationalMode";
+						default "0";
+						type string{
+                            length "0..2";
+						}
+					}
+					leaf UlLaMode {
+						description
+						"This object is used to configure NROperationalMode";
+						default "160";
+						type string{
+							length "0..65535";}
+						}
+					
+					leaf UlLaTriggerTimer {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "100";
+						type string{
+							length "1..65535";}
+					}
+					leaf UlLaPktCount {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "100";
+						type string{
+							length "0..65535";}
+					}
+					leaf UlLaBlerSamplesCount {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "100";
+						type string{
+							length "0..65535";}
+					}
+					leaf UlLaTargetBler {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "80";
+						type string{
+							length "0..65535";}
+					}
+					leaf UlLaIirCoefficient {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "80";
+						type string{
+							length "0..100";}
+					}
+					leaf UlLaBlerScalingValue {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "15";
+						type string{
+							length "0..100";}
+					}
+					leaf UlLaDlToUlFeedback {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type string{
+							length "0..28";}
+					}
+					leaf UlLaSinrToMCSTable64Qam {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type string{
+							length "0..1024";}
+					}
+					leaf UlLaSinrToMCSTable256Qam {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type string{
+							length "0..1024";}
+					}
+					leaf UlLaSinrToMCSTableLowScQam {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type string{
+							length "0..256";}
+					}
+				}/*UlLaInfoParmas*/
+				container DlGenericParams {
+					leaf MaxDlHarqRetx {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..3";}
+					}
+					leaf SsbResourcesReserved {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..1";}
+					}
+				}/*DlGenericParams*/
+				container UlGenericParams {
+					leaf MaxUlHarqRetx {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "0";
+						type uint32{
+							range "0..3";}
+					}
+					leaf NumReportsToDetermineRank {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "10";
+						type uint32{
+							range "0..10";}
+					}
+					leaf SinrThresholdL1 {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "100";
+						type uint32{
+							range "0..200";}
+					}
+					leaf SinrThresholdL2 {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "100";
+						type uint32{
+							range "0..200";}
+					}
+					leaf SinrThresholdL3 {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "100";
+						type uint32{
+							range "0..200";}
+					}
+					leaf SinrThresholdL4 {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "1";
+						type uint32{
+							range "0..200";}
+					}
+					leaf RssiMeasurement {
+                                                description
+                                                "This object is used to configure RssiMeasurement";
+                                                default "100";
+                                                type uint32{
+                                                        range "0..200";}
+                                        }
+
+				}/*UlGenericParams*/
+				container ForceGrantParams {
+					leaf NumForceGrant {
+					description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "5";
+						type int32{
+							range "5..100";}
+					}
+					leaf SizeOfForceGrant {
+						description
+						"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+						default "10";
+						type uint32{
+							range "10..100";}
+					}
+				}/*ForceGrantParams*/
+				container ULPowerControlParms {
+					container OLPCParams {
+						leaf PeriodicReportingEnabled {
+							description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "10";
+							type uint32{
+								range "0..100";}
+						}
+						leaf TimeAvgCoeffIRR {
+							description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE ";
+							default "820";
+							type uint32{
+								range "0..1024";}
+						}
+						leaf ReportPeriodicity {
+							description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "100";
+							type uint32{
+								range "100..5000";}
+						}
+						leaf MinReports {
+							description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "5";
+							type uint32{
+								range "1..100";}
+						}
+						leaf UeBatchSize {
+							description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "5";
+							type uint32{
+								range "5..25";}
+						}
+					}/*OLPCParams 4558*/
+					container CLPCParams {
+						container ClpcPuschParams {
+							leaf ClpcPuschEnabled {
+							description
+							"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+							default "0";
+							type uint32{
+								range "0..1";}
+							}
+							leaf CoolOffPeriodForPuschTpc {
+								description
+								"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+								default "0";
+								type uint32{
+									range "0..1";}
+							}
+							leaf TimeAvgCoeffIRRPusch {
+								description
+								"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+								default "820";
+								type uint32{
+									range "0..1024";}
+							}
+							container AlphaPathlossToTargetSinrMap {
+								leaf DefaultPathLoss {
+								description
+								"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+								default "0";
+								type uint32{
+									range "0..255";}
+								}
+								list PathlossToTargetSinrMap {
+									key "PathlossToTargetSinrMapInfoCount";
+								
+									leaf PathlossToTargetSinrMapInfoCount {
+										description
+										"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+										default "0";
+										type uint32{
+											range "0..255";}
+									}
+									list PathlossToTargetSinrMapInfo {
+										key "StartPathloss EndPathloss TargetSinr";
+                                        leaf StartPathloss {
+											description
+											"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+											default "0";
+											type uint32{
+												range "0..255";}
+										}
+										leaf EndPathloss {
+											description
+											"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+											default "0";
+											type uint32{
+												range "0..255";}
+										}
+										leaf TargetSinr {
+											description
+											"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+											default "0";
+											type uint32{
+												range "0..255";}
+										}
+									}/*PathlossToTargetSinrMapInfo*/
+								}/*PathlossToTargetSinrMap*/
+							}/*AlphaPathlossToTargetSinrMap*/
+							list DeltaSinrToTpcMapPusch {
+                                key "DeltaSinrToTpcMapPuschCount";
+								leaf DeltaSinrToTpcMapPuschCount {
+									description
+											"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+											default "0";
+											type uint32{
+												range "0..255";}
+								}
+								container DeltaSinrToTpcMapPuschInfo {
+
+									leaf StartDeltaSinr {
+										description
+											"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+											default "-255";
+											type int32{
+												range "-255..255";}
+										}
+										leaf EndDeltaSinr {
+											description
+											"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+											default "-255";
+											type int32{
+												range "-255..255";}
+										}
+										leaf PuschTpc {
+											description
+											"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+											default "-255";
+											type int32{
+												range "-255..255";}
+										}
+										
+								}/*DeltaSinrToTpcMapPuschInfo */
+							}/*DeltaSinrToTpcMapPusch 5943*/
+							container AtBParams {
+								leaf AtbEnabled {
+									description
+									"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+									default "0";
+									type uint32{
+										range "0..1";}
+								}
+								leaf MinMcsForAtb {
+								description
+									"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+									default "1";
+									type uint32{
+										range "0..28";}
+								}
+								leaf MinPrbForAtb {
+									description
+									"This object is used to configure ID of the DU_MGR_DF1AP_F1_REMOVAL_GUARD_TIMER_VALUE";
+									default "1";
+									type uint32{
+										range "0..273";}
+								}
+								}
+								leaf TwoPuschAdjStates {
+								description
+									"This object is used to configure TwoPuschAdjStates";
+									default "0";
+									type uint32{
+										range "0..1";}
+								}
+								leaf FiBackoffEnabled {
+								description
+									"This object is used to configure FiBackoffEnabled";
+									default "1";
+									type uint32{
+										range "0..1";}
+								}
+
+								leaf FiBackoffThreshold {
+								description
+									"This object is used to configure FiBackoffThreshold";
+									default "130";
+									type uint32{
+										range "0..255";}
+								}
+								leaf DefaultUlSchDtxThreshold {
+								description
+									"This object is used to configure DefaultUlSchDtxThreshold";
+									default "130";
+									type uint32{
+										range "0..255";}
+								}
+								}/*ClpcPuschParams 5977*/
+								
+								container ClpcPucchParams {
+									leaf ClpcPucchEnabled {
+										description
+										"This object is used to configure ClpcPucchEnabled";
+										default "0";
+										type uint32{
+											range "0..1";}
+									}
+									leaf ClpcPucchSinrEnabled {
+										description
+										"This object is used to configure ClpcPucchSinrEnabled";
+										default "0";
+										type uint32{
+											range "0..3";}
+									}
+									leaf ClpcPucchBlerEnabled {
+										description
+										"This object is used to configure ClpcPucchEnabled";
+										default "0";
+										type uint32{
+											range "0..1";}
+									}
+									leaf CoolOffPeriodForPucchSinrTpc {
+										description
+										"This object is used to configure CoolOffPeriodForPucchSinrTpc";
+										default "0";
+										type uint32{
+											range "0..255";}
+									}
+									leaf CoolOffPeriodForPucchBlerTpc {
+										description
+										"This object is used to configure CoolOffPeriodForPucchBlerTpc";
+										default "0";
+										type uint32{
+											range "0..255";}
+									}
+									leaf TimeAvgCoeffIRRPucch {
+										description
+										"This object is used to configure TimeAvgCoeffIRRPucch";
+										default "820";
+										type uint32{
+											range "0..1024";}
+									}
+									leaf DefaultUlUciDtxThreshold {
+										description
+										"This object is used to configure DefaultUlUciDtxThreshold";
+										default "0";
+										type uint32{
+											range "0..1024";}
+									}
+									container DeltaSinrToTpcMapPucch {
+										leaf PucchTargetSinr {
+											description
+											"This object is used to configure PucchTargetSinr";
+											default "0";
+											type uint32{
+												range "0..255";}
+										}
+										leaf DeltaSinrToTpcMapPucchCount {
+											description
+											"This object is used to configure PucchTargetSinr";
+											default "0";
+											type uint32{
+												range "0..255";}
+										}
+										container DeltaSinrToTpcMapPucchInfo {
+											leaf StartDeltaSinr {
+												description
+													"This object is used to configure StartDeltaSinr";
+													default "-255";
+													type int32{
+														range "-255..255";}
+											}
+											leaf EndDeltaSinr {
+												description
+													"This object is used to configure EndDeltaSinr";
+													default "-255";
+													type int32{
+														range "-255..255";}
+											}
+											leaf PucchTpc {
+												description
+													"This object is used to configure PucchTpc";
+													default "-4";
+													type int32{
+														range "-4..4";}
+											}
+											leaf EndBler {
+												description
+													"This object is used to configure EndBler";
+													default "-5";
+													type int32{
+														range "-100..100";}
+											}
+										}/*DeltaSinrToTpcMapPucchInfo */
+									
+									}/*DeltaSinrToTpcMapPucch 6051*/
+									list DeltaBlerToTpcMapPucch {
+                                        key "DeltaBlerToTpcMapPucchCount";
+									
+									leaf PucchTargetBler {
+											description
+											"This object is used to configure PucchTargetBler";
+											default "0";
+											type uint32{
+												range "0..100";}
+										}
+										leaf DeltaBlerToTpcMapPucchCount {
+											description
+											"This object is used to configure DeltaBlerToTpcMapPucchCount";
+											default "0";
+											type uint32{
+												range "0..255";}
+										}
+										container DeltaBlerToTpcMapPucchInfo {
+											leaf StartDeltaSinr {
+												description
+													"This object is used to configure StartDeltaSinr";
+													default "-255";
+													type int32{
+														range "-255..255";}
+											}
+											leaf EndDeltaSinr {
+												description
+													"This object is used to configure EndDeltaSinr";
+													default "-255";
+													type int32{
+														range "-255..255";}
+											}
+											leaf PucchTpc {
+												description
+													"This object is used to configure PucchTpc";
+													default "-4";
+													type int32{
+														range "-4..4";}
+											}
+											leaf StartBler {
+									  			description
+													"This object is used to configure StartBlerr";
+								        				default "100";
+										  			type int32{
+									        			range "-100..100";}
+											}
+                                            leaf EndBler {
+                                                description
+                                                    "This object is used to configure StartBlerr";
+                                                        default "100";
+                                                    type int32{
+                                                        range "-100..100";}
+                                            }
+                                     }/*DeltaBlerToTpcMapPucchinfo*/
+                                    }/*DeltaBlerToTpcMapPucch*/
+									leaf TwoPucchAdjStates {
+										description
+											"This object is used to configure TwoPucchAdjStates";
+											default "0";
+											type uint32{
+												range "0..1";}
+										}
+										
+								}/*ClpcPucchParams 6104*/
+								container ClpcSrsParams {
+									leaf ClpcSrsEnabled {
+										description
+											"This object is used to configure ClpcSrsEnabled";
+											default "0";
+											type uint32{
+												range "0..1";}
+									}
+									leaf CoolOffPeriodForSrsTpc {
+										description
+											"This object is used to configure CoolOffPeriodForSrsTpc";
+											default "200";
+											type uint32{
+												range "0..255";}
+									}
+									leaf TimeAvgCoeffIRRSrsClpc {
+										description
+											"This object is used to configure TimeAvgCoeffIRRSrsClpc";
+											default "820";
+											type uint32{
+												range "0..1024";}
+									}
+									container AlphaPathlossToTargetSinrMapSrs {
+										leaf DefaultPathLoss {
+											description
+											"This object is used to configure DefaultPathLossc";
+											default "255";
+											type uint32{
+												range "0..255";}
+										}
+										list PathlossToTargetSinrMapSrs {
+											key "PathlossToTargetSinrMapInfoCountSrs";
+											leaf PathlossToTargetSinrMapInfoCountSrs {
+												description
+												"This object is used to configure PathlossToTargetSinrMapInfoCountSrs";
+												default "0";
+												type uint32{
+													range "0..10";}
+											}
+											container PathlossToTargetSinrMapInfoSrs {
+												leaf StartPathloss {
+													description
+													"This object is used to configure StartPathlos";
+													default "255";
+													type uint32{
+														range "0..255";}
+												}
+												leaf EndPathloss {
+													description
+													"This object is used to configure EndPathloss";
+													default "255";
+													type uint32{
+														range "0..255";}
+												}
+												leaf TargetSinr {
+													description
+													"This object is used to configure EndPathloss";
+													default "255";
+													type uint32{
+														range "0..255";}
+												}
+											}/*PathlossToTargetSinrMapInfoSrs*/
+											list PathlossToTargetSinrMapInfo {
+												key "StartPathloss EndPathloss TargetSinr";
+												leaf StartPathloss {
+													description
+													"This object is used to configure StartPathlos";
+													default "255";
+													type uint32{
+														range "0..255";}
+												}
+												leaf EndPathloss {
+													description
+													"This object is used to configure EndPathloss";
+													default "255";
+													type uint32{
+														range "0..255";}
+												}
+												leaf TargetSinr {
+													description
+													"This object is used to configure TargetSinr";
+													default "255";
+													type uint32{
+														range "0..255";}
+												}
+											
+											}/*PathlossToTargetSinrMapInfo*/
+										}/*PathlossToTargetSinrMapSrs*/
+									}/*AlphaPathlossToTargetSinrMapSrs*/
+									container DeltaSinrToTpcMapSrs {
+										leaf DeltaSinrToTpcMapSrsCount {
+											description
+													"This object is used to configure DeltaSinrToTpcMapSrsCount";
+													default "0";
+													type uint32{
+														range "0..4";}
+										}
+										list DeltaSinrToTpcMapSrsInfo {
+										key "StartDeltaSinr EndDeltaSinr SrsTpc";
+											leaf StartDeltaSinr {
+												description
+													"This object is used to configure StartDeltaSinr";
+													default "255";
+													type int32{
+														range "-255..255";}
+											}
+											leaf EndDeltaSinr {
+												description
+													"This object is used to configure EndDeltaSinr";
+													default "255";
+													type int32{
+														range "-255..255";}
+											}
+											leaf SrsTpc {
+												description
+													"This object is used to configure EndDeltaSinr";
+													default "4";
+													type int32{
+														range "-4..4";}
+											}
+										
+										}/*DeltaSinrToTpcMapSrsInfo*/
+									}/*DeltaSinrToTpcMapSrs*/
+								}/*ClpcSrsParams 7467*/
+								
+					}/*CLPCParams*/
+				}/*ULPowerControlParms*/
+				list RachParms {
+                    key "SinrAlMcsRowCount";
+					leaf RachSinrThreshold {
+						description
+							"This object is used to configure RachSinrThreshold";
+							default "255";
+								type uint32{
+							range "0..255";}
+											
+					}
+					
+					leaf CfraGrantBytes {
+						description
+							"This object is used to configure CfraGrantBytes";
+							default "7";
+								type uint32{
+							range "5..25";}
+											
+					}
+					leaf Msg3MaxHarqRetx {
+						description
+							"This object is used to configure Msg3MaxHarqRetx";
+							default "1";
+								type uint32{
+							range "1..16";}
+											
+					}
+					leaf Msg4MaxHarqRetx {
+						description
+							"This object is used to configure Msg4MaxHarqRetx";
+							default "3";
+								type uint32{
+							range "0..6";}
+											
+					}
+					leaf Msg3FreqHop {
+						description
+							"This object is used to configure Msg4MaxHarqRetx";
+							default "1";
+								type uint32{
+							range "0..1";}
+											
+					}
+					leaf VrbToPrbMappingForRarMsg4 {
+						description
+							"This object is used to configure VrbToPrbMappingForRarMsg4";
+							default "1";
+								type uint32{
+							range "0..1";}
+											
+					}
+					leaf SinrAlMcsRowCount {
+						description
+							"This object is used to configure SinrAlMcsRowCount";
+							default "1";
+								type uint32{
+							range "0..5";}
+											
+					}
+					container SinrAggrLvlMcsArray {
+						leaf SinrLowThreshold {
+						description
+							"This object is used to configure SinrLowThreshold";
+							default "1";
+								type uint32{
+							range "0..255";}
+											
+						}
+						leaf SinrHighThreshold {
+						description
+							"This object is used to configure SinrHighThreshold";
+							default "1";
+								type uint32{
+							range "0..255";}
+											
+						}
+						leaf AggregationLevel {
+							description
+								"This object is used to configure AggregationLevel";
+							default "2";
+								type uint32{
+							range "0..4";}
+						}
+						leaf McsIndexRar {
+							description
+							"This object is used to configure McsIndexRar";
+							default "1";
+								type uint32{
+							range "0..9";}
+											
+						}
+						leaf McsIndexMsg3 {
+							description
+							"This object is used to configure McsIndexMsg3";
+							default "1";
+								type uint32{
+							range "0..9";}
+											
+						}
+						leaf MaxMcsIndexCCCH {
+							description
+							"This object is used to configure MaxMcsIndexCCCH";
+							default "27";
+								type uint32{
+							range "0..27";}
+                                                 }
+                                            leaf MinMcsIndexCCCH {
+							description
+							"This object is used to configure MinMcsIndexCCCH";
+							default "5";
+								type int32{
+							range "0..15";}
+                                                 }
+                                           leaf Msg3Tpc {
+							description
+							"This object is used to configure Msg3TpcH";
+							default "0";
+								type int32{
+							range "0..7";}
+                                                 }
+						leaf McsIndexMsg4 {
+							description
+							"This object is used to configure McsIndexMsg4";
+							default "1";
+								type uint32{
+							range "0..9";}
+											
+						}
+						leaf TbScaling {
+							description
+								"This object is used to configure AggregationLevel";
+							default "2";
+								type uint32{
+							range "0..3";}
+						}
+						leaf pdcch_power_offset {
+							description
+							"This object is used to configure pdcch_power_offset";
+							default "1";
+								type uint32{
+							range "0..6000";}
+											
+						}
+                        leaf pdsch_power_offset {
+                            description
+                            "This object is used to configure pdsch_power_offset";
+                            default "1";
+                                type uint32{
+                            range "0..6000";}
+
+                        }
+
+						leaf pdcch_dmrs_power_offset {
+							description
+							"This object is used to configure pdcch_dmrs_power_offset";
+							default "1";
+								type uint32{
+							range "0..6000";}
+											
+						}
+						leaf pdsch_dmrs_power_offset {
+						description
+							"This object is used to configure pdsch_dmrs_power_offset";
+							default "1";
+								type uint32{
+							range "0..6000";}
+											
+						}
+					}/*SinrAggrLvlMcsArray*/
+				}/*RachParms 7632*/
+				list MCSThresholdInfo{
+                    key "MCSThreshold64QAM2_2";
+                              leaf MCSThreshold64QAM2_2 {
+                                   description
+                                   "This object is used to configure MCSThreshold64QAM2_2";
+                                   default "1";
+                                     type string{
+                                      length  "1..28";}
+                                 } 
+                              leaf MCSThreshold64QAM4_4  {
+                                    description 
+                                     "This object is used to configure MCSThreshold64QAM4_4";
+                                   default "1,2,3";
+                                     type string{
+                                      length "1..28";}
+                                  }
+                               leaf MCSThreshold64QAM8_8  {
+                                     description 
+                                     "This object is used to configure MCSThreshold64QAM8_8";
+                                   default "2,3,4,5,6,7,8";
+                                     type string{
+                                      length  "1..28";}
+                                }
+                              leaf MCSThreshold256QAM2_2  {
+                                  description 
+                                     "This object is used to configure MCSThreshold256QAM2_2";
+                                   default "1";
+                                     type string{
+                                      length  "1..27";}
+                                 }
+                             leaf MCSThreshold256QAM4_4  {
+                                    description 
+                                     "This object is used to configure MCSThreshold256QAM4_";
+                                   default "1,2,3";
+                                     type string{
+                                      length  "1..27";}
+                                }
+                            leaf MCSThreshold256QAM8_8  {
+                                    description
+                                     "This object is used to configure MCSThreshold256QAM4_";
+                                   default "2,3,4,5,6,7,8";
+                                     type string{
+                                      length  "1..27";}
+                                }
+
+                         }/* MCSThresholdInfo*/
+        container BeamGenericParams {
+                     leaf NumRsrpReports{
+			description
+			   "This object is used to configure NumRsrpReports";
+			default "1";
+			 type int32{
+			  range "1..50";}
+			}
+		    leaf SsbRsrpThreshold{
+	              description
+		          "This object is used to configure SsbRsrpThreshold";
+			     default "76";
+			       type int32{
+				range "0..100";}
+				}
+		     leaf NumCriRsrpReports{
+		        description
+		         "This object is used to configure NumCriRsrpReports";
+			   default "1";
+		        	type int32{
+				  range "1..50";}
+			}
+			leaf CriRsrpThreshold{
+				description
+					"This object is used to configure CriRsrpThreshold";
+				default "76";
+				type int32{
+					range "1..100";}
+			}
+                  leaf PdschSchedulingInSsbSlot{
+			description
+		       	" This object is used to configure PdschSchedulingInSsbSlot";
+			default "0";
+			type int32{
+		         range "0..1";}
+                    }
+          }/*BeamGenericParams*/
+      container RUConfig{
+          leaf FPGAEnabled {
+              description 
+               "The  object is used to configure FPGAEnabled";
+                             default "1";
+                             type int32{
+                             range "0..1 ";}
+                  }
+           leaf PTRSFlag {
+              description 
+               "The  object is used to configure PTRSFlag";
+                             default "0";
+                             type int32{
+                             range "0..0 ";}
+                  }
+            leaf RUType {
+              description 
+               "The  object is used to configure RUType";
+                             default "1";
+                             type uint32{
+                             range "0..1 ";}
+                  }
+        }/*RUConfig*/
+                         leaf QloadThreshold {
+                            description 
+                             "This object is used to configure QloadThreshold";
+                             default "100";
+                             type uint32{
+                             range "0..4294967295 ";}
+                          }
+                       	leaf MuMimoCsiType {
+                            description 
+                             "This object is used to configure MuMimoCsiType";
+                             default "1";
+                             type int32{
+                             range "0..1 ";}
+                          }
+                        leaf MaxMuMimoLayers {
+                            description 
+                             "This object is used to configure MaxMuMimoLayers";
+                             default "2";
+                             type int32{
+                             range "1..4 ";}
+                          }
+                       leaf NumUEPair {
+                            description 
+                             "This object is used to configure NumUEPairs";
+                             default "2";
+                             type int32{
+                             range "2..8 ";}
+                          }
+                      leaf MuMimoPmiThreshold {
+                            description 
+                             "This object is used to configure MuMimoPmiThreshold";
+                             default "10";
+                             type int32{
+                             range "0..10 ";}
+                          }
+                     leaf MuMimoPairThreshold {
+                            description 
+                             "This object is used to configure MuMimoPairThreshold";
+                             default "2";
+                             type int32{
+                             range "0..20 ";}
+                          }
+		     leaf dmrsPortReuseCount {
+                        description
+                        "This object is used to configure ID of the dmrsPortReuseCount";
+                        default "0";
+                        type uint32{
+                range "0..255";}
+                }
+
+			
+               list DRBInactivityPerQosTimer  {
+                key "DRBInactivityPerQosTimerCount";
+                  leaf DRBInactivityPerQosTimerCount{
+					description
+					"This object is used to configure DRBInactivityPerQosTimerCount";
+					default "9";
+						type int32{
+					range "0..9";
+				    }
+                }
+                 list  InactivityTimerPerQos {
+                    key "InactivityTimerValue";
+                      leaf QCI {
+                           description
+			    "This object is used to configure QCI";
+			       default "1";
+				    type uint32{
+				    range "0..9";
+				    }
+                }
+                
+                       leaf InactivityTimerValue {
+                           description
+			    "This object is used to configure InactivityTimerValue";
+			       default "60000";
+				    type uint32{
+                    range "0..60000";
+                }}
+                
+                   }/*InactivityTimerPerQos*/
+	              }/*DRBInactivityPerQosTimer*/
+		}/*SchedParms*/
+       }/*MacProvsioningParams*/
+		container QosProvsioningParams{
+			list QosQciInfoList{
+                key "count";
+            leaf count {
+                default "0";
+                        type uint32{
+                        range "0..9";}
+                }
+
+				list QosQciInfo{
+                    key "pktDlyBdgt";
+                    leaf qci{
+                    default "0";
+                        type uint32{
+                        range "0..9";}
+                }
+
+					leaf pktDlyBdgt{
+						default "250";
+						type uint32{
+						range "0..255";}
+				}
+					leaf pktErrLossRate{
+						default "1";
+						type uint32{
+						range "0..6";}
+					}
+					leaf priority{
+						default "0";
+						type uint32{
+						range "0..90";}
+					}
+					leaf resType{
+						default "0";
+						type uint32{
+						range "0..9";}
+					}
+				}/*QosQciInfo*/
+
+			}/*QosQciInfoList*/
+
+		}/*QosProvsioningParams*/
+     container F1uProvisioningParams{
+            leaf logLevel {
+            description
+                     "This object is used to configure logLevel";
+                    default "127";
+                    type uint32{
+                        range "1..127";
+                }
+            }
+             leaf maxRetry {
+            description
+                     "This object is used to configure maxRetry";
+                    default "4";
+                    type uint32{
+                        range "1..4";
+                }
+            }
+
+
+             leaf healthTimeInterval {
+            description
+                     "This object is used to configure healthTimeInterval";
+                    default "4";
+                    type uint32{
+                        range "1..4";
+                }
+            }
+             leaf NumPeerRec {
+            description
+                     "This object is used to configure NumPeerRec";
+                    default "4";
+                    type uint32{
+                        range "1..48";
+                }
+            }
+             leaf maxBufferSizeForMtu {
+            description
+                     "This object is used to configure maxBufferSizeForMtu";
+                    default "1500";
+                    type uint32{
+                        range "1500..9000";
+                }
+            }
+             leaf echoReqTimer {
+            description
+                     "This object is used to configure echoReqTimer";
+                    default "0";
+                    type uint32{
+                        range "0..60";
+                }
+            }
+             leaf max_bytes_threshold {
+            description
+                     "This object is used to configure max_bytes_threshold";
+                    default "4";
+                    type uint32{
+                        range "1..52428800";
+                }
+            }
+             leaf logCategory {
+            description
+                     "This object is used to configure logCategory";
+                    default "4";
+                    type int64{
+                        range "1..9223372036854775807";
+                }
+            }
+            container numRabRec{
+                    leaf numRabRecinitSize{
+                        default "0";
+                        type uint32{
+                            range "0..4096";
+                        }
+                    }
+                    leaf numRabRecmaxSize{
+                     default "8192";
+                     type uint32{
+                     range "1..8192";}
+                    }
+
+                    leaf numRabRecstepSize{
+                        default "1024";
+                        type uint32{
+                            range "1..1024";
+                        }
+                    }
+            }/*numRabRec*/
+            container x2uDeliveryStatusTag{
+                        leaf x2uDeliveryStatusTriggerPktCnt{
+                                    default "100";
+                                    type uint32{
+                                    range "10..65535";}
+                        }
+                        leaf x2uDeliveryStatusTriggerPktSize{
+                                    default "100";
+                                    type uint32{
+                                    range "10..65535";}
+                        }
+                        leaf x2uDeliveryStatusTriggerTimer{
+                                    default "1000";
+                                    type uint32{
+                                    range "10..65535";}
+                        }
+                }/*x2uDeliveryStatusTag*/
+        leaf numReceiverThreads{
+                                    default "100";
+                                    type uint32{
+                                    range "1..65535";}
+                        }
+                        leaf numWorkerThreads{
+                                    default "1000";
+                                    type uint32{
+                                    range "1..65535";}
+                        }
+
+        }/*F1uProvisioningParams*/
+
+     container CbsdProvisioningParams{
+             leaf cbsdEnabled{
+            description
+                     "!-- 0 to disable and 1 to enable cbsd support--";	
+                    default "0";
+                    type uint32{
+              	    range "0..1";
+                    }
+
+	        }
+
+	     leaf sasUrl{
+	    description
+                     "This object is used to configure ID of the sasUrl";
+                    default "https://127.0.0.1:9099";
+                    type string{
+                    length "1..150";
+		    }
+	
+	        }
+
+	     leaf tlsVersion{
+	    description
+                     "This object is used to configure tlsVersion";
+                    default "v1.2";
+                    type string{
+                    length "1..6";
+		    }
+	        }
+
+	     leaf logLevel{
+            description
+                     "This object is used to configure logLevel";
+                    default "0";
+                    type uint32{
+                    range "0..4";
+                    }
+
+	
+	        }
+
+	     leaf maxRetry{
+            description
+                     "This object is used to configure ID of the maxRetry";
+                    default "4";
+                    type uint32{
+                    range "0..4";
+		    }	
+	
+	
+        	}  
+
+
+	}/*CbsdProvisioningParams */
+
+
+  }/*gNBDUParams*/
+}
+}

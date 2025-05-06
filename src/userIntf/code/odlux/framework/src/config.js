@@ -1,0 +1,1 @@
+export const  ftpurl= 'sftp://rnacumos:test123@192.168.128.77:22//home/rnacumos/' 

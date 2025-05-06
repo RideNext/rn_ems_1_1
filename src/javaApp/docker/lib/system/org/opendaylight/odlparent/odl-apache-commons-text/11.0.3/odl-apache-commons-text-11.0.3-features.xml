@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-apache-commons-text">
+    <repository>mvn:org.opendaylight.odlparent/odl-apache-commons-lang3/11.0.3/xml/features</repository>
+    <feature name="odl-apache-commons-text" description="OpenDaylight :: Apache Commons Text" version="11.0.3">
+        <details>Apache commons-text</details>
+        <feature version="11.0.3" prerequisite="false" dependency="false">odl-apache-commons-lang3</feature>
+        <bundle>mvn:org.apache.commons/commons-text/1.10.0</bundle>
+    </feature>
+</features>

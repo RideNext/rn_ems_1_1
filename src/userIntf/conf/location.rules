@@ -1,0 +1,99 @@
+location ~ ^/$  {
+    return 301 " /tej-ems/index.html";
+}
+location ~ ^/help/$  {
+    try_files /help/$args.json $uri;
+}
+location ~ ^/transportpce  {
+    resolver 127.0.0.11;
+    if ($request_uri ~* "/transportpce/(.*)") { 
+        return 404;
+    }
+}
+location ~ ^/topology/  {
+    resolver 127.0.0.11;
+    return 404;
+}
+location ~ ^/sitedoc/  {
+  resolver 127.0.0.11;
+  if ($request_uri ~* "/sitedoc/(.*)") {
+    return 404;
+  }
+}
+location ~ ^/tiles/  {
+    resolver 1.1.1.1 ipv6=off;
+    if ($request_uri ~* "/tiles/(.*)") { 
+        return 404;
+    }
+}
+location ~ ^/terrain/  {
+  resolver 127.0.0.11;
+  if ($request_uri ~* "/terrain/(.*)") {
+    return 404;
+  }
+}
+location /  {
+    try_files $uri $uri/ @backend;
+}
+location /websocket {
+    proxy_pass http://sdnr:8182/websocket;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+}
+location @backend {
+    proxy_pass http://sdnr:8181;
+}
+
+location /oauth {
+    proxy_pass http://sdnr:8181;
+}
+
+location ~ ^/(faultcurrent-v7|faultlog-v7|commentalarms|ackalarms|clearalarms|auditlog|cell_status|profilemanagement|pm_data|networkelement-connection-v7|pre_provider|rn_ems_perf_util|basic_config|system_config|cell_config|cuup_config|du_config|cucp_config|software_management|cell_status|sm_history|ru_config)/ {
+    proxy_pass http://persistence:9200;
+}
+
+location ~ ^/(realms|admin)/ {
+    proxy_pass https://identity:8463;
+}
+location /proxyapi/ {
+    proxy_pass  http://localhost:3005;
+}
+
+location /swagger-ui/ {
+    proxy_pass http://nbi:8080;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+location /v3/api-docs/ {
+    proxy_pass http://nbi:8080/v3/api-docs/;  # Swagger API docs path
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+location /nbi/v1/alarmManagement/ {
+    proxy_pass http://nbi:8080/$request_uri;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+location /nbi/v1/getInventory/ {
+    proxy_pass http://nbi:8080/$request_uri;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+location /nbi/v1/configuration/ {
+    proxy_pass http://nbi:8080/$request_uri;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-gson">
+    <feature name="odl-gson" description="OpenDaylight :: GSON" version="11.0.3">
+        <details>Gson</details>
+        <bundle>mvn:com.google.code.gson/gson/2.10</bundle>
+    </feature>
+</features>

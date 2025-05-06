@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-stax2-api">
+    <feature name="odl-stax2-api" description="OpenDaylight :: StAX2 API" version="11.0.3">
+        <details>StAX2 API</details>
+        <bundle>mvn:org.codehaus.woodstox/stax2-api/4.2.1</bundle>
+    </feature>
+</features>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-javassist-3">
+    <feature name="odl-javassist-3" description="OpenDaylight :: Javassist" version="11.0.3">
+        <details>Javassist</details>
+        <bundle>mvn:org.javassist/javassist/3.29.2-GA</bundle>
+    </feature>
+</features>

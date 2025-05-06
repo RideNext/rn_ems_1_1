@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="pt-triemap">
+    <feature name="pt-triemap" description="PANTHEON.tech :: TrieMap :: Feature" version="1.2.0">
+        <details>Concurrent Hash-trie Map</details>
+        <bundle>mvn:tech.pantheon.triemap/triemap/1.2.0</bundle>
+    </feature>
+</features>

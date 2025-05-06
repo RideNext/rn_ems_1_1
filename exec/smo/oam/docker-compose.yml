@@ -1,0 +1,256 @@
+################################################################################
+# Copyright (C) 2024 RideNext Software Solutions. Pvt Ltd
+# Copyright 2021 highstreet technologies GmbH
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+version: '3.8'
+services:
+  sdnc-web:
+    image: ${SDNC_WEB_IMAGE}
+    privileged: true
+    container_name: sdnc-web
+    ports:
+      - ${SDNC_WEB_PORT}:${SDNC_WEB_PORT}
+    environment:
+      - ENABLE_OAUTH=true
+      - WEBPROTOCOL=HTTPS
+      - SDNRHOST=${SDNR_IP_ADDRESS}
+      - WEBPORT=${SDNC_WEB_PORT}
+      - SDNRPROTOCOL=http
+      - SDNRHOST=sdnr
+      - SDNRPORT=${SDNC_REST_PORT}
+      - SSL_CERT_DIR=/opt/app/osaaf/local/certs
+      - SSL_CERTIFICATE=cert.pem
+      - SSL_CERTIFICATE_KEY=key.pem
+      - REACT_APP_EMS_TIME_ZONE=${EMS_TIME_ZONE}
+      - REACT_APP_ARRAY_SIZE=${NBI_ALLOWED_ARRAY_LIMIT}
+      - REACT_APP_ADMIN_USERNAME=${ADMIN_USERNAME}
+      - REACT_APP_WAIT_TIME=${SOFTWARE_NOTIFICATION_WAIT_LIMIT}
+      - NMS_KAFKA_IP=${NMS_KAFKA_IP}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - ./sdnc-web/software-version-details.json:/app/nodeServer/software-version-details.json
+      - ./sdnc-web:/opt/app/osaaf/local/certs
+      - ../platform/persistence/config-files/:/app/nodeServer/pnffiles/
+      - ../../utils/dockerStats.sh:/app/nodeServer/dockerStats.sh
+    pull_policy: missing
+    mem_limit: 512Mib # Set memory limit to 512Mib
+    cpus: 0.1000
+    restart: always
+    env_file: .env
+    networks:
+      dmz:
+      smo:
+
+  sdnr:
+    image: ${SDNC_IMAGE}
+    container_name: sdnr
+    ports:
+      - ${SDNC_REST_PORT}:8181
+      - 6666:6666
+      - 1090:1090
+      - 4335:4335
+      - 8101:8101
+    environment:
+      - ENABLE_ODL_CLUSTER=false
+      - ENABLE_OAUTH=true
+      - ODL_CERT_DIR=${SDNC_CERT_DIR}
+      - ODL_ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - SDNC_CONFIG_DIR=/opt/onap/ccsdk/data/properties
+      - SDNC_REPLICAS=0
+      - CCSDK_REPLICAS=0
+      - DOMAIN=""
+      - SDNRWT=true
+      - SDNRONLY=true
+      - SDNRINIT=true
+      - SDNRDM=true
+      - SDNRDBURL=http://persistence:9200
+      - SDNR_NETCONF_CALLHOME_ENABLED=true
+      - A1_ADAPTER_NORTHBOUND=false
+      - SDNRUSERNAME=${ADMIN_USERNAME}
+      - SDNRPASSWORD=${ADMIN_PASSWORD}
+      - JAVA_OPTS=-Xms256m -Xmx4g
+      - IDENTITY_PROVIDER_URL=${IDENTITY_PROVIDER_URL}
+      - SDNC_WEB_URL=https://sdnc-web:${SDNC_WEB_PORT}
+      - SDNR_VES_COLLECTOR_ENABLED=true
+      - SDNR_VES_COLLECTOR_TLS_ENABLED=true
+      - SDNR_VES_COLLECTOR_TRUST_ALL_CERTS=true
+      - SDNR_VES_COLLECTOR_IP=$VES_COLLECTOR_OAM_IPv6
+      - SDNR_VES_COLLECTOR_PORT=$VES_COLLECTOR_PORT
+      - SDNR_VES_COLLECTOR_VERSION=v7
+      - SDNR_VES_COLLECTOR_REPORTING_ENTITY_NAME=ONAP SDN-R
+      - SDNR_VES_COLLECTOR_EVENTLOG_MSG_DETAIL=LONG
+      - SDNR_VES_COLLECTOR_USERNAME=${VES_COLLECTOR_USERNAME}
+      - SDNR_VES_COLLECTOR_PASSWORD=${VES_COLLECTOR_PASSWORD}
+      - SDNR_WEBSOCKET_PORT=${WEBSOCKET_PORT}
+      - SDNR_URL=http://sdnr:${SDNC_REST_PORT}
+      - CONFIG_FILE_PATH=${CONFIG_FILE_PATH}
+      - FILE_UPLOAD_SRVIP=${FILE_UPLOAD_SRVIP}
+      - PM_USERID=${PM_USER_ID}
+      - PM_USERPASWD=${PM_USERPASWD}
+      - PM_FILE_UPLOADPATH=${PM_FILE_UPLOADPATH}
+      - JDEBUG=true
+      - SYSTEM_NAME=${COMPOSE_PROJECT_NAME}
+      - SYSTEM_ID=${EMS_ID}
+      - VES_HEARTBEAT_SCHEDULE_TIMER=11
+      - VES_HB_MISSED_COUNT=4
+      - NMS_KAFKA_IP=${NMS_KAFKA_IP}
+      - NMS_KAFKA_PORT=${NMS_KAFKA_PORT}
+      - SDNR_VERSION=${SDNC_IMAGE}
+      - SDNCWEB_VERSION=${SDNC_WEB_IMAGE}
+      - VES_VERSION=${VES_COLLECTOR_IMAGE}
+      - PERF_VERSION=${PERF_IMAGE}
+      - NBI_VERSION=${NBI_IMAGE}
+      - IDENTITYDB_VERSION=13
+      - CURRENT_EMS_VERSION=${CURRENT_VERSION}
+      - WAIT_TIME=${NBI_WAIT_TIME}
+    volumes:
+      - ./sdnr/oauth-provider.config.json:/opt/opendaylight/etc/oauth-provider.config.json
+      - ./sdnr/devicemanager.properties:/opt/opendaylight/etc/devicemanager.properties
+      - ./sdnr/mountpoint-registrar.properties:/opt/opendaylight/etc/mountpoint-registrar.properties
+      - ./sdnr/org.ops4j.pax.logging.cfg:/opt/opendaylight/etc/org.ops4j.pax.logging.cfg
+      - ./sdnr/certs/certs.properties:${SDNC_CERT_DIR}/certs.properties
+      - ./sdnr/certs/keys0.zip:${SDNC_CERT_DIR}/keys0.zip
+      - ./sdnr/certs/keys1.zip:${SDNC_CERT_DIR}/keys1.zip
+      - ../../logs/sdnr:/opt/opendaylight/data/log
+    pull_policy: missing
+    restart: always
+    cpus: 2.25
+    mem_limit: 4Gib # Set memory limit to 4Gib
+    env_file: 
+      - ../platform/.env
+      - .env
+    networks:
+      dmz:
+      smo:
+      default:
+        ipv6_address: ${SDNC_OAM_IPv6}
+
+  ves-collector:
+    image: ${VES_COLLECTOR_IMAGE}
+    container_name: ves-collector
+    environment:
+      DMAAPHOST: onap-dmaap
+    ports:
+      - 8443:8443
+      - 8080:8080
+    volumes:
+      - ./ves-collector/collector.properties:/opt/app/VESCollector/etc/collector.properties
+      - ./ves-collector/ves-dmaap-config.json:/opt/app/VESCollector/etc/ves-dmaap-config.json
+      - ./ves-collector/externalRepo:/opt/app/VESCollector/etc/externalRepo
+      - ../../logs/ves:/opt/app/VESCollector/logs
+    pull_policy: missing
+    restart: always
+    cpus: 0.2
+    mem_limit: 512Mib # Set memory limit to 512Mib
+    networks:
+      smo:
+      default:
+        ipv6_address: ${VES_COLLECTOR_OAM_IPv6}
+
+  perf: 
+    image: ${PERF_IMAGE}
+    container_name: perf-monitor
+    ports:
+      - ${PERF_OPEN_PORT}:${PERF_OPEN_PORT}
+    environment:
+      - PERF_RAWFILE_INPUT_DIR=${PERF_RAWFILE_DIR}
+      - PERF_PROCESSED_OUT_DIR=${PERF_PROCESD_FILE_DIR}
+      - PERF_CSV_OUT_DIR=${PERF_CSV_OUT_DIR}
+      - PERF_ERROR_OUT_DIR=${PERF_ERROR_FILE_DIR}
+      - EL_IP=${SDNR_IP_ADDRESS}
+      - DB_IP=${SDNR_IP_ADDRESS}
+      - DELAY=${DELAY_TIME}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - ./perf-file/raw-perf-files:${PERF_RAWFILE_DIR}
+      - ./perf-file/processed-perf-files:${PERF_PROCESD_FILE_DIR}
+      - ./perf-file/csv-outfiles:${PERF_CSV_OUT_DIR}
+      - ./perf-file/error-perf-files:${PERF_ERROR_FILE_DIR}
+      - ../../logs/perf:/home/perfModule/logs
+    pull_policy: missing
+    env_file: .env
+    mem_limit: 128Mib # Set memory limit to 128Mib
+    restart: always
+    cpus: 0.05 
+    networks:
+       smo:
+       default:
+  
+  nbi:
+    image: ${NBI_IMAGE}
+    container_name: nbi
+    pull_policy: missing
+    env_file: .env
+    #mem_limit: 10G # Set memory limit to 10G
+    #cpus: 0.5 # Limit CPU usage to 50% of one core
+    ports:
+      - 8470:8080
+    volumes:
+      - ./nbi/nbiconfig:/home/application.properties
+      - ../../logs/nbi:/home/logs
+    environment:
+      - ENTITY_NAME=${COMPOSE_PROJECT_NAME}
+      - SDNR_IP=${SDNR_IP_ADDRESS}
+      - NBI_IP=${NBI_IP}
+      - SYSTEM_ID=${EMS_ID}
+      - SIZE=${NBI_ALLOWED_ARRAY_LIMIT}
+      - PRODUCER_IP=${NMS_KAFKA_IP}
+      - WAIT_TIME=${NBI_WAIT_TIME}
+    mem_limit: 512Mib # Set memory limit to 512Mib
+    cpus: 0.0520
+    restart: always
+    networks:
+       smo:
+       default:
+
+
+  dfc:
+    container_name: dfc
+    user: root
+    image: $DFC_IMAGE
+    ports:
+    - 8439:8439
+    volumes:
+    - ./dfc/application.yaml:/opt/app/datafile/config/application.yaml
+    - ./dfc/truststore.jks:/opt/app/datafile/config/truststore.jks
+    - ./dfc/token-cache:/token-cache
+    - ./perf-file/raw-perf-files:/tmp
+    - ../../logs/dfc:/var/log/ONAP
+    # truststore is updated in runtime
+    depends_on:
+      - auth-token-file-dfc
+    mem_limit: 512Mib # Set memory limit to 512Mib
+    cpus: 0.0608
+    restart: always
+    networks:
+       smo:
+       default:
+
+networks:
+  dmz:
+    external: true
+  smo:
+    external: true
+  default:
+    driver: bridge
+    name: oam
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+      - subnet:  ${NETWORK_SUBNET_OAM_IPv6}
+        gateway: ${NETWORK_GATEWAY_OAM_IPv6}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="sdnr-wt-websocketmanager-feature">
+    <feature name="sdnr-wt-websocketmanager-feature" description="ccsdk-features :: sdnr-wt-websocketmanager-feature" version="1.5.1">
+        <details>Root POM to be used in place of odlparent for CCSDK based projects</details>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-websocketmanager-model/1.5.1</bundle>
+        <bundle>mvn:org.opendaylight.mdsal/yang-binding/10.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/concepts/9.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/util/9.0.5</bundle>
+        <bundle>mvn:tech.pantheon.triemap/triemap/1.2.0</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/yang-common/9.0.5</bundle>
+        <bundle>mvn:com.google.guava/guava/31.1-jre</bundle>
+        <bundle>mvn:com.google.guava/failureaccess/1.0.1</bundle>
+        <bundle>mvn:org.checkerframework/checker-qual/3.12.0</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-websocketmanager-provider/1.5.1</bundle>
+        <bundle>mvn:org.eclipse.jetty.websocket/websocket-servlet/9.4.49.v20220914</bundle>
+        <bundle>mvn:org.eclipse.jetty.websocket/websocket-api/9.4.49.v20220914</bundle>
+        <bundle>mvn:javax.servlet/javax.servlet-api/3.1.0</bundle>
+        <bundle>mvn:org.eclipse.jetty.websocket/websocket-server/9.4.49.v20220914</bundle>
+        <bundle>mvn:org.eclipse.jetty.websocket/websocket-common/9.4.49.v20220914</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-io/9.4.49.v20220914</bundle>
+        <bundle>mvn:org.eclipse.jetty.websocket/websocket-client/9.4.49.v20220914</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-client/9.4.49.v20220914</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-servlet/9.4.49.v20220914</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-security/9.4.49.v20220914</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-server/9.4.49.v20220914</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-util-ajax/9.4.49.v20220914</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-http/9.4.49.v20220914</bundle>
+        <bundle>mvn:org.eclipse.jetty/jetty-util/9.4.49.v20220914</bundle>
+        <bundle>mvn:org.java-websocket/Java-WebSocket/1.5.2</bundle>
+        <bundle>mvn:com.fasterxml.jackson.datatype/jackson-datatype-jsr310/2.13.4</bundle>
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/2.13.4</bundle>
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-core/2.13.4</bundle>
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-databind/2.13.4.2</bundle>
+    </feature>
+</features>

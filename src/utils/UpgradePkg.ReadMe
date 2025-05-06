@@ -1,0 +1,62 @@
+/*****
+ **  rn_ems_deploy.sh script used for upgrading and downgrading
+ **  purpose.
+ **
+*****/
+  
+ Assumption:
+             1. Docker hub / registry contains all required docker images
+             2. User has to update the script with login  and credentials of Docker registry.
+             3. Input Docker binary contains the exec directory, contains all needed files to bringup EMS docker images
+             4. Docker and docker-compose required environments are available on target.
+             5. Base platform and network is available on target.
+                      example :
+                                1. zookeeper
+                                2. elasticsearch-oss
+                                3. kafka
+                                4. dmap
+                                5. mysql
+                                6. identitydb
+
+ How to use  Options :
+                     upgrade script : rn_ems_deploy.sh
+                     Required Input :
+                                  1. EMS binary ( exec directory ) in tar.gz format
+                                  2. Destination Directory, where Installation to be done.
+                                  3. Is it Upgrade (up)  or Day 0 Installation ( installaetion that includes platform - new)
+                                         . Only supported options are "up" or new 
+                                             note: currently supporting only upgrade feature
+                                   
+
+upgrade Procedure :
+     
+       destination directory , contains installed executables.
+       "curwrk" : is the soft link  -  refers the current active release / working directory 
+       "prevwrk"  is the soft link  -  refers to the previous working version / currently in-active release.
+                                       In case of Failure of the current release. The Upgrade has to fall back to this release
+
+       Upgrade feature maintains the release versions by name ( exec/smo/oam/.env - COMPOSE_PROJECT_NAME):
+       release name / version refers to COMPOSE_PROJECT_NAME  from .env file
+       
+       note: keep distinguish names for every release and naming should be inline with docker-compose rules.
+
+       Example Format :
+              ./rn_ems_deploy.sh  /home/rnacumos/Balaji/exec_guibuild.tar.gz    /home/rnacumos/Balaji/tmp/upg up
+
+                          - exec_guibuild.tar.gz :  EMS Executable Binary
+                          -  /home/rnacumos/Balaji/tmp/upg -  Is the directory, where the EMS binaries needs to be installed
+                          -  up  - Upgrade Requested 
+
+       If destination / target folder doesn't have any previous installed EMS release/directory, the script cretaes the directory by release name.
+       Brings up the EMS  services and creates a soft link "curwrk" referring to release directory create in destination folder. 
+
+       If destination/target folder contains previously running EMS directory ( curwrk referring to working/current EMS directory), script creates a new  directory        with release name. 
+                1. Brings down the EMS services from the current directory.
+                2. Brings up the EMS services from new release.
+                3. creates the softlink "curwrk" to new Release and creates a softlink "prevwrk" to previous release.
+                
+
+Checking the validity / successfull of EMS Services UP / DOWN.
+           1. Script monitors for the pre defined text messages from docker logs. If docker logs contains the predefined text contenets, then script assumes that EMS Service container is up successfully, if not EMS service is not up properly. 
+                                                  
+             

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="features-infrautils">
+    <repository>mvn:org.opendaylight.infrautils/odl-infrautils-diagstatus/4.0.3/xml/features</repository>
+    <repository>mvn:org.opendaylight.infrautils/odl-infrautils-ready/4.0.3/xml/features</repository>
+    <repository>mvn:org.opendaylight.infrautils/odl-infrautils-utils/4.0.3/xml/features</repository>
+    <feature name="features-infrautils" description="ODL :: infrautils :: features-infrautils" version="4.0.3">
+        <details>InfraUtils Stable Features</details>
+        <feature version="4.0.3" prerequisite="false" dependency="false">odl-infrautils-diagstatus</feature>
+        <feature version="4.0.3" prerequisite="false" dependency="false">odl-infrautils-ready</feature>
+        <feature version="4.0.3" prerequisite="false" dependency="false">odl-infrautils-utils</feature>
+    </feature>
+</features>

@@ -1,0 +1,212 @@
+################################################################################
+# Copyright (C) 2024 RideNext Software Solutions. Pvt Ltd
+# Copyright 2022 highstreet technologies GmbH
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+version: '3.8'
+services:
+
+  identity:
+    image: ${IDENTITY_IMAGE}
+    container_name: identity
+    ports:
+      - ${IDENTITY_PORT_HTTPS}:${IDENTITY_PORT_HTTPS}
+    environment:
+      - KEYCLOAK_HTTPS_PORT=${IDENTITY_PORT_HTTPS}
+      - KEYCLOAK_CREATE_ADMIN_USER=true
+      - KEYCLOAK_ADMIN_USER=${ADMIN_USERNAME}
+      - KEYCLOAK_ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - KEYCLOAK_MANAGEMENT_USER=${IDENTITY_MGMT_USERNAME}
+      - KEYCLOAK_MANAGEMENT_PASSWORD=${IDENTITY_MGMT_PASSWORD}
+      - KEYCLOAK_DATABASE_HOST=identitydb
+      - KEYCLOAK_DATABASE_NAME=keycloak
+      - KEYCLOAK_DATABASE_USER=keycloak
+      - KEYCLOAK_DATABASE_PASSWORD=keycloak
+      - KEYCLOAK_JDBC_PARAMS=sslmode=disable&connectTimeout=30000
+      - KEYCLOAK_PRODUCTION=false
+      - KEYCLOAK_ENABLE_TLS=true
+      - KEYCLOAK_TLS_KEYSTORE_FILE=/opt/bitnami/keycloak/certs/keystore.jks
+      - KEYCLOAK_TLS_TRUSTSTORE_FILE=/opt/bitnami/keycloak/certs/truststore.jks
+      - KEYCLOAK_TLS_KEYSTORE_PASSWORD=password
+      - KEYCLOAK_TLS_TRUSTSTORE_PASSWORD=changeit
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./identity/standalone.xml:/opt/jboss/keycloak/standalone/configuration/standalone.xml
+      - ./identity/keystore.jks:/opt/bitnami/keycloak/certs/keystore.jks
+      - ./identity/truststoreONAPall.jks:/opt/bitnami/keycloak/certs/truststore.jks
+    pull_policy: missing
+    mem_limit: 512Mib # Set memory limit to 512Mib
+    restart: always
+    cpus: 0.1
+    env_file: .env
+    depends_on:
+      - identitydb
+    networks:
+      - dmz
+
+  identitydb:
+    image: ${IDENTITY_DB_IMAGE}
+    container_name: identitydb
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - POSTGRESQL_USERNAME=keycloak
+      - POSTGRESQL_DATABASE=keycloak
+      - POSTGRESQL_PASSWORD=keycloak
+    pull_policy: missing
+    env_file: .env
+    mem_limit: 128Mib # Set memory limit to 128Mib
+    cpus: 0.0024
+    restart: always
+    networks:
+      - dmz
+      
+
+  persistence:
+    image: ${PERSISTENCE_IMAGE}
+    container_name: persistence
+    ports:
+      - 9200:9200
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms4g -Xmx4g -XX:-HeapDumpOnOutOfMemoryError"
+    pull_policy: missing
+    env_file: .env
+    volumes:
+      - ./persistence/esearch:/usr/share/elasticsearch/data
+      - ./persistence/elastic.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    mem_limit: 6Gib # Set memory limit to 6 Gib
+    cpus: 3.5
+    restart: always
+
+  zookeeper:
+    image: ${ZOOKEEPER_IMAGE}
+    container_name: zookeeper
+    ports:
+      - 2181:2181
+    environment:
+      ZOOKEEPER_REPLICAS: 1
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_SYNC_LIMIT: 5
+      ZOOKEEPER_INIT_LIMIT: 10
+      ZOOKEEPER_MAX_CLIENT_CNXNS: 200
+      ZOOKEEPER_AUTOPURGE_SNAP_RETAIN_COUNT: 3
+      ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL: 24
+      ZOOKEEPER_CLIENT_PORT: 2181
+      KAFKA_OPTS: -Djava.security.auth.login.config=/etc/zookeeper/secrets/jaas/zk_server_jaas.conf -Dzookeeper.kerberos.removeHostFromPrincipal=true -Dzookeeper.kerberos.removeRealmFromPrincipal=true -Dzookeeper.authProvider.1=org.apache.zookeeper.server.auth.SASLAuthenticationProvider -Dzookeeper.requireClientAuthScheme=sasl
+      ZOOKEEPER_SERVER_ID:
+    pull_policy: missing
+    mem_limit: 300Mib # Set memory limit to 300Mib
+    cpus : 0.0192
+    restart: always
+    env_file: .env
+    volumes:
+      -  ./zookeeper/zk_server_jaas.conf:/etc/zookeeper/secrets/jaas/zk_server_jaas.conf
+
+  kafka:
+    image: ${KAFKA_IMAGE}
+    container_name: kafka
+    ports:
+     - 9092:9092
+    environment:
+      enableCadi: 'false'
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ZOOKEEPER_CONNECTION_TIMEOUT_MS: 40000
+      KAFKA_ZOOKEEPER_SESSION_TIMEOUT_MS: 40000
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL_PLAINTEXT:PLAINTEXT,EXTERNAL_PLAINTEXT:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL_PLAINTEXT://kafka:9092
+      KAFKA_LISTENERS: INTERNAL_PLAINTEXT://0.0.0.0:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL_PLAINTEXT
+      KAFKA_CONFLUENT_SUPPORT_METRICS_ENABLE: 'false'
+      KAFKA_OPTS: -Djava.security.auth.login.config=/etc/kafka/secrets/jaas/zk_client_jaas.conf
+      KAFKA_ZOOKEEPER_SET_ACL: 'true'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      # Reduced the number of partitions only to avoid the timeout error for the first subscribe call in slow environment
+      KAFKA_OFFSETS_TOPIC_NUM_PARTITIONS: 1
+    volumes:
+      -  ./kafka/zk_client_jaas.conf:/etc/kafka/secrets/jaas/zk_client_jaas.conf
+    pull_policy: missing
+    env_file: .env
+    mem_limit: 1Gib # Set memory limit to 1Gib
+    cpus: 0.5736
+    restart: always
+    depends_on:
+     - zookeeper
+
+  dmaap:
+    container_name: onap-dmaap
+    image: ${DMAAP_IMAGE}
+    ports:
+      - 3904:3904
+      - 3905:3905
+    environment:
+      enableCadi: 'false'
+    volumes:
+      - ./dmaap/MsgRtrApi.properties:/appl/dmaapMR1/bundleconfig/etc/appprops/MsgRtrApi.properties
+      - ./dmaap/logback.xml:/appl/dmaapMR1/bundleconfig/etc/logback.xml
+      - ./dmaap/cadi.properties:/appl/dmaapMR1/etc/cadi.properties
+    pull_policy: missing
+    env_file: .env
+    mem_limit: 768Mib # Set memory limit to 768Mib
+    cpus : 0.1
+    restart: always
+    depends_on:
+      - zookeeper
+      - kafka
+
+  minio:
+    image: ${MINIO_IMAGE}
+    container_name: minio-server
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: adminadmin
+    ports:
+    - 9000:9000
+    - 9001:9001
+    volumes:
+    - /tmp/minio-test/0:/data
+    mem_limit: 128Mib # Set memory limit to 768Mib
+    cpus: 0.0240
+    restart: always
+
+  redpanda:
+    container_name: redpanda-console
+    image: ${REDPANDA_IMAGE}
+    restart: on-failure
+    hostname: redpanda-console
+    ports:
+    - "8780:8080"
+    depends_on:
+      - kafka
+    environment:
+      KAFKA_BROKERS: kafka:9092
+    mem_limit: 128Mib # Set memory limit to 768Mib
+    cpus: 0.0240
+    restart: always
+
+
+networks:
+  dmz:
+    driver: bridge
+    name: dmz
+    enable_ipv6: false
+  default:
+    driver: bridge
+    name: smo
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+      - subnet:  ${NETWORK_SUBNET_SMO}
+        gateway: ${NETWORK_GATEWAY_SMO}

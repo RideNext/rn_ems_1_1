@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="sdnr-wt-feature-aggregator-devicemanager-base">
+    <repository>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-apigateway-feature/1.5.1/xml/features</repository>
+    <repository>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-websocketmanager-feature/1.5.1/xml/features</repository>
+    <repository>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-data-provider-feature/1.5.1/xml/features</repository>
+    <repository>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-netconfnode-state-service-feature/1.5.1/xml/features</repository>
+    <repository>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-devicemanager-core-feature/1.5.1/xml/features</repository>
+    <repository>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-mountpoint-registrar-feature/1.5.1/xml/features</repository>
+    <repository>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-mountpoint-state-provider-feature/1.5.1/xml/features</repository>
+    <feature name="sdnr-wt-feature-aggregator-devicemanager-base" description="ccsdk-features :: sdnr-wt-feature-aggregator-devicemanager-base" version="1.5.1">
+        <details>Root POM to be used in place of odlparent for CCSDK based projects</details>
+        <feature version="1.5.1" prerequisite="false" dependency="false">sdnr-wt-apigateway-feature</feature>
+        <feature version="1.5.1" prerequisite="false" dependency="false">sdnr-wt-websocketmanager-feature</feature>
+        <feature version="1.5.1" prerequisite="false" dependency="false">sdnr-wt-data-provider-feature</feature>
+        <feature version="1.5.1" prerequisite="false" dependency="false">sdnr-wt-netconfnode-state-service-feature</feature>
+        <feature version="1.5.1" prerequisite="false" dependency="false">sdnr-wt-devicemanager-core-feature</feature>
+        <feature version="1.5.1" prerequisite="false" dependency="false">sdnr-wt-mountpoint-registrar-feature</feature>
+        <feature version="1.5.1" prerequisite="false" dependency="false">sdnr-wt-mountpoint-state-provider-feature</feature>
+    </feature>
+</features>

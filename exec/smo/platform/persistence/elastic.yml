@@ -1,0 +1,20 @@
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+path.repo: ["/usr/share/elasticsearch/data/snapshots"]
+
+# Disable swapping
+bootstrap.memory_lock: False
+
+# Thread pool settings for memory optimization
+thread_pool.write.size: 4  # Reduced write thread pool size to lower memory usage
+thread_pool.write.queue_size: 100  # Reduced write queue size
+
+thread_pool.search.size: 4  # Reduced search thread pool size
+thread_pool.search.queue_size: 300  # Reduced search queue size
+
+# Performance optimizations
+indices.memory.index_buffer_size: 3%  # Reduced index buffer size to lower memory usage
+indices.requests.cache.size: 1%  # Reduced request cache size to save memory
+indices.fielddata.cache.size: 5%  # Reduced fielddata cache size
+indices.queries.cache.size: 1%  # Reduced query cache size
+indices.breaker.fielddata.limit: 40%  # Set a fielddata memory limit to avoid memory overload

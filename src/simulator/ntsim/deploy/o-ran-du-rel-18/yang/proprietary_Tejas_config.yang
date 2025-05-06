@@ -1,0 +1,145 @@
+module  proprietary_Tejas_config {
+
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:proprietary_Tejas_config";
+  prefix "proprietary_Tejas_config";
+
+  organization
+    "Tejas Network Limited";
+  contact
+    "description This YANG module defines a model for LBM.";
+
+  revision 2023-07-25 {
+    description
+      "This is proprietry yang module that defines parameters of lbm";
+  }
+  
+     grouping lbm_info {
+
+      list lbm-start {
+        key "transaction-id";
+        description
+          "Parameters for starting LBM.";
+
+        leaf transaction-id {
+          type uint32;
+          description
+            "A unique identifier for the LBM transaction.";
+        }
+        leaf cplane-vlan-id {
+          type uint16;
+          description
+            "The Cplane VLAN ID for the LBM.";
+        }
+        leaf uplane-vlan-id {
+          type uint16;
+          description
+            "The Uplane VLAN ID for the LBM.";
+        }
+        leaf lbm-perodicty {
+          type uint32;
+          description
+            "The frequency of the LBM start time in sec.";
+        }
+        leaf ru-mac-address {
+          type string;
+          description
+            "The RU MAC address.";
+        }
+        leaf RU-up {
+          type boolean;
+          description
+            "The flag indicating whether the RU is up or down.";
+        }
+        leaf RU_id {
+          type string;
+          description 
+            "A string-based identifier for the RU.";
+        }
+      }
+    }
+    container lbm_feature {
+     description "top level container for lbm information";
+     uses lbm_info;
+   }
+
+
+    container general_params {
+
+	leaf reboot {
+          type boolean;
+	  default false;
+          description
+                "This parameter indicates whether gNB is rebooted or not.";
+        }
+
+   }
+
+    grouping prop_slot_info {
+    description
+      "Contains information about each software slot and its content.";
+    list software-slot-info {
+      key slot_name;
+
+      description
+        "Information about available software-slots, their status, state and content.";
+
+      leaf slot_name {
+        type string;
+
+        description
+          "Name of the software slot. This shall be unique to identify the software-slot.";
+     }
+
+      leaf slot_ver {
+          type string;
+
+          description
+            "informs about the software version of that slot.";
+      }
+    }
+
+      leaf active_slot {
+          type string;
+          description
+            "informs about the software active slot";
+      }
+
+      leaf active_path {
+          type string;
+          description
+            "informs about the path of the active slot";
+      }
+
+      leaf passive_path {
+          type string;
+          description
+            "informs about the path of the passive slot";
+      }
+
+      leaf install_path {
+          type string;
+          description
+            "informs about the install path of the software management";
+      }
+
+      leaf bin_pkg_file {
+          type string;
+          description
+            "informs about the bin pkg file of software management";
+      }
+
+      leaf factory_reset_img_path {
+          type string;
+          description
+            "informs about the path of the factory image";
+      }
+    }
+
+    container prop_software_info {
+     description "top level container for get software inventory";
+     uses prop_slot_info;
+   }
+
+
+}

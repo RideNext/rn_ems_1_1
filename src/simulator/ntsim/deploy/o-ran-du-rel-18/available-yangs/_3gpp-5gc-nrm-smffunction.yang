@@ -1,0 +1,108 @@
+module _3gpp-5gc-nrm-smffunction {
+  yang-version 1.1;
+  namespace urn:3gpp:sa5:_3gpp-5gc-nrm-smffunction;
+  prefix smf3gpp;
+
+  import _3gpp-common-managed-function { prefix mf3gpp; }
+  import _3gpp-common-managed-element { prefix me3gpp; }
+  import _3gpp-common-yang-types { prefix types3gpp; }
+  import _3gpp-5g-common-yang-types { prefix types5g3gpp; }
+  import ietf-inet-types { prefix inet; }
+  import _3gpp-common-top { prefix top3gpp; }
+
+  organization "3gpp SA5";
+  contact "https://www.3gpp.org/DynaReport/TSG-WG--S5--officials.htm?Itemid=464";
+  description "SMFFunction derived from basic ManagedFunction.
+    Copyright 2023, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, 
+    TTA, TTC). All rights reserved.";
+  reference "3GPP TS 28.541";
+
+  revision 2023-09-18 { reference CR-1043 ; } 
+  revision 2023-04-26 { reference CR-0916; }
+  revision 2020-11-08 { reference CR-0412 ; }
+  revision 2020-08-06 { reference "CR-0333"; }
+  revision 2020-06-03 { reference "CR-0286"; }
+  revision 2019-10-25 { reference "S5-194457 S5-193518"; }
+  revision 2019-05-31 {reference "Ericsson refactoring."; }
+  revision 2018-08-07 { reference "Initial revision";}
+
+  grouping SMFFunctionGrp {
+    description "Represents the SMFFuntion IOC";
+    uses mf3gpp:ManagedFunctionGrp;
+
+    list pLMNIdList {
+      min-elements 1;
+      description "A list of PLMN identifiers (Mobile Country Code and Mobile 
+        Network Code).";
+      key "mcc mnc";
+      uses types3gpp:PLMNId;
+    }
+
+    leaf-list nRTACList {
+      description "List of Tracking Area Codes (legacy TAC or extended TAC)
+      where the represented management function is serving.";
+      reference "TS 38.413 clause 9.3.3.10";
+      min-elements 1;
+      config false;
+      type types3gpp:Tac;
+    }
+
+    leaf sBIFQDN {
+      description "The FQDN of the registered NF instance in the service-based 
+        interface.";
+      type inet:domain-name;
+    }
+
+    list sNSSAIList {
+      description "List of S-NSSAIs the managed object is capable of supporting.
+                   (Single Network Slice Selection Assistance Information)
+                   An S-NSSAI has an SST (Slice/Service type) and an optional SD
+                   (Slice Differentiator) field.";
+      reference "3GPP TS 23.003";
+      key "sd sst";
+      uses types5g3gpp:SNssai;
+    }
+    
+    list managedNFProfile {
+      key idx;
+      min-elements 1;
+      max-elements 1;
+      description "Profile definition of a Managed NF (See TS 23.501)";
+      uses types3gpp:ManagedNFProfile;
+    }
+
+    list commModelList {
+      min-elements 1;
+      key "groupId";
+      description "Specifies a list of commModel. It can be used by NF and 
+        NF services to interact with each other in 5G Core network ";
+      reference "3GPP TS 23.501";
+      uses types5g3gpp:CommModel;
+    }
+
+    leaf configurable5QISetRef {
+      type types3gpp:DistinguishedName;
+      description "DN of the Configurable5QISet that the SMFFunction supports 
+        (is associated to).";
+         }
+     
+    leaf dynamic5QISetRef {
+      type types3gpp:DistinguishedName;
+      description "DN of the Dynamic5QISet that the SMFFunction supports 
+        (is associated to).";
+    }
+  }
+
+  augment "/me3gpp:ManagedElement" {
+    list SMFFunction {
+      description "5G Core SMF Function";
+      reference "3GPP TS 28.541";
+      key id;
+      uses top3gpp:Top_Grp;
+      container attributes {
+        uses SMFFunctionGrp;
+      }
+      uses mf3gpp:ManagedFunctionContainedClasses;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-guava">
+    <feature name="odl-guava" description="OpenDaylight :: Guava 31.1" version="11.0.3">
+        <details>odl-guava</details>
+        <bundle>mvn:com.google.guava/guava/31.1-jre</bundle>
+        <bundle>mvn:com.google.guava/failureaccess/1.0.1</bundle>
+        <bundle>mvn:org.checkerframework/checker-qual/3.12.0</bundle>
+    </feature>
+</features>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-netconf-callhome-ssh">
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-topology/4.0.4/xml/features</repository>
+    <feature name="odl-netconf-callhome-ssh" description="OpenDaylight :: Netconf Connector :: Netconf Callhome Connector + Netconf SSH Server" version="4.0.4">
+        <details>odl-netconf-callhome-ssh</details>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-topology</feature>
+        <bundle>mvn:org.opendaylight.netconf/callhome-model/4.0.4</bundle>
+        <bundle>mvn:org.opendaylight.netconf/callhome-protocol/4.0.4</bundle>
+        <bundle>mvn:org.opendaylight.netconf/callhome-provider/4.0.4</bundle>
+    </feature>
+</features>

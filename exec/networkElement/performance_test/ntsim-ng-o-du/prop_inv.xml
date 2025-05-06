@@ -1,0 +1,3 @@
+ <general_params xmlns="urn:ietf:params:xml:ns:yang:proprietary_Tejas_config">
+    <reboot>false</reboot>
+ </general_params>

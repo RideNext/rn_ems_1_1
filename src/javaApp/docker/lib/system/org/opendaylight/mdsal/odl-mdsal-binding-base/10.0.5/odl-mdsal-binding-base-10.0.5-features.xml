@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-mdsal-binding-base">
+    <repository>mvn:org.opendaylight.yangtools/odl-yangtools-common/9.0.5/xml/features</repository>
+    <feature name="odl-mdsal-binding-base" description="OpenDaylight :: MD-SAL :: Binding Base" version="10.0.5">
+        <details>MD-SAL Java Binding base support</details>
+        <feature version="[9,10)">odl-yangtools-common</feature>
+        <bundle>mvn:org.opendaylight.mdsal/yang-binding/10.0.5</bundle>
+        <bundle>mvn:org.opendaylight.mdsal/mdsal-binding-spec-util/10.0.5</bundle>
+        <bundle>mvn:org.opendaylight.mdsal.model/yang-ext/2013.09.07.22.5</bundle>
+    </feature>
+</features>

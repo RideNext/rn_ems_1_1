@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-netconf-notifications-impl-4.0.4">
+    <repository>mvn:org.opendaylight.mdsal/odl-mdsal-binding-runtime/10.0.5/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-notifications-api/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-util/4.0.4/xml/features</repository>
+    <feature name="odl-netconf-notifications-impl" description="OpenDaylight :: Netconf :: Monitoring :: Impl" version="4.0.4">
+        <details>odl-netconf-notifications-impl</details>
+        <feature version="[10,11)">odl-mdsal-binding-runtime</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-notifications-api</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-util</feature>
+    </feature>
+</features>

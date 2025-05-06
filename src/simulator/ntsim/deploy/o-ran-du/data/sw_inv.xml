@@ -1,0 +1,28 @@
+  <software-inventory xmlns="urn:o-ran:software-management:1.0">
+    <software-slot>
+	    <name>PART-A</name>
+	    <status>VALID</status>
+	    <active>true</active>
+	    <running>true</running>
+      <access>READ_WRITE</access>
+      <product-code>TEJAS-GNB_01</product-code>
+      <vendor-code>123</vendor-code>
+      <build-id>gnb_01</build-id>
+      <build-name>gnb_rel1</build-name>
+      <build-version>rel1.0</build-version>
+    </software-slot>
+    <software-slot>
+	    <name>PART-B</name>
+	    <status>VALID</status>
+	    <active>false</active>
+	    <running>false</running>
+      <access>READ_WRITE</access>
+      <product-code>TEJAS-GNB_02</product-code>
+      <vendor-code>234</vendor-code>
+      <build-id>gnb_02</build-id>
+      <build-name>gnb_rel2</build-name>
+      <build-version>rel2.0</build-version>
+    </software-slot>
+    <build-content-download/>
+  </software-inventory>
+

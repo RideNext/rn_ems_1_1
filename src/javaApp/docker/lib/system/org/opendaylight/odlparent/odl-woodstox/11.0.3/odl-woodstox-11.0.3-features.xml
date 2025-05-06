@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-woodstox">
+    <repository>mvn:org.opendaylight.odlparent/odl-stax2-api/11.0.3/xml/features</repository>
+    <feature name="odl-woodstox" description="OpenDaylight :: Woodstox" version="11.0.3">
+        <details>Woodstox StAX</details>
+        <feature version="11.0.3" prerequisite="false" dependency="false">odl-stax2-api</feature>
+        <bundle>mvn:com.fasterxml.woodstox/woodstox-core/6.4.0</bundle>
+    </feature>
+</features>

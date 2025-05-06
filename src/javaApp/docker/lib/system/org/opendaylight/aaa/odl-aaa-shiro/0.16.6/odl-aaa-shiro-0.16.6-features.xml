@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-aaa-0.16.6">
+    <repository>mvn:org.opendaylight.odlparent/odl-karaf-feat-jdbc/11.0.3/xml/features</repository>
+    <repository>mvn:org.opendaylight.odlparent/odl-karaf-feat-jetty/11.0.3/xml/features</repository>
+    <repository>mvn:org.opendaylight.controller/odl-jolokia/6.0.5/xml/features</repository>
+    <repository>mvn:org.opendaylight.aaa/odl-aaa-password-service/0.16.6/xml/features</repository>
+    <repository>mvn:org.opendaylight.aaa/odl-aaa-web/0.16.6/xml/features</repository>
+    <repository>mvn:org.opendaylight.aaa/odl-aaa-encryption-service/0.16.6/xml/features</repository>
+    <repository>mvn:org.opendaylight.aaa/odl-aaa-api/0.16.6/xml/features</repository>
+    <repository>mvn:org.opendaylight.aaa/odl-aaa-cert/0.16.6/xml/features</repository>
+    <feature name="odl-aaa-shiro" description="ODL :: aaa :: odl-aaa-shiro" version="0.16.6">
+        <details>odl-aaa-shiro</details>
+        <configfile finalname="etc/opendaylight/datastore/initial/config/aaa-app-config.xml">
+            mvn:org.opendaylight.aaa/aaa-shiro/0.16.6/xml/aaa-app-config
+        </configfile>
+        <configfile finalname="etc/opendaylight/datastore/initial/config/aaa-datastore-config.xml">
+            mvn:org.opendaylight.aaa/aaa-shiro/0.16.6/xml/aaa-datastore-config
+        </configfile>
+        <configfile finalname="etc/opendaylight/datastore/initial/config/aaa-password-service-config.xml">
+            mvn:org.opendaylight.aaa/aaa-password-service-impl/0.16.6/xml/aaa-password-service-config
+        </configfile>
+        <configfile finalname="bin/idmtool">
+            mvn:org.opendaylight.aaa/aaa-shiro/0.16.6/py/idmtool
+        </configfile>
+        <configfile finalname="/etc/org.opendaylight.aaa.filterchain.cfg">
+            mvn:org.opendaylight.aaa/aaa-filterchain/0.16.6/cfg/config
+        </configfile>
+        <feature version="[11,12)">odl-karaf-feat-jdbc</feature>
+        <feature version="[11,12)">odl-karaf-feat-jetty</feature>
+        <feature version="[6,7)">odl-jolokia</feature>
+        <feature version="0.16.6" prerequisite="false" dependency="false">odl-aaa-password-service</feature>
+        <feature version="0.16.6" prerequisite="false" dependency="false">odl-aaa-web</feature>
+        <feature version="0.16.6" prerequisite="false" dependency="false">odl-aaa-encryption-service</feature>
+        <feature version="0.16.6" prerequisite="false" dependency="false">odl-aaa-api</feature>
+        <feature version="0.16.6" prerequisite="false" dependency="false">odl-aaa-cert</feature>
+        <bundle>mvn:org.opendaylight.aaa/aaa-shiro/0.16.6</bundle>
+        <bundle>mvn:org.opendaylight.aaa/aaa-tokenauthrealm/0.16.6</bundle>
+        <bundle>mvn:org.opendaylight.aaa/aaa-idm-store-h2/0.16.6</bundle>
+        <bundle>mvn:com.h2database/h2/2.1.214</bundle>
+        <bundle>mvn:net.sf.ehcache/ehcache/2.10.9.2</bundle>
+        <bundle>mvn:org.opendaylight.aaa/aaa-shiro-api/0.16.6</bundle>
+        <bundle>mvn:org.opendaylight.aaa/aaa-filterchain/0.16.6</bundle>
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+    </feature>
+</features>

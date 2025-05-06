@@ -1,0 +1,59 @@
+module _3gpp-nr-nrm-cesmanagementfunction {
+  yang-version 1.1;
+  namespace "urn:3gpp:sa5:_3gpp-nr-nrm-cesmanagementfunction";
+  prefix "cesmanagementfunction3gpp";
+
+  import _3gpp-common-subnetwork { prefix subnet3gpp; }
+  import _3gpp-nr-nrm-nrcellcu { prefix nrcellcu3gpp; }
+  import _3gpp-nr-nrm-gnbcucpfunction { prefix gnbcucp3gpp; }
+  import _3gpp-common-managed-element { prefix me3gpp; }
+
+
+  organization "3GPP SA5";
+  contact "https://www.3gpp.org/DynaReport/TSG-WG--S5--officials.htm?Itemid=464";
+  description "Defines the YANG mapping of the CESManagementFunction Information Object Class
+    (IOC) that is part of the NR Network Resource Model (NRM).";
+  reference "3GPP TS 28.541 5G Network Resource Model (NRM)";
+
+  revision 2020-05-08 { reference S5-203316; }
+
+
+  grouping CESManagementFunctionGrp {
+    description "Represents the CESManagementFunction IOC.";
+    reference "3GPP TS 28.541";
+
+    leaf cesSwitch {
+        description "This attribute determines whether the Cross Domain-Centralized SON energy saving function is enabled or disabled.";
+         type boolean;
+    }
+
+    leaf energySavingState {
+        description "Specifies the status regarding the energy saving in the cell. If the value of energySavingControl is toBeEnergySaving, then it shall be tried to achieve the value isEnergySaving for the energySavingState. If the value of energySavingControl is toBeNotEnergySaving, then it shall be tried to achieve the value isNotEnergySaving for the energySavingState. ";
+        type enumeration{
+		  enum isNotEnergySaving;
+          enum isEnergySaving;
+		}
+    }
+
+
+    leaf energySavingControl {
+        description "This attribute allows the Cross Domain-Centralized SON energy saving function to initiate energy saving activation or deactivation.";
+        type enumeration{
+		  enum toBeEnergySaving;
+          enum toBeNotEnergySaving;
+		}
+    }
+
+    
+  }
+
+  augment "/me3gpp:ManagedElement/gnbcucp3gpp:GNBCUCPFunction/nrcellcu3gpp:NRCellCU" {
+    uses CESManagementFunctionGrp;
+    }
+  augment "/me3gpp:ManagedElement" {
+    uses CESManagementFunctionGrp;
+    }
+  augment "/subnet3gpp:SubNetwork" {
+    uses CESManagementFunctionGrp;
+    }
+}

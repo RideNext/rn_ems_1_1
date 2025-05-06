@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-karaf-feat-jdbc">
+    <repository>mvn:org.ops4j.pax.jdbc/pax-jdbc-features/1.5.4/xml/features</repository>
+    <feature name="odl-karaf-feat-jdbc" description="ODL :: odlparent :: odl-karaf-feat-jdbc" version="11.0.3">
+        <details>odl-karaf-feat-jdbc</details>
+        <feature prerequisite="true">pax-jdbc</feature>
+        <feature prerequisite="true">pax-jdbc-config</feature>
+        <bundle>mvn:org.osgi/org.osgi.service.jdbc/1.0.1</bundle>
+        <bundle>mvn:org.apache.karaf.jdbc/org.apache.karaf.jdbc.core/4.4.2</bundle>
+    </feature>
+</features>

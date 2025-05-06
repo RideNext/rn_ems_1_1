@@ -1,0 +1,206 @@
+module proprietary_gNodeB_RRH_Data_Model  {
+
+  yang-version 1.1;
+
+  namespace "urn:ietf:params:xml:ns:yang:smiv2:proprietary_gNodeB_RRH_Data_Model";
+
+  prefix "proprietary_gNodeB_RRH_Data_Model";
+
+  import _3gpp-common-managed-function { prefix mf3gpp; }
+  import _3gpp-common-managed-element { prefix me3gpp; }
+  import _3gpp-common-top { prefix top3gpp; }
+
+  organization
+    "TEJAS NETWORKS";
+  contact
+    "DESCRIPTION
+    TEJAS NETWORKS";
+
+
+  revision 2024-05-31 {
+    description
+      "This is a proprietary yang that defines parameters corresponding to RRH Data Model";
+  }
+
+  grouping rrhInfo{
+    description "Represents RRH container";
+    leaf rrhModel{
+      description
+        "This object is used to configure rrhModel .";
+      default "DEFAULT_RRH_MODEL";
+      type string{
+        length "0..127";}
+    }
+    leaf mimoMode {
+      type enumeration {
+        enum 0 {
+          description "Value 0 signifies 2T2R or 4T4R";
+        }
+        enum 1 {
+          description "Value 1 signifies split RRH";
+        }
+      }
+      description
+        "This object is used to configure mimoMode .";
+    }
+    leaf antennaType {
+
+      type enumeration {
+        enum 2 {
+          description "Value 2 signifies 2 port antenna";
+        }
+        enum 4 {
+          description "Value 4 signifies 4 port antenna";
+        }
+      }
+      description
+        "This object is used to configure antennaType .";
+    }
+    leaf isRetEnabled{
+      description
+        "This object is used to enable(1) or disable(0) Ret .";
+      type boolean;
+      default "true";
+
+    }
+    leaf cpriRate {
+      description
+        "This object is used to configure cpriRate .";
+      default "0";
+      type uint8;
+    }
+    leaf setRRHDate{
+      description
+        "This object is used to configure RRHDate.";
+      type boolean;
+      default "true";
+    }
+    leaf duplexMode {
+      type enumeration {
+        enum 1 {
+          description "Value 1 signifies TDD";
+        }
+        enum 2 {
+          description "Value 2 signifies FDD";
+        }
+      }
+      description
+        "This object is used to configure Duplex mode as TDD(1) or FDD(2) .";
+    }
+
+    leaf dlEarfcn{
+      description
+        "This object is used to configure dlEarfcn .";
+      default "0";
+      type uint32;
+    }
+    leaf ulEarfcn{
+      description
+        "This object is used to configure ulEarfcn .";
+      default "0";
+      type uint32;
+    }
+    leaf frequencyBand{
+      description
+        "This object is used to configure frequencyBand .";
+      default "0";
+      type uint16{
+        range "0..43";}
+    }
+    leaf bandWidth{
+      description
+        "This object is used to configure bandWidth .";
+      default "0";
+      type uint16;
+    }
+
+    container delayParam{
+      leaf txDelay{
+        description
+          "This object is used to configure delayParam .";
+        default "0.0";
+        type decimal64 {
+          fraction-digits 4;
+        }
+      }
+      leaf rxDelay{
+        description
+          "This object is used to configure rxDelay .";
+        default "0.0";
+        type decimal64 {
+          fraction-digits 4;
+        }
+      }
+    }
+
+    container cpriLoopback{
+      leaf isLoopBackEnabled{
+        description
+          "This object is used to enable/disable cpriLoopback.";
+        type boolean;
+        default "false";
+      }
+      leaf mode{
+        description
+          "This object is used to configure mode .";
+        default "0";
+        type uint8{
+          range "0..2";}
+      }
+      leaf testTime{
+        description
+          "This object is used to configure testTime .";
+        default "0";
+        type uint16;
+      }
+    }
+
+
+
+    container antennaConfig{
+      leaf antennaId{
+        description
+          "This object is used to configure antennaConfig .";
+        default "0";
+        type uint16{
+          range "0..3";}
+      }
+      leaf antennaGain{
+        description
+          "This object is used to configure antennaGain .";
+        default "0";
+        type uint16{
+          range "0..120";}
+      }
+      leaf txPower{
+        description
+          "This object is used to configure txPower .";
+        default "0.0";
+        type decimal64 {
+          fraction-digits 4;
+        }
+      }
+    }
+
+  }
+
+
+augment "/me3gpp:ManagedElement" {
+  list RRHList {
+    description "Represents the information of RRH";
+    key id;
+    leaf id {
+      description "Id field should match with NR-Cell DU";
+      type int32 {
+        range "1..8";
+      }
+    }
+
+    container AllRRHInfo {
+      uses rrhInfo;
+    }
+  }
+}
+
+
+}

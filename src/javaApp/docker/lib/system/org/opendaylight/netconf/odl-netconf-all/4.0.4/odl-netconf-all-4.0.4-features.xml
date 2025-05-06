@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-netconf-all">
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-api/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-mapping-api/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-util/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-impl/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-netty-util/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-client/4.0.4/xml/features</repository>
+    <feature name="odl-netconf-all" description="OpenDaylight :: Netconf :: All" version="4.0.4">
+        <details>odl-netconf-all</details>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-api</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-mapping-api</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-util</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-impl</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-netty-util</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-client</feature>
+    </feature>
+</features>

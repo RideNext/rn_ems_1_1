@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="features-netconf-connector">
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-clustered-topology/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-connector/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-connector-all/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-callhome-ssh/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-console/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-topology/4.0.4/xml/features</repository>
+    <feature name="features-netconf-connector" description="features-netconf-connector" version="4.0.4">
+        <details>features-netconf-connector</details>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-clustered-topology</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-connector</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-connector-all</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-callhome-ssh</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-console</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-topology</feature>
+    </feature>
+</features>

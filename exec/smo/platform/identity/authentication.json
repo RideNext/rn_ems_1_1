@@ -1,0 +1,99 @@
+{
+  "users": [
+    {
+      "firstName": "Manish",
+      "lastName": "Tiwari",
+      "email": "manish.tiwari@ridenext.co.in",
+      "enabled": "true",
+      "username": "manish.tiwari",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Default4SDN!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "firstName": "R2",
+      "lastName": "D2",
+      "email": "r2.d2@ridenext.in",
+      "enabled": "true",
+      "username": "r2.d2",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Default4SDN!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "firstName": "Mohan",
+      "lastName": "Rao",
+      "email": "mks@ridenext.co.in",
+      "enabled": "true",
+      "username": "mohan.ks",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Default4SDN!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "firstName": "Manohar",
+      "lastName": "P",
+      "email": "manohar.p@ridenext.in",
+      "enabled": "true",
+      "username": "manohar.p",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Default4SDN!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "firstName": "Balaji",
+      "lastName": "G",
+      "email": "balajiG@ridenext.in",
+      "enabled": "true",
+      "username": "balaji.G",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Default4SDN!",
+          "temporary": true
+        }
+      ],
+      "requiredActions": [
+        "UPDATE_PASSWORD"
+      ]
+    }
+  ],
+  "grants": [
+    {
+      "username": "manish.tiwari",
+      "role": "administration"
+    },
+    {
+      "username": "r2.d2",
+      "role": "administration"
+    },
+    {
+      "username": "mohan.ks",
+      "role": "provision"
+    },
+    {
+      "username": "manohar.p",
+      "role": "supervision"
+    },
+    {
+      "username": "balaji.G",
+      "role": "administration"
+    }
+  ]
+}

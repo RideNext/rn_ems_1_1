@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-aaa-netconf-plugin">
+    <repository>mvn:org.opendaylight.aaa/odl-aaa-shiro/0.16.6/xml/features</repository>
+    <feature name="odl-aaa-netconf-plugin" description="OpenDaylight :: AAA :: ODL NETCONF Plugin" version="4.0.4">
+        <details>odl-aaa-netconf-plugin</details>
+        <feature version="[0.16,1)">odl-aaa-shiro</feature>
+        <bundle>mvn:org.opendaylight.netconf/aaa-authn-odl-plugin/4.0.4</bundle>
+        <bundle>mvn:org.opendaylight.netconf/netconf-auth/4.0.4</bundle>
+    </feature>
+</features>

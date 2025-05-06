@@ -1,0 +1,66 @@
+[2024-03-04T13:00:03,903][ERROR][main      ][org.onap.dcaegen2.services.sdk.services.external.schema.manager.service.StndDefinedValidator]Validation error(s) :
+StndDefinedSchemaValidator: Field 'href' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+StndDefinedSchemaValidator: Field 'notificationId' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+StndDefinedSchemaValidator: Field 'notificationType' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+StndDefinedSchemaValidator: Field 'eventTime' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+StndDefinedSchemaValidator: Field 'systemDN' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+
+[2024-03-04T13:00:03,975][ERROR][main      ][org.onap.dcaegen2.services.sdk.services.external.schema.manager.service.StndDefinedValidator]Validation error(s) :
+StndDefinedSchemaValidator.perceivedSeverity: Type expected 'string', found 'integer'. (code: 1027)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.perceivedSeverity.<#/components/schemas/PerceivedSeverity>.<type>
+StndDefinedSchemaValidator.perceivedSeverity: Value '1' is not defined in the schema. (code: 1006)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.perceivedSeverity.<#/components/schemas/PerceivedSeverity>.<enum>
+StndDefinedSchemaValidator.alarmId: Type expected 'string', found 'integer'. (code: 1027)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.alarmId.<#/components/schemas/AlarmId>.<type>
+StndDefinedSchemaValidator.trendIndication: Value '123' is not defined in the schema. (code: 1006)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.trendIndication.<#/components/schemas/TrendIndication>.<enum>
+
+[2024-03-04T13:25:56,797][ERROR][main      ][org.onap.dcaegen2.services.sdk.services.external.schema.manager.service.StndDefinedValidator]Validation error(s) :
+StndDefinedSchemaValidator: Field 'href' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+StndDefinedSchemaValidator: Field 'notificationId' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+StndDefinedSchemaValidator: Field 'notificationType' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+StndDefinedSchemaValidator: Field 'eventTime' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+StndDefinedSchemaValidator: Field 'systemDN' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+
+[2024-03-04T13:25:56,901][ERROR][main      ][org.onap.dcaegen2.services.sdk.services.external.schema.manager.service.StndDefinedValidator]Validation error(s) :
+StndDefinedSchemaValidator.perceivedSeverity: Type expected 'string', found 'integer'. (code: 1027)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.perceivedSeverity.<#/components/schemas/PerceivedSeverity>.<type>
+StndDefinedSchemaValidator.perceivedSeverity: Value '1' is not defined in the schema. (code: 1006)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.perceivedSeverity.<#/components/schemas/PerceivedSeverity>.<enum>
+StndDefinedSchemaValidator.alarmId: Type expected 'string', found 'integer'. (code: 1027)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.alarmId.<#/components/schemas/AlarmId>.<type>
+StndDefinedSchemaValidator.trendIndication: Value '123' is not defined in the schema. (code: 1006)
+From: StndDefinedSchemaValidator.</home/rnacumos/Manish/devEnv/src/vesCollector/dcaegen2-collectors-ves-1.10.1/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.trendIndication.<#/components/schemas/TrendIndication>.<enum>
+
+[2024-09-20T15:22:20,127][ERROR][main      ][org.onap.dcaegen2.services.sdk.services.external.schema.manager.service.StndDefinedValidator]Validation error(s) :
+StndDefinedSchemaValidator: Field 'href' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/manishti/rn-ems/src/vesCollector/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+StndDefinedSchemaValidator: Field 'notificationId' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/manishti/rn-ems/src/vesCollector/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+StndDefinedSchemaValidator: Field 'notificationType' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/manishti/rn-ems/src/vesCollector/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+StndDefinedSchemaValidator: Field 'eventTime' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/manishti/rn-ems/src/vesCollector/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+StndDefinedSchemaValidator: Field 'systemDN' is required. (code: 1026)
+From: StndDefinedSchemaValidator.</home/manishti/rn-ems/src/vesCollector/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.<#/components/schemas/NotificationHeader>.<required>
+
+[2024-09-20T15:22:20,162][ERROR][main      ][org.onap.dcaegen2.services.sdk.services.external.schema.manager.service.StndDefinedValidator]Validation error(s) :
+StndDefinedSchemaValidator.perceivedSeverity: Type expected 'string', found 'integer'. (code: 1027)
+From: StndDefinedSchemaValidator.</home/manishti/rn-ems/src/vesCollector/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.perceivedSeverity.<#/components/schemas/PerceivedSeverity>.<type>
+StndDefinedSchemaValidator.perceivedSeverity: Value '1' is not defined in the schema. (code: 1006)
+From: StndDefinedSchemaValidator.</home/manishti/rn-ems/src/vesCollector/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.perceivedSeverity.<#/components/schemas/PerceivedSeverity>.<enum>
+StndDefinedSchemaValidator.alarmId: Type expected 'string', found 'integer'. (code: 1027)
+From: StndDefinedSchemaValidator.</home/manishti/rn-ems/src/vesCollector/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.alarmId.<#/components/schemas/AlarmId>.<type>
+StndDefinedSchemaValidator.trendIndication: Value '123' is not defined in the schema. (code: 1006)
+From: StndDefinedSchemaValidator.</home/manishti/rn-ems/src/vesCollector/./src/test/resources/stndDefined/faultMnS.yaml#/components/schemas/NotifyNewAlarm>.<allOf>.trendIndication.<#/components/schemas/TrendIndication>.<enum>
+

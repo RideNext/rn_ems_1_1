@@ -1,0 +1,116 @@
+module _3gpp-common-mnsregistry {
+  yang-version 1.1;
+  namespace "urn:3gpp:sa5:_3gpp-common-mnsregistry";
+  prefix "mnsregist3gpp";
+
+  import _3gpp-common-subnetwork { prefix subnet3gpp; }
+  import _3gpp-common-top { prefix top3gpp; }
+  import _3gpp-common-yang-types { prefix types3gpp; }
+
+  organization "3GPP SA5";
+  contact "https://www.3gpp.org/DynaReport/TSG-WG--S5--officials.htm?Itemid=464";
+  description "Defines the YANG mapping of the MNSRegistry Information Object
+    Class (IOC) that is part of the Generic Network Resource Model (NRM).
+    Copyright 2023, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, 
+    TTA, TTC). All rights reserved.";
+  reference "3GPP TS 28.623 Generic Network Resource Model (NRM)";
+
+  revision 2023-09-30 { reference CR-0278; }
+  revision 2023-09-18 { reference CR-0271 ; } 
+  revision 2023-05-10 { reference CR-0243; }
+  revision 2023-02-14 { reference CR-0234; }
+  revision 2021-11-23 { reference "S5-216090"; }
+  revision 2021-10-18 { reference "S5-215263"; }
+  revision 2021-08-29 { reference "Initial revision, S5-214388"; }
+  
+  grouping MnsInfoGrp {
+    description "Represents the MnsInfo IOC.";
+    leaf mnsLabel {
+      description "Human-readable name of management service.";
+      mandatory true;
+      type string;
+    }
+    
+    leaf mnsType {
+      description "Type of management service.";
+      type enumeration {
+         enum ProvMnS;
+         enum FaultSupervisionMnS;
+         enum StreamingDataReportingMnS;
+         enum FileDataReportingMnS;
+      }
+    }
+    
+    leaf mnsVersion {
+      description "Version of management service.";
+      type string;
+    }    
+    
+    leaf mnsAddress {
+      description "Addressing information for Management Service operations.";
+      mandatory true;
+      type string;
+    }    
+    
+    leaf-list mnsScope {
+      description "List of the managed object instances that can be accessed
+        using the MnS. If a complete SubNetwork can be accessed using the MnS,
+        this attribute may contain the DN of the SubNetwork instead of the
+        DNs of the individual managed entities within the SubNetwork.  If a 
+        complete ManagedElement can be accessed using the MnS,
+        this attribute may contain the DN of the ManagedElement instead of the
+        DNs of the individual managed entities within the ManagedElement.";
+      min-elements 1;
+      type types3gpp:DistinguishedName;
+    }
+  }
+  
+  grouping MnsRegistryGrp {
+    description "Currently no own attributes defined.";
+  }  
+  
+  augment "/subnet3gpp:SubNetwork" {
+    list MnsRegistry {
+      description "This IOC is a container for MnsInfo IOC-s. It can be 
+        contained only by SubNetwork IOC. A SubNetwork IOC can contain 
+        only one instance of MnsRegistry.
+        The IOC is instantiated by the system.";
+      key id;
+      max-elements 1;
+      uses top3gpp:Top_Grp;
+      container attributes {
+        uses MnsRegistryGrp;
+      }
+      
+      list MnsInfo {
+        description "This IOC represents an available Management Service (MnS)
+          and provides the data required to support its discovery.
+          It is name-contained by MnsRegistry.
+
+          This specification does not specify how 'MnsInfo' objects are 
+          created and maintained.
+          
+          This information is used by the consumer to discover the producers
+          of specific Management Services and to derive the addresses of the
+          Management Service.
+
+          Attributes mnsLabel, mnsType, and mnsVersion are used to describe
+          the Management Service.
+
+          Attribute mnsAddress is used to provide addressing information for
+          the Management Service operations.
+
+          Attribute mnsScope is used to provide information about the
+          management scope of the Management Service. The management scope is
+          defined as the set of managed object instances that can be accessed
+          using the Management Service.";
+
+        key id;
+        uses top3gpp:Top_Grp;
+        container attributes {
+          uses MnsInfoGrp;
+        }
+      }
+    }
+  }
+}

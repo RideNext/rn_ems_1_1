@@ -1,0 +1,14 @@
+.collapse {
+    transition-property: height;
+    transition-duration: 200ms;
+    overflow: auto;
+  }
+
+  .expnd_icon {
+    transform: scale(2);
+   color: #ccc;
+  }
+  .expnd_child_icon {
+    transform: scale(1.5);
+   color: #55679d;
+  }

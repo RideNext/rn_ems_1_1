@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="sdnr-wt-feature-aggregator-devicemanager">
+    <repository>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-devicemanager-o-ran-sc-oran-feature/1.5.1/xml/features</repository>
+    <feature name="sdnr-wt-feature-aggregator-devicemanager" description="ccsdk-features :: sdnr-wt-feature-aggregator-devicemanager" version="1.5.1">
+        <details>Root POM to be used in place of odlparent for CCSDK based projects</details>
+        <feature version="1.5.1" prerequisite="false" dependency="false">sdnr-wt-devicemanager-o-ran-sc-oran-feature</feature>
+    </feature>
+</features>

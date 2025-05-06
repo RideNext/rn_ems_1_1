@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="features-yanglib">
+    <repository>mvn:org.opendaylight.netconf/odl-yanglib/4.0.4/xml/features</repository>
+    <feature name="features-yanglib" description="features-yanglib" version="4.0.4">
+        <details>features-yanglib</details>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-yanglib</feature>
+    </feature>
+</features>

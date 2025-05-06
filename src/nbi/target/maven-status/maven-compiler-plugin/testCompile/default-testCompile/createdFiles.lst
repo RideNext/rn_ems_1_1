@@ -1,0 +1,10 @@
+com/nbi/AlarmApplicationTests.class
+com/nbi/test/ClearAlarmsListTests.class
+com/nbi/test/ClearAlarmTests.class
+com/nbi/test/CommentAlarmTests.class
+com/nbi/test/AlarmServiceTests.class
+com/nbi/test/AckAlarmTests.class
+com/nbi/test/InventoryTests.class
+com/nbi/test/ConfigurationTests.class
+com/nbi/test/UnAckAlarmTests.class
+com/nbi/test/KafkaConsumerServiceTest.class

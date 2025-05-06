@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-restconf-all">
+    <repository>mvn:org.opendaylight.netconf/odl-restconf/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-mdsal-apidocs/4.0.4/xml/features</repository>
+    <feature name="odl-restconf-all" description="OpenDaylight :: Restconf :: All" version="4.0.4">
+        <details>odl-restconf-all</details>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-restconf</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-mdsal-apidocs</feature>
+    </feature>
+</features>

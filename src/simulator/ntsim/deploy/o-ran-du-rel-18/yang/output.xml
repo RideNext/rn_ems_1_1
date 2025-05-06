@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <notification_params xmlns="urn:ietf:params:xml:ns:yang:proprietary_Tejas_notification">
+    <swVersion/>
+    <hwVersion/>
+    <pnfId/>
+    <cell_oper_details>
+      <cell_id/>
+      <cell_opstate/>
+      <ngap_link_status/>
+      <f1ap_link_status/>
+    </cell_oper_details>
+    <du_details>
+      <du_id/>
+      <du_mac_addr/>
+    </du_details>
+  </notification_params>
+</data>

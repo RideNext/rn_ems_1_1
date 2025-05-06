@@ -1,0 +1,246 @@
+module gNodeB_Telemetry_Data_Model{
+
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:smiv2:gNodeB_Telemetry_Data_Model";
+  prefix "gnodeb-telemetry-data-model";
+
+  import ietf-yang-types {
+    prefix yang;
+  }
+
+  organization
+    "Tejas Network Limited";
+  contact
+    "DESCRIPTION
+    The telemetry module for GNB.";
+
+  revision 2023-05-02 {
+    description
+      "The Telemetry module for GNB.";
+  }
+
+
+
+
+
+  typedef operational-state {
+
+    type enumeration {
+      enum unknown {
+        value 1;
+        description
+          "The resource is unable to report administrative state.";
+      }
+      enum disabled {
+        value 2;
+        description
+          "The resource is totally inoperable.";
+      }
+      enum enabled {
+        value 3;
+
+        description
+          "The resource is partially or fully operable.";
+      }
+      enum testing {
+        value 4;
+        description
+          "The resource is currently being tested and cannot
+          therefore report whether or not it is operational.";
+      }
+    }
+  }
+
+
+  container telemetry {
+    container gNBParams {
+
+      leaf gNBID {
+        description
+          "This object is used to configure ID of the gNB-Node
+          by this unique identification, SMO Identifies the gNB ; TejasNL-01 ";
+        type string{ length "1..150";}
+      }
+
+      leaf gNBName {
+        description
+          "This object is used to configure ID of the gNBName";
+        default "TNL";
+        type string{ length "1..150";}
+      }
+
+      leaf vendorName {
+        description
+          "This object specifies the Vendor Name";
+        type string{ length "1..150";}
+      }
+
+      leaf sourceName {
+        description
+          "This object specifies the Source Name";
+        type string{ length "1..1000";}
+      }
+
+
+      leaf swVersion {
+        description
+          "This object is used to version currently active";
+        type string{ length "1..150";}
+      }
+
+      leaf fwVersion {
+        description
+          "This object is used to version currently active";
+        type string{ length "1..150";}
+      }
+
+
+      leaf oper-state {
+        type operational-state;
+        description
+          "The operational state for this component.";
+      }
+    }/* gNBParams */
+
+
+
+    list gNodeB_Telemetry_Data {
+      key id;
+      max-elements 15;
+      leaf id { type uint32; }
+
+      leaf time-stamp {
+        type yang:date-and-time;
+        description
+          "Time-stamp for measurement of object stats";
+      }
+
+      container gNBHwStats {
+        leaf uptime {
+          description
+            "This parameter specifies the device uptime in seconds.";
+          mandatory true;
+          type uint32;
+        }
+        leaf disk_usage {
+          description
+            "This parameter specifies the disk usage.";
+          mandatory true;
+          type uint32{
+            range "1..100";}
+        }
+        leaf mem_usage {
+          description
+            "This parameter specifies the memory/RAM usage.";
+          mandatory true;
+          type decimal64 {
+            fraction-digits 4;
+            range "0.0 .. 1000.0000";}
+        }
+        leaf cpu_usage {
+          description
+            "This parameter specifies the memory/RAM usage.";
+          mandatory true;
+          type decimal64 {
+            fraction-digits 4;
+            range "0.0 .. 1000.0000";}
+        }
+        list cpu_usage_module_wise {
+          description
+            "This parameter specifies the CPU usage for all the gNB modules/processes.";
+          key "module-name";
+
+          leaf module-name {
+            type string{
+              length "1..1000";}
+          }
+
+          leaf cpu-percentage {
+            type decimal64 {
+              fraction-digits 2;
+              range "0.0 .. 1000.00";}
+          }
+        }
+        list  mem_usage_module_wise {
+          description
+            "This parameter specifies the memory/RAM usage for all the gNB modules/processes.";
+
+          key "module-name";
+
+          leaf module-name {
+            type string{
+              length "1..1000";}
+          }
+
+          leaf memory-usage {
+
+            description
+              "memory  usage  per process In MB ";
+            type decimal64 {
+              fraction-digits 2;
+              range "0.0 .. 1000.00";}
+          }
+        }
+
+
+        leaf sys-inlet-temp {
+          type string;
+          description
+            "Temeperature of hardware";
+        }
+        leaf cpu-temp {
+          type string;
+          description
+            "Temeperature of hardware";
+        }
+        leaf bmc-temp {
+          type string;
+          description
+            "Temeperature of hardware";
+        }
+        leaf ssd-temp {
+          type string;
+          description
+            "Temeperature of hardware";
+        }
+        leaf fpga-temp {
+          type string;
+          description
+            "Temeperature of hardware";
+        }
+        leaf power {
+          type string;
+          description
+            "A measure of electric power in volts.";
+        }
+        leaf current {
+          type string;
+          description
+            "A measure of electric current in amps.";
+        }
+        list fan-status {
+          description
+            "Status of all the FANs with their speed in RPM";
+
+          key "fan-name";
+
+          leaf fan-name {
+            type string{
+              length "1..1000";}
+          }
+
+          leaf fan-speed {
+
+            description
+              "Fan speed in RPM";
+            type uint32{
+              range "1..100000";}
+          }
+        }
+      }
+
+
+    } /* gNodeB_Telemetry_Data */
+  }
+}
+

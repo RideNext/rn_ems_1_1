@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="sdnr-wt-data-provider-feature">
+    <feature name="sdnr-wt-data-provider-feature" description="ccsdk-features :: sdnr-wt-data-provider-feature" version="1.5.1">
+        <details>Root POM to be used in place of odlparent for CCSDK based projects</details>
+        <feature prerequisite="true" dependency="false">wrap</feature>
+        <bundle>mvn:com.highstreet-technologies.opendaylight/odl-ready/3.2.0</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-data-provider-provider/1.5.1</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-common/1.5.1</bundle>
+        <bundle>wrap:mvn:org.elasticsearch.client/elasticsearch-rest-client/7.13.4</bundle>
+        <bundle>wrap:mvn:org.apache.httpcomponents/httpclient/4.5.13</bundle>
+        <bundle>wrap:mvn:org.apache.httpcomponents/httpcore/4.4.14</bundle>
+        <bundle>wrap:mvn:org.apache.httpcomponents/httpasyncclient/4.1.4</bundle>
+        <bundle>wrap:mvn:org.apache.httpcomponents/httpcore-nio/4.4.14</bundle>
+        <bundle>mvn:commons-codec/commons-codec/1.15</bundle>
+        <bundle>mvn:commons-logging/commons-logging/1.2</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-yang-utils/1.5.1</bundle>
+        <bundle>mvn:com.google.code.findbugs/annotations/3.0.1</bundle>
+        <bundle>wrap:mvn:net.jcip/jcip-annotations/1.0</bundle>
+        <bundle>mvn:com.google.code.findbugs/jsr305/3.0.1</bundle>
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/2.13.4</bundle>
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-databind/2.13.4.2</bundle>
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-core/2.13.4</bundle>
+        <bundle>mvn:com.fasterxml.jackson.datatype/jackson-datatype-jsr310/2.13.4</bundle>
+        <bundle>mvn:org.json/json/20201115</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-data-provider-model/1.5.1</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/openroadm-pm-types/1.5.1</bundle>
+        <bundle>mvn:org.opendaylight.mdsal/yang-binding/10.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/concepts/9.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/util/9.0.5</bundle>
+        <bundle>mvn:tech.pantheon.triemap/triemap/1.2.0</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/yang-common/9.0.5</bundle>
+        <bundle>mvn:com.google.guava/guava/31.1-jre</bundle>
+        <bundle>mvn:com.google.guava/failureaccess/1.0.1</bundle>
+        <bundle>mvn:org.checkerframework/checker-qual/3.12.0</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-data-provider-dblib/1.5.1</bundle>
+        <bundle>mvn:com.zaxxer/HikariCP/4.0.3</bundle>
+        <bundle>mvn:org.mariadb.jdbc/mariadb-java-client/2.7.5</bundle>
+    </feature>
+</features>

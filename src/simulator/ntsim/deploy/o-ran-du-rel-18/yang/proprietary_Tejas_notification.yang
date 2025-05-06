@@ -1,0 +1,169 @@
+
+module proprietary_Tejas_notification {
+
+	yang-version 1.1;
+        namespace "urn:ietf:params:xml:ns:yang:proprietary_Tejas_notification";
+	prefix "proprietary_Tejas_notification";
+
+
+	organization
+		"Tejas Network Limited";
+	contact
+		"DESCRIPTION
+		The proprietary notifications parameters for GNB.";
+
+	revision 2023-05-02 {
+		description
+			"The proprietary notifications parameters for GNB.";
+	}
+	grouping cell_status {
+		leaf PLMNID {
+                        description
+                                "This object is used to configure PLMN_ID  .";
+                        type string{
+                                length 6;}
+                }
+                leaf Cell_Identity {
+                        description
+                                "This object is used to configure Cell_Identity .";
+                        type uint32{
+                        range "0..16383";}
+                }
+	}
+         grouping output-status-grouping {
+    description "Status grouping";
+
+    leaf status {
+      type enumeration {
+        enum SUCCESS {
+            description "";}
+        enum FAILURE {
+            description "";}
+      }
+      description "Operation status";
+      }
+
+    leaf reject-reason {
+      //when "../status = 'FAILURE'";
+      type string;
+      description "";
+    }
+  }
+
+
+	typedef operational-state {
+
+		type enumeration {
+
+			enum down {
+				value 1;
+				description
+					"The resource is totally inoperable.";
+			}
+			enum up {
+				value 2;
+
+				description
+					"The resource is partially or fully operable.";
+			}
+		}
+	}
+
+	container notification_params {
+		leaf swVersion {
+			description
+				"This object is used to version currently active";
+			type string{
+				length "1..150";}
+		}	
+
+		leaf hwVersion {
+			description
+				"This object is used to version currently active";
+			type string{
+				length "1..150";}
+
+		}		
+
+		
+		leaf pnfId {
+			description
+				"This uniquely identifies a node amongst multiple gNBs after PNF Registration";
+			type string{
+                                length "1..150";}
+                        }
+
+
+		list cell_oper_details {
+			description
+				"This parameter specifies the Cell operational details";
+			key "cell_id";
+
+			leaf cell_id {
+				description
+					"This parameter identifies the id of Cell";
+				type string{
+					length "1..1000";}
+			}
+
+			leaf cell_opstate {
+				description
+					"This parameter specifies the operational state of the cell";
+				type operational-state;
+			}
+
+      leaf ngap_link_status {
+        description
+          "This parameter specifies the link status of NGAP";
+        type operational-state;
+      }
+
+      leaf f1ap_link_status {
+        description
+          "This parameter specifies the link status of F1AP";
+        type operational-state;
+      }
+    }
+
+
+    list du_details {
+      description
+        "This parameter specifies the DU details";
+
+			key "du_id";
+
+			leaf du_id {
+				description
+					"This parameter identifies the id of DU";
+				type string{
+					length "1..1000";}
+			}
+
+			leaf du_mac_addr {
+				description
+					"This parameter specifies the address of DU MAC";
+				type string{
+					length "1..1000";}
+			}
+		}
+	}
+	rpc initiate-cell-activate {
+         input {
+            uses cell_status;
+        }
+         output {
+      	     uses output-status-grouping;
+        }
+        }
+	rpc initiate-cell-deactivate {
+        input {
+            uses cell_status;
+        }
+        output {
+            uses output-status-grouping;
+        }
+
+        }
+
+} /* proprietary_Tejas_notification */
+

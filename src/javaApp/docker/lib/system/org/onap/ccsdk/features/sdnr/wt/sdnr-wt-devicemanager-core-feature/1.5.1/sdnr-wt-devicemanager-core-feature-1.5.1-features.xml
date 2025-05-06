@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="sdnr-wt-devicemanager-core-feature">
+    <feature name="sdnr-wt-devicemanager-core-feature" description="ccsdk-features :: sdnr-wt-devicemanager-core-feature" version="1.5.1">
+        <details>Root POM to be used in place of odlparent for CCSDK based projects</details>
+        <feature prerequisite="true" dependency="false">wrap</feature>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-devicemanager-core-provider/1.5.1</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-mountpoint-registrar-provider/1.5.1</bundle>
+        <bundle>mvn:com.github.mwiede/jsch/0.2.11</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-mountpoint-registrar-model/1.5.1</bundle>
+        <bundle>wrap:mvn:org.apache.kafka/kafka-clients/3.0.0</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-devicemanager-core-model/1.5.1</bundle>
+        <bundle>mvn:org.opendaylight.mdsal/yang-binding/10.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/concepts/9.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/util/9.0.5</bundle>
+        <bundle>mvn:tech.pantheon.triemap/triemap/1.2.0</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/yang-common/9.0.5</bundle>
+        <bundle>mvn:com.google.guava/guava/31.1-jre</bundle>
+        <bundle>mvn:com.google.guava/failureaccess/1.0.1</bundle>
+        <bundle>mvn:org.checkerframework/checker-qual/3.12.0</bundle>
+    </feature>
+</features>

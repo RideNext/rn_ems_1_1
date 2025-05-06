@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-mdsal-model-rfc8342">
+    <repository>mvn:org.opendaylight.mdsal.model/odl-mdsal-model-rfc7952/10.0.5/xml/features</repository>
+    <feature name="odl-mdsal-model-rfc8342" description="OpenDaylight :: MD-SAL :: Model :: RFC8342" version="10.0.5">
+        <details>Models from RFC8342</details>
+        <feature version="10.0.5" prerequisite="false" dependency="false">odl-mdsal-model-rfc7952</feature>
+        <bundle>mvn:org.opendaylight.mdsal.binding.model.ietf/rfc8342/10.0.5</bundle>
+        <bundle>mvn:org.opendaylight.mdsal.binding.model.ietf/rfc8342-ietf-datastores/10.0.5</bundle>
+        <bundle>mvn:org.opendaylight.mdsal.binding.model.ietf/rfc8342-ietf-origin/10.0.5</bundle>
+    </feature>
+</features>

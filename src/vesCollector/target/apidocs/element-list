@@ -1,0 +1,10 @@
+org.onap.dcae
+org.onap.dcae.common
+org.onap.dcae.common.configuration
+org.onap.dcae.common.model
+org.onap.dcae.common.publishing
+org.onap.dcae.common.validator
+org.onap.dcae.configuration
+org.onap.dcae.configuration.cbs
+org.onap.dcae.multiplestreamreducer
+org.onap.dcae.restapi

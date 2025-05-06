@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.jboss.narayana.osgi</groupId>
+  <artifactId>narayana-osgi-jta</artifactId>
+  <versioning>
+    <release>5.12.5.Final</release>
+    <versions>
+      <version>5.12.5.Final</version>
+    </versions>
+    <lastUpdated>20240412072319</lastUpdated>
+  </versioning>
+</metadata>

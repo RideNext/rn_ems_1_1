@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-netconf-mdsal">
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-all/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-tcp/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-ssh/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-client/4.0.4/xml/features</repository>
+    <feature name="odl-netconf-mdsal" description="OpenDaylight :: Netconf :: Mdsal" version="4.0.4">
+        <details>odl-netconf-mdsal</details>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-all</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-tcp</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-ssh</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-client</feature>
+        <bundle>mvn:org.opendaylight.netconf/mdsal-netconf-ssh/4.0.4</bundle>
+        <bundle>mvn:org.opendaylight.netconf/mdsal-netconf-tcp/4.0.4</bundle>
+        <bundle>mvn:org.opendaylight.netconf/mdsal-netconf-notification/4.0.4</bundle>
+        <bundle>mvn:org.opendaylight.netconf/mdsal-netconf-connector/4.0.4</bundle>
+        <bundle>mvn:org.opendaylight.netconf/mdsal-netconf-monitoring/4.0.4</bundle>
+        <bundle>mvn:org.opendaylight.netconf/mdsal-netconf-yang-library/4.0.4</bundle>
+        <bundle>mvn:org.opendaylight.netconf/mdsal-netconf-impl/4.0.4</bundle>
+    </feature>
+</features>

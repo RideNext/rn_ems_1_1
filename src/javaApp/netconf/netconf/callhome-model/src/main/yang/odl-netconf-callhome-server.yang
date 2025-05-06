@@ -1,0 +1,113 @@
+module odl-netconf-callhome-server {
+
+  namespace "urn:opendaylight:params:xml:ns:yang:netconf-callhome-server";
+  prefix "callhome";
+
+  organization
+   "OpenDaylight Project";
+
+  contact
+   "netconf-dev@lists.opendaylight.org";
+
+  description
+   "This module defines the northbound interface for OpenDaylight NETCONF Callhome.";
+
+  revision 2020-10-15 {
+    description
+     "This revision adds connectivity details for one of the supported transport protocols";
+    reference
+     "RFC 8071: NETCONF Call Home and RESTCONF Call Home";
+  }
+
+  revision "2016-11-09" {
+    description "Initial version";
+  }
+
+  grouping credentials {
+    container credentials {
+      presence "Credentials to device.";
+      leaf username {
+        mandatory true;
+        description "Username to be used for authentication";
+        type string {
+          length "1..max";
+        }
+      }
+      leaf-list passwords {
+        description "Passwords to be used for authentication.";
+        type string;
+      }
+    }
+  }
+
+  container netconf-callhome-server {
+    description "Settings for call home server administration";
+
+    container global {
+      presence "global credentials are enabled.";
+      uses credentials;
+      leaf accept-all-ssh-keys {
+        type boolean;
+        default false;
+      }
+
+      leaf mount-point-naming-strategy {
+        type enumeration {
+            enum IP_PORT;
+            enum IP_ONLY;
+        }
+        default IP_PORT;
+        description "Mount name will be chosen as per this strategy in the absence of per device settings. Default is IP_PORT";
+      }
+    }
+
+    container allowed-devices {
+      description "A list of allowed devices";
+      list device {
+        key unique-id;
+        leaf unique-id {
+          description "Identifier of device, which will be used to identify device.";
+          type string;
+        }
+        leaf ssh-host-key {
+          description "BASE-64 encoded public key which device will use during connection.
+                       Deprecated, a 'host-key' from the  'ssh-client-params' containers should be used instead.";
+          status deprecated;
+          type string;
+        }
+        unique ssh-host-key;
+        uses credentials;
+
+        choice transport {
+          description "Provides connectivity details for one of the supported transport protocols";
+          case ssh {
+            container ssh-client-params {
+              leaf host-key {
+                mandatory true;
+                description "BASE-64 encoded public key which device will use during connection.";
+                type string;
+              }
+              uses credentials;
+            }
+          }
+          case tls {
+            container tls-client-params {
+              leaf certificate-id {
+                mandatory true;
+                description "Certificate identifier which will be used during two-way TLS authentication.";
+                type string;
+              }
+              leaf key-id {
+                mandatory true;
+                description "Key identifier inside the NetConf keystore which will be used during two-way TLS authentication.";
+                type string;
+              }
+            }
+          }
+        }
+        unique transport/ssh/ssh-client-params/host-key;
+        unique transport/tls/tls-client-params/certificate-id;
+      }
+    }
+  }
+}

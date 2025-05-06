@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-ws-rs-api">
+    <feature name="odl-ws-rs-api" description="OpenDaylight :: Javax WS RS API" version="11.0.3">
+        <details>Java API for RESTful Web Services</details>
+        <bundle>mvn:jakarta.ws.rs/jakarta.ws.rs-api/2.1.6</bundle>
+    </feature>
+</features>

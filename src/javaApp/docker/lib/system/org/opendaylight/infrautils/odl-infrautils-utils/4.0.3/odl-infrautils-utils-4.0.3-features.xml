@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-infrautils-utils">
+    <repository>mvn:org.opendaylight.odlparent/odl-guava/11.0.3/xml/features</repository>
+    <feature name="odl-infrautils-utils" description="OpenDaylight :: Infrautils :: Utils" version="4.0.3">
+        <details>odl-infrautils-utils</details>
+        <feature version="[11,12)">odl-guava</feature>
+        <bundle>mvn:org.opendaylight.infrautils/infrautils-util/4.0.3</bundle>
+    </feature>
+</features>

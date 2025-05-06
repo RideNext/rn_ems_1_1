@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-yangtools-data-api">
+    <repository>mvn:org.opendaylight.yangtools/odl-yangtools-parser-api/9.0.5/xml/features</repository>
+    <feature name="odl-yangtools-data-api" description="OpenDaylight :: Yangtools :: Data API" version="9.0.5">
+        <details>YANG modeled data APIs</details>
+        <feature version="9.0.5" prerequisite="false" dependency="false">odl-yangtools-parser-api</feature>
+        <bundle>mvn:org.opendaylight.yangtools/yang-data-api/9.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/yang-data-spi/9.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/yang-data-tree-api/9.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/yang-data-tree-spi/9.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/yang-data-util/9.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/rfc7952-data-api/9.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/rfc7952-data-util/9.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/rfc8528-data-api/9.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/rfc8528-data-util/9.0.5</bundle>
+    </feature>
+</features>

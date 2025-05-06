@@ -1,0 +1,712 @@
+module o-ran-odu-fh-management {
+  yang-version 1.1;
+  namespace "urn:o-ran:odu-fh:1.0";
+  prefix "o-ran-odu-fh";
+
+  import ietf-yang-types {
+    prefix "yang";
+  }
+
+
+  import o-ran-operations {
+    prefix "or-ops";
+  }
+
+  import _3gpp-common-yang-types { prefix types3gpp; }
+  import _3gpp-common-managed-function { prefix mf3gpp; }
+  import _3gpp-common-managed-element { prefix me3gpp; }
+  import _3gpp-common-top { prefix top3gpp; }
+  import _3gpp-nr-nrm-gnbdufunction { prefix gnbdu3gpp; }
+
+
+  organization "O-RAN Alliance";
+
+  contact
+    "www.o-ran.org";
+
+  description
+    "This module is for supporting WG4 Fronthaul configuration and delay management support between O-DU and O-RU.
+
+    Copyright 2020 the O-RAN Alliance.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 'AS IS'
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the above disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the above disclaimer in the documentation
+    and/or other materials provided with the distribution.
+    * Neither the Members of the O-RAN Alliance nor the names of its
+    contributors may be used to endorse or promote products derived from
+    this software without specific prior written permission.";
+
+  revision "2020-09-25" {
+    description
+      "version 1.0.0 - first release of O-RAN O1 for O-DU YANG models";
+
+    reference "ORAN-WG5.MP.0-v01.00";
+  }
+
+  typedef ru-ref {
+    type leafref {
+      path "/or-ops:operational-info/or-ops:declarations/or-ops:ru-instance-id";
+	  require-instance false;
+    }
+  description
+    "A type defintion for the ru-instance-id. Although the type used in
+    o-ran-operations is only a 'string', this leafref is used to indicate
+    that the type 'ru-ref' is used to encode ru-instance-id values.
+
+    These will typically have been recovered using the NETCONF client in an
+    O-DU which has a NETCONF session with an O-RU which implements the
+    o-ran-operations.yang model. ";
+  }
+
+typedef bandwidth {
+  type uint32 {
+    range "200 | 1400 | 3000 | 5000 | 10000 | 15000 | 20000 | 25000 |
+          30000 | 40000 | 50000 | 60000 | 70000 | 80000 | 90000 | 100000
+          | 200000 | 400000" ;
+  }
+  units kilohertz;
+  description
+    "transmission bandwidth configuration in units of kHz -
+    covering NBIoT through to New Radio - see 38.104";
+}
+
+grouping prb-elem-group{
+
+   description
+      "the container for configuring ODU Fronthaul resource configuration for downlink at O-DU";   
+
+     leaf rb-start {
+      type uint16;
+      description
+        "Start of rb at fronthaul";
+    }
+
+    leaf rb-size {
+      type uint16;
+      description
+        "Size of rb used at fronthaul";
+    }
+
+    leaf start-symbol {
+      type uint8;
+      description
+        "Start of Symbol at fronthaul";
+    }
+
+    leaf number-of-symbol{
+      type uint8;
+      description
+        "Size of symbol used at fronthaul";
+    }
+    leaf beam-index{
+      type uint8;
+      description
+        "Statically configured Beam Index at fronthaul";
+     }
+     leaf bf-weight-update{
+      type uint8;
+      description
+        "Statically configured bf-weight at fronthaul";
+     }
+     leaf comp-method{
+      type uint8;
+      description
+        "Compression method configured at fronthaul";
+     }
+    leaf iq-width{
+      type uint8;
+      description
+        "iq-width configured at fronthaul";
+     }
+   leaf beam-forming-type{
+      type uint8;
+      description
+        "Beam Forming Type used at fronthaul";
+    }
+   leaf scale-factor{
+      type uint8;
+      description
+        "Scale Factor configured at fronthaul";
+   }
+   leaf re-mask{
+      type uint8;
+      description
+        "RE-Mask configured at fronthaul";
+    }
+ }
+
+
+grouping bandwidth-configuration {
+  description
+    "Grouping for bandwidth and scs configuration";
+
+  leaf bandwidth {
+    type bandwidth;
+    description
+      "transmission bandwidth configuration in units of kHz -
+      covering NBIoT through to New Radio - see 38.104";
+  }
+  leaf subcarrier-spacing {
+    type uint32 {
+      range "0 .. 240000 ";
+    }
+    units Hertz;
+    description "subcarrier spacing in Hz";
+  }
+}
+
+
+  grouping t2a-up {
+    description
+      "configuration of t2a for uplink";
+
+    leaf t2a-min-up {
+      type uint32;
+      units nanoseconds;
+      description
+        "the minimum O-RU data processing delay between receiving IQ data
+        message over the fronthaul interface and transmitting
+        the corresponding first IQ sample at the antenna";
+    }
+    leaf t2a-max-up {
+      type uint32;
+      units nanoseconds;
+      description
+        "the earliest allowable time when a data packet is received before
+        the corresponding first IQ sample is transmitted at the antenna";
+    }
+  }
+
+  grouping ta3 {
+    description
+      "Grouping for ta3 configuration";
+
+    leaf ta3-min {
+      type uint32;
+      units nanoseconds;
+      description
+        "the minimum O-RU data processing delay between receiving an IQ sample
+        at the antenna and transmitting the first data sample over the
+        fronthaul interface";
+    }
+    leaf ta3-max {
+      type uint32;
+      units nanoseconds;
+      description
+        "the maximum O-RU data processing delay between receiving an IQ sample
+        at the antenna and transmitting the last data sample over the
+        fronthaul interface";
+    }
+  }
+
+ grouping t2a-cp-ul {
+    description
+      "Grouping for t2a CP uplink";
+
+    leaf t2a-min-cp-ul {
+      type uint32;
+      units nanoseconds;
+      description
+        "the minimum O-RU data processing delay between receiving real time
+        up-link control plane message over the fronthaul interface and
+        recieving the first IQ sample at the antenna";
+    }
+    leaf t2a-max-cp-ul {
+      type uint32;
+      units nanoseconds;
+      description
+        "the earliest allowable time when a real time up-link control message
+        is received before the corresponding first IQ sample is received  at
+        the antenna";
+    }
+  }
+
+ grouping t2a-cp-dl {
+    description
+      "Grouping for t2a CP uplink";
+
+    leaf t2a-min-cp-dl {
+      type uint32;
+      units nanoseconds;
+      description
+        "the minimum O-RU data processing delay between receiving real time
+        up-link control plane message over the fronthaul interface and
+        recieving the first IQ sample at the antenna";
+    }
+    leaf t2a-max-cp-dl {
+      type uint32;
+      units nanoseconds;
+      description
+        "the earliest allowable time when a real time up-link control message
+        is received before the corresponding first IQ sample is received  at
+        the antenna";
+    }
+  }
+
+
+
+  grouping ru-delay-profile {
+    description
+      "Grouping for ru delay profile";
+
+    uses t2a-up;
+    uses t2a-cp-dl;
+
+    leaf tcp-adv-dl {
+      type uint32;
+      units nanoseconds;
+      description
+        "the time difference (advance) between the reception window for
+        downlink real time Control messages and reception window for the
+        corresponding IQ data messages.";
+    }
+
+    uses ta3;
+    uses t2a-cp-ul;
+  }
+
+  grouping o-du-delay-profile {
+    description
+      "Grouping for O-DU delay profile";
+
+    leaf t1a-max-up {
+      type uint32;
+      units nanoseconds;
+      description
+        "the earliest possible time which the O-DU can support transmiting
+        an IQ data message prior to transmission of the corresponding IQ
+        samples at the antenna";
+    }
+    leaf t1a-min-up {
+      type uint32;
+      units nanoseconds;
+      description
+        "the earliest possible time which the O-DU can support transmiting
+        an IQ data message prior to transmission of the corresponding IQ
+        samples at the antenna";
+    }
+
+    leaf t1a-min-cp-dl {
+      type uint32;
+      units nanoseconds;
+      description
+        " ";
+    }
+    leaf t1a-min-cp-ul {
+      type uint32;
+      units nanoseconds;
+      description
+        " ";
+    }
+    leaf t1a-max-cp-dl {
+      type uint32;
+      units nanoseconds;
+      description
+        " ";
+    }
+    leaf t1a-max-cp-ul {
+      type uint32;
+      units nanoseconds;
+      description
+        " ";
+    }
+
+    leaf ta4-max {
+      type uint32;
+      units nanoseconds;
+      description
+        "the latest possible time which the O-DU can support receiving the
+        last uplink user plane IQ data message for a symbol.";
+    }
+    leaf ta4-min {
+      type uint32;
+      units nanoseconds;
+      description
+        "the latest possible time which the O-DU can support receiving the
+        last uplink user plane IQ data message for a symbol.";
+    }
+
+
+    //leaf tx-max {
+      // type uint32;
+      //units nanoseconds;
+     // description
+      //  "The maximum amount of time which the O-DU requires to transmit
+      //  all downlink user plane IQ data message for a symbol";
+   // }
+    //leaf rx-max {
+     // type uint32;
+      //units nanoseconds;
+     // description
+      //  "The maximum time difference the O-DU can support between
+      //  receiving the first user plane IQ data message for a symbol and
+      //  receiving the last user plane IQ data message for the same symbol";
+   // }
+
+  }
+
+  grouping t12 {
+    description
+      "Grouping for t12";
+
+    leaf t12-min {
+      type uint32;
+      units nanoseconds;
+      description
+        "the minimum measured delay between DU port-ID and O-RU port-ID";
+    }
+    // additional leaf added by Samsung
+    leaf t12-max {
+      type uint32;
+      units nanoseconds;
+      description
+        "the maximum measured delay between CU port-ID and O-RU port-ID";
+    }
+  }
+
+  grouping t34 {
+    description
+      "Grouping for t34";
+
+    leaf t34-min {
+      type uint32;
+      units nanoseconds;
+      description
+        "the minimum measured delay between O-RU port-ID and CU port-ID";
+    }
+    // additional leaf added by Samsung
+    leaf t34-max {
+      type uint32;
+      units nanoseconds;
+      description
+        "the maximum measured delay between O-RU port-ID and CU port-ID";
+    }
+  }
+
+
+
+
+
+grouping window-determine-method-group {
+
+  container window-determine-method {
+    description
+      "the container for configuring the window determination method to O-DU";
+    leaf method {
+      type enumeration {
+        enum HARDCODED {
+          description
+          "O-DU transmission/reception window is determined by O-DU";
+        }
+        enum CONFIGURED {
+          description
+          "O-DU transmission/reception window is determined by configured value from SMO";
+        }
+      }
+      // mandatory true;
+      description
+      "Method for determination of O-DU transmission/reception";
+    }
+    
+    leaf configuration-status {
+      type enumeration {
+        enum NOT_CONFIGURED {
+          description
+          "  ";
+         }
+        enum CONFIGURED {
+          description
+          "  ";
+          }
+       }
+
+    //  mandatory true;
+      description
+        "Parameter representing status of configuration to be used as validator";
+    }
+
+    leaf ru-num { 
+      type uint8 {
+            range "0..127";
+        }
+      description
+        "Total Number of RU that can be configured";
+     } 
+
+    list pre-configured-ru-profile {
+        key "ru-index ru-instance-id";
+        leaf ru-index {
+           type uint8 {
+              range "0..127";
+            }
+           description
+           "RU Index ID; has to start with 0";
+         }
+
+         leaf ru-instance-id {
+           type ru-ref;
+         }
+     }
+
+    container pre-configured-delay-profile {
+        uses ru-delay-profile;
+        uses o-du-delay-profile;
+        uses t34;
+        uses t12;
+    }
+
+   }
+}
+
+  grouping window-determine-information-group {
+
+    leaf window-determine-capability {
+      type enumeration {
+        enum NOT_CONFIGURED {
+          description
+          "O-DU transmission/reception window can be determined by O-DU";
+        }
+        enum CONFIGURED {
+          description
+          "O-DU transmission/reception window can be determined by configured value from SMO";
+        }
+        enum BOTH {
+          description
+          "O-DU has both capability, NOT_CONFIGURED and CONFIGURED";
+        }
+      }
+      config false;
+      description
+        "Capability how O-DU transmission/reception window can be determined";
+      }
+
+    uses window-determine-method-group;
+  }
+
+  grouping o-du-window-group {
+
+    list o-du-window {
+      key "ru-index-id ru-instance-id bandwidth subcarrier-spacing";
+      description
+      "a list of o-du-window";
+
+      leaf ru-index-id{ 
+         type leafref {
+            path "../../window-determine-method/pre-configured-ru-profile/ru-index";
+          }
+       }
+
+      leaf ru-instance-id {
+        type leafref {
+               path "../../window-determine-method/pre-configured-ru-profile[ru-index=current()/../ru-index-id]/ru-instance-id";
+            }
+      }
+
+
+      uses bandwidth-configuration;
+
+     leaf du-mac-address {
+
+        type yang:mac-address;
+
+        description
+         "O-DU's MAC address used to provision O-DU at Fronthaul";
+      }
+     // cpmac matche with 0 index-l1xml
+     leaf ru-cpmac-address {
+
+        type yang:mac-address;
+
+        description
+         "O-RU's MAC address used to provision O-RU at Fronthaul";
+      }
+     // upmac matche with 1 index-l1xml
+     leaf ru-upmac-address {
+
+        type yang:mac-address;
+
+        description
+         "O-RU's MAC address used to provision O-RU at Fronthaul";
+      }
+
+
+     leaf cp-vlan-id {
+        type uint16 {
+        range "1..4094";
+      }
+       description
+        "The VLAN-ID.";
+     }
+
+     leaf up-vlan-id {
+        type uint16 {
+        range "1..4094";
+      }
+       description
+        "The VLAN-ID.";
+     }
+    leaf comp-method{
+      type uint16;
+       description
+        "Supported Compression Method";
+    }
+
+
+
+   //uses prb-elem-dl-group;
+    list  prb-elem-dl {
+
+        key "elem-index";
+        leaf elem-index {
+           type uint8;
+         }
+        uses  prb-elem-group;
+      }
+      list  prb-elem-ul {
+
+        key "elem-index";
+        leaf elem-index {
+           type uint8;
+         }
+        uses prb-elem-group;
+     }
+  }
+}
+
+  grouping o-ru-window-group {
+    list o-ru-window {
+      key "ru-index-id  ru-instance-id bandwidth subcarrier-spacing";
+      description
+      "a list of o-ru-window";
+      config false;
+
+      leaf ru-index-id{ 
+         type leafref {
+            path "../../window-determine-method/pre-configured-ru-profile/ru-index";
+          }
+       }
+
+      leaf ru-instance-id {
+        type leafref {
+               path "../../window-determine-method/pre-configured-ru-profile[ru-index=current()/../ru-index-id]/ru-instance-id";
+            }
+      }
+
+     leaf tcp-adv-dl {
+      type uint32;
+      units nanoseconds;
+      description
+      "the time difference (advance) between the reception window for
+      downlink real time Control messages and reception window for the
+      corresponding IQ data messages.";
+     }
+
+      uses bandwidth-configuration;
+
+  }
+
+}
+
+grouping sync-group {
+    description
+      "Grouping for synchronization top container.";
+
+    container du-sync-state {
+      description
+        "Container for collecting synchronization functions.";
+       leaf du-index {
+         type leafref {
+            path "/me3gpp:ManagedElement/gnbdu3gpp:GNBDUFunction/gnbdu3gpp:id";
+           }
+        }
+
+       leaf gNBDUId{ 
+         type leafref {
+            path "/me3gpp:ManagedElement/gnbdu3gpp:GNBDUFunction[gnbdu3gpp:id=current()/../du-index]/gnbdu3gpp:attributes/gnbdu3gpp:gNBDUId";
+          }
+       }
+
+      leaf sync-state {
+        type enumeration {
+          enum LOCKED {
+            description
+              "Device is in the locked mode, as defined in ITU-T G.810";
+          }
+          enum HOLDOVER {
+            description
+              "Device clock is in holdover mode, as defined in ITU-T G.810";
+          }
+          enum FREERUN {
+            description
+              "Device clock isn't locked to an input reference,
+               and is not in the holdover mode, as defined in ITU-T G.810";
+          }
+        }
+        description
+          "State of device synchronization";
+      }
+
+
+   }
+
+ }
+
+  grouping measured-transport-delay-group {
+    list measured-transport-delay {
+      key "ru-index-id  ru-instance-id";
+      config false;
+      description
+      "a list of measured-transport-delay";
+ 
+      leaf ru-index-id{ 
+         type leafref {
+            path "../../window-determine-method/pre-configured-ru-profile/ru-index";
+          }
+       }
+
+      leaf ru-instance-id {
+        type leafref {
+               path "../../window-determine-method/pre-configured-ru-profile[ru-index=current()/../ru-index-id]/ru-instance-id";
+         }
+      }
+    }
+   }
+
+      augment "/me3gpp:ManagedElement/gnbdu3gpp:GNBDUFunction" {
+
+      container odu-fh-management {
+        description
+          "top level tree for supporting franthaul management";
+        uses sync-group;
+        uses window-determine-information-group;
+        uses o-du-window-group;
+        uses o-ru-window-group;
+        uses measured-transport-delay-group;
+      }
+
+    }
+
+   // Notification on Sync Status Change
+    notification syncStateChange {
+      uses sync-group;
+    }
+
+
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="sdnr-wt-netconfnode-state-service-feature">
+    <feature name="sdnr-wt-netconfnode-state-service-feature" description="ccsdk-features :: sdnr-wt-netconfnode-state-service-feature" version="1.5.1">
+        <details>Root POM to be used in place of odlparent for CCSDK based projects</details>
+        <feature prerequisite="true" dependency="false">wrap</feature>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-netconfnode-state-service-provider/1.5.1</bundle>
+        <bundle>wrap:mvn:org.apache.kafka/kafka-clients/3.0.0</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-netconfnode-state-service-model/1.5.1</bundle>
+        <bundle>mvn:org.opendaylight.mdsal/yang-binding/10.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/concepts/9.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/util/9.0.5</bundle>
+        <bundle>mvn:tech.pantheon.triemap/triemap/1.2.0</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/yang-common/9.0.5</bundle>
+        <bundle>mvn:com.google.guava/guava/31.1-jre</bundle>
+        <bundle>mvn:com.google.guava/failureaccess/1.0.1</bundle>
+        <bundle>mvn:org.checkerframework/checker-qual/3.12.0</bundle>
+    </feature>
+</features>

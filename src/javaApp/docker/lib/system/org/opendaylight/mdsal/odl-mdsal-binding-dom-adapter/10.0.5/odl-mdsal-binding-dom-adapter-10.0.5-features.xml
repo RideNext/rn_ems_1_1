@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-mdsal-binding-dom-adapter">
+    <repository>mvn:org.opendaylight.mdsal/odl-mdsal-binding-runtime/10.0.5/xml/features</repository>
+    <repository>mvn:org.opendaylight.mdsal/odl-mdsal-binding-api/10.0.5/xml/features</repository>
+    <repository>mvn:org.opendaylight.mdsal/odl-mdsal-dom-broker/10.0.5/xml/features</repository>
+    <feature name="odl-mdsal-binding-dom-adapter" description="OpenDaylight :: MD-SAL :: Binding/DOM Adapter" version="10.0.5">
+        <details>MD-SAL Java Binding/DOM adapter</details>
+        <feature version="10.0.5" prerequisite="false" dependency="false">odl-mdsal-binding-runtime</feature>
+        <feature version="10.0.5" prerequisite="false" dependency="false">odl-mdsal-binding-api</feature>
+        <feature version="10.0.5" prerequisite="false" dependency="false">odl-mdsal-dom-broker</feature>
+        <bundle>mvn:org.opendaylight.mdsal/mdsal-binding-dom-adapter/10.0.5</bundle>
+    </feature>
+</features>

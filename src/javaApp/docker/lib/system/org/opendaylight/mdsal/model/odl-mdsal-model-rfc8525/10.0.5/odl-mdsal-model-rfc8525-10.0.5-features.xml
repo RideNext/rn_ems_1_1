@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-mdsal-model-rfc8525">
+    <repository>mvn:org.opendaylight.mdsal.model/odl-mdsal-model-rfc6991/10.0.5/xml/features</repository>
+    <repository>mvn:org.opendaylight.mdsal.model/odl-mdsal-model-rfc8342/10.0.5/xml/features</repository>
+    <feature name="odl-mdsal-model-rfc8525" description="OpenDaylight :: MD-SAL :: Model :: RFC8525" version="10.0.5">
+        <details>Models from RFC8525</details>
+        <feature version="10.0.5" prerequisite="false" dependency="false">odl-mdsal-model-rfc6991</feature>
+        <feature version="10.0.5" prerequisite="false" dependency="false">odl-mdsal-model-rfc8342</feature>
+        <bundle>mvn:org.opendaylight.mdsal.binding.model.ietf/rfc8525/10.0.5</bundle>
+    </feature>
+</features>

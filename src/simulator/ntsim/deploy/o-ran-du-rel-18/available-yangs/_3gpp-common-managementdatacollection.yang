@@ -1,0 +1,344 @@
+module _3gpp-common-managementdatacollection {
+  yang-version 1.1;
+  namespace "urn:3gpp:sa5:_3gpp-common-managementdatacollection";
+  prefix "mgtdatcol3gpp";
+
+  import _3gpp-common-top { prefix top3gpp; }
+  import _3gpp-common-yang-types {prefix types3gpp; }
+  import _3gpp-common-yang-extensions {prefix yext3gpp; }
+  //import ietf-inet-types { prefix inet; }
+  import ietf-yang-types { prefix yang; }
+  import _3gpp-common-subnetwork { prefix subnet3gpp; }
+
+  organization "3GPP SA5";
+  contact "https://www.3gpp.org/DynaReport/TSG-WG--S5--officials.htm?Itemid=464";
+ 
+  description "Handling management data collection
+    Copyright 2023, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, 
+    TTA, TTC). All rights reserved.";
+  reference "3GPP TS 28.623
+      Generic Network Resource Model (NRM)
+      Integration Reference Point (IRP);
+      Solution Set (SS) definitions
+
+      3GPP TS 28.622
+      Generic Network Resource Model (NRM)
+      Integration Reference Point (IRP);
+      Information Service (IS)";
+
+  revision 2023-11-18 { reference CR-0299 ; }
+  revision 2023-11-06 { reference "CR-0305"; }
+  revision 2023-09-18 { reference CR-0271 ; } 
+  revision 2023-02-14 { reference "CR-0234"; }
+  revision 2022-11-04 { reference "CR-0194"; }
+  
+  grouping GeoAreaToCellMappingGrp {
+    description "Represents the GeoAreaToCellMapping data type. 
+      
+      The mapping of the geographical area to cells is performed at 
+      instantiation of the IOC.";
+    
+    list geoArea {
+      description "It specifies the geographical area using the cordinates of 
+        the corners of a convex polygon.";
+      key idx;
+      max-elements 1;
+      leaf idx {
+        type string;
+      }
+      uses types3gpp:GeoAreaGrp;
+    }
+    
+    leaf associationThreshold {
+      type uint8 {
+        range 1..100;
+      }
+      yext3gpp:inVariant;
+      description "It specifies the threshold of coverage area in 
+        percentage whether a cell belongs to the geographical area or not.
+
+        If this attribute is absent, the location of the base station 
+        antenna determines whether a cell belongs to the geographical 
+        area or not.";
+    }
+  }
+
+  grouping AreaOfInterestGrp {
+    description "It specifies a location(s) from where the management data 
+      shall be collected."; 
+      
+    list geoAreaToCellMapping {
+      description "Contains a geographical area and an association threshold. 
+        The geo-area is defined as a convex polygon using the attribute 
+        'geoArea'.
+
+        The MnS producer shall map the geographical area to cells. There are 
+        two evaluation criteria whether a cell belongs to a geographical area 
+        or not. If attribute 'associationThreshold' is absent, the location 
+        of the base station antenna determines the belonging. If attribute 
+        'associationThreshold' is configured, the coverage area is considered. 
+        The attribute 'associationThreshold' determines the lower boundary of 
+        the coverage ratio. For example, if the 'associationThreshold' is 
+        configured to 60%, a cell shall be considered as included in the 
+        geographical area if at least 60% of the coverage area of that 
+        cell overlaps with the specified geographical area. 
+
+        The mapping of the geographical area to cells is performed at 
+        instantiation of the IOC.";
+      key idx;
+      leaf idx { type string; }
+      uses GeoAreaToCellMappingGrp;
+    }
+        
+    list taiList {
+      description "Tracking Area Identity list";
+      key idx;
+      min-elements 1;
+      max-elements 8;
+      leaf idx { type string; }
+      uses types3gpp:TaiGrp;
+    }
+    
+    leaf-list nrCellIdList {
+      type string;
+      description "List of NR cells identified by NG-RAN CGI";
+    }
+    
+    leaf-list eutraCellIdList {
+      type string;
+      description "List of E-UTRAN cells identified by E-UTRAN-CGI";
+    }
+    
+    leaf-list utraCellIdList {
+      type string;
+      description "List of UTRAN cells identified by UTRAN CGI";
+    }
+  }
+
+  grouping NodeFilterGrp {
+
+    list areaOfInterest {
+      key idx;
+      leaf idx {
+        type string;
+      }
+      uses AreaOfInterestGrp;          
+      description "It specifies a location(s) from where the management data
+        shall be collected. It is defined in terms of TAI(s).";
+    }
+
+    leaf networkDomain {
+      type enumeration {
+        enum CN;
+        enum RAN;
+      }
+      // mandatory false
+      description "It specifies the network domain of the target node. This
+        will also result in collecting appropriate management data from the
+        nodes belonging to the specified domain.";
+    }
+
+    leaf cpUpType {
+      type enumeration {
+        enum CP;
+        enum UP;
+      }
+      // mandatory false
+     description "It specifies the traffic type of the target node. This will
+       also result in collecting appropriate management data from the nodes
+       handling the specified traffic (e.g AMF for CP and UPF for UP).";
+    }
+
+    leaf sst {
+      type uint8;  // TS 28.003 clause 28.4.
+      description "It specifies the slice service type (SST) of which the slice
+        subnet should be targeted. Please refer to 3GPP TS 23.501: 'System
+        Architecture for the 5G System'";
+    }
+  }
+
+  typedef mgtDataCategoryType {
+    type enumeration {
+      enum COVERAGE;
+      enum CAPACITY;
+      enum ENERGY_EFFICIENCY;
+      enum MOBILITY;
+      enum ACCESSIBILITY;
+    }
+    description "";
+  }
+
+  grouping TimeWindowGrp {
+    leaf startTime {
+      type yang:date-and-time;
+      yext3gpp:inVariant;
+    }
+    leaf endTime {
+      type yang:date-and-time;
+      yext3gpp:inVariant;
+    }
+  }
+
+
+  grouping ManagementDataCollectionGrp {
+
+    choice managementData {
+      case mgtDataCategory {
+        leaf-list category  {
+          type mgtDataCategoryType;
+          min-elements 1;
+          max-elements 5; // The ENUM contains 5 possible values
+          description "This attributes defines the type of management data that
+            are requested.
+
+            Allowed values for data category are COVERAGE, CAPACITY,
+            ENERGY_EFFICIENCY, MOBILITY, ACCESSIBILITY. The data categories
+            will map to certain measurement families defined in TS 28.552, see
+            below. In addition to the below mappings, MnS producer may map the
+            provided categories to any additional proprietary management data,
+            as appropriate.
+
+            - The COVERAGE category will map to measurement families of MR
+            (measurements related to Measurement Report) and L1M (measurements
+            related to Layer 1 Measurement).
+
+            - The CAPACITY category will map to measurement family RRU
+            (measurements related to Radio Resource Utilization).
+
+            - The ENERGY_EFFICIENCY category will map to measurement family PEE
+            (measurements related to Power, Energy and Environment).
+
+            - The MOBILITY category will map to measurement family MM
+            (measurements related to Mobility Management).
+
+            - The ACCESSIBILITY category will map to measurement family CE
+            (measurements related to Connection Establishment).";
+        }
+      }
+      case mgtDataName {
+        leaf-list name {
+          type string;
+          min-elements 1;
+          description "List of management data identified by name.
+
+          The list may include metrics or set of metrics defined
+            in TS 28.552, TS 28.554 and TS 32.422.
+
+            The metrics are identified with their names/identifiers.
+            For performance measurements defined in TS 28.552 the name is
+            constructed as follows:
+              - 'family.measurementName.subcounter' for measurement types with
+                subcounters
+              - 'family.measurementName' for measurement types without
+                subcounters
+              - 'family' for measurement families
+
+            For KPIs defined in TS 28.554 the name is defined according to the
+            KPI definitions template as the component designated with a).
+
+            For trace metrics (including trace messages, MDT measurements
+            (Immediate MDT, Logged MDT, Logged MBSFN MDT), RLF and RCEF
+            reports) defined in TS 32.422, the name (metric identifier) is
+            defined in clause 10 of TS 32.422.
+            
+            For non-3GPP specified managment data the name is defined 
+            elsewhere.";
+          }
+      }
+      mandatory true;
+    }
+
+    list targetNodeFilter {
+      key idx;
+      leaf idx {
+        type string;
+      }
+      min-elements 1;
+      description "Set of information to target the Object Instance to collect
+        the measurements from.";
+      uses NodeFilterGrp;
+    }
+
+    list collectionTimeWindow {
+        key "startTime endTime";
+        max-elements 1;
+        description "Collection time window for which the management data
+          should be reported.";
+        uses TimeWindowGrp;
+   }
+
+    list reportingCtrl {
+      key idx;
+      leaf idx {
+        type string;
+      }
+       min-elements 1;
+       max-elements 1;
+       uses types3gpp:ReportingCtrl;
+       description "Selecting the reporting method and defining associated
+         control parameters.";
+    }
+
+    leaf dataScope {
+        type enumeration {
+          enum SNSSAI;
+          enum 5QI;
+        }
+        // mandatory false; [Implicit]
+        description "It specifies whether the required data is reported per
+          S-NSSAI or per 5QI.";
+    }
+  }
+
+  augment /subnet3gpp:SubNetwork {
+
+    list ManagementDataCollection {
+      key id;
+      uses top3gpp:Top_Grp ;
+      container attributes {
+          uses ManagementDataCollectionGrp;
+      }
+      description "This IOC represents a management data collection request
+        job. The requested data could be of kind Trace, MDT (Minimization
+        of Drive Test), RLF (Radio Link Failure) report, RCEF (RRC Connection
+        Establishment Failure) report, PM (performance measurements), KPI
+        (end-to-end key performance indicators) or a combination of these.
+
+        The attribute 'managementData' defines the management data which shall
+        be reported. This may either include a list of data categories or a
+        list of management data identified with their name. For further details
+        see TS 28.622 clause 4.3.50. The 'targetNodeFilter' attribute can be
+        used to target object instance(s) producing the required management
+        data. It is assumed that the consumer may not have detailed knowledge
+        of the network and hence may not identify the exact object instance
+        producing the required management data. In this case consumer can
+        request management data, specified by 3GPP, produced by certain network
+        function(s) based on a particular location, the domain (CN or RAN) of
+        the network function, and the handled traffic (CP or UP) of the network
+        function.
+
+        To activate the production of the requested data, a MnS consumer has to
+        create a 'ManagementDataCollection' object instance on the MnS producer.
+
+        The MnS producer will derive multiple jobs ('PerfMetricJob',
+        'TraceJob') from a single 'ManagementDataCollection' job for collecting
+        the required management data. Once it receives the measurement from
+        multiple sources, it consolidates the data into a set of management data
+        for reporting.
+
+        The attribute 'collectionTimeWindow' specifies the time window for which
+        the management data should be reported.
+
+        The attribute 'reportingCtrl' specifies the method and associated
+        control parameters for reporting the produced management data to MnS
+        consumers. Three methods are available: file-based reporting with
+        selection of the file location by the MnS producer, file-based
+        reporting with selection of the file location by the MnS consumer and
+        stream-based reporting.
+
+        The attribute 'dataScope' configures, whether the management data
+        should be reported per S-NSSAI or per 5QI, if applicable.";
+    }
+  }
+
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-restconf">
+    <repository>mvn:org.opendaylight.netconf/odl-restconf-nb/4.0.4/xml/features</repository>
+    <feature name="odl-restconf" description="OpenDaylight :: Restconf" version="4.0.4">
+        <details>odl-restconf</details>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-restconf-nb</feature>
+    </feature>
+</features>

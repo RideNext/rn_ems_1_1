@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-mdsal-dom-api">
+    <repository>mvn:org.opendaylight.yangtools/odl-yangtools-data-api/9.0.5/xml/features</repository>
+    <repository>mvn:org.opendaylight.mdsal/odl-mdsal-common/10.0.5/xml/features</repository>
+    <feature name="odl-mdsal-dom-api" description="OpenDaylight :: MD-SAL :: DOM API and SPI" version="10.0.5">
+        <details>MD-SAL DOM APIs</details>
+        <feature version="[9,10)">odl-yangtools-data-api</feature>
+        <feature version="10.0.5" prerequisite="false" dependency="false">odl-mdsal-common</feature>
+        <bundle>mvn:org.opendaylight.mdsal/mdsal-dom-api/10.0.5</bundle>
+        <bundle>mvn:org.opendaylight.mdsal/mdsal-dom-spi/10.0.5</bundle>
+    </feature>
+</features>

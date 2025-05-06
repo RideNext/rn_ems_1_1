@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="sdnr-wt-helpserver-feature">
+    <feature name="sdnr-wt-helpserver-feature" description="ccsdk-features :: sdnr-wt-helpserver-feature" version="1.5.1">
+        <details>Root POM to be used in place of odlparent for CCSDK based projects</details>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-helpserver-provider/1.5.1</bundle>
+    </feature>
+</features>

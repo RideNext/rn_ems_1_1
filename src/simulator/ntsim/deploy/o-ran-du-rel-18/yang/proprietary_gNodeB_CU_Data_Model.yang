@@ -1,0 +1,2491 @@
+module proprietary_gNodeB_CU_Data_Model  {
+    yang-version 1.1;
+    namespace "urn:ietf:params:xml:ns:yang:smiv2:proprietary_gNodeB_CU_Data_Model";
+    prefix "proprietary-gNodeB-CU-Data-Model";
+    organization
+        "ALTRAN/CAPGEMINI gNB RAN SOFTWARE";
+    contact
+        "DESCRIPTION
+        ALTRAN/CAPGEMINI.";
+
+    revision 2021-10-11 {
+        description
+            "This is a proprietary yang that defines parameters corresponding to gNB proprietary for CU and DU.";
+
+    }
+container proprietary_gNodeB_CU_Data_Model {
+container gNodeBParams{
+	leaf ManagementMode {
+		description
+            "This object is used to configure ManagementMode .";
+            default "0";
+			type uint32{
+                range "0..1";}
+
+	}
+    leaf gNB_ID {
+    description
+            "This object is used to configure gNB_ID .";
+            default "0";
+            type uint32{
+                range "0..31";}
+
+    }
+
+     leaf logLevel {
+            description
+                     "This object is used to configure logLevel";
+                    default "127";
+                    type uint32{
+                        range "1..127";
+                }
+            }
+
+	leaf OAM_Support_Log_Archival{
+		description
+            "This object is used to configure OAM_Support_Log_Archival .";
+            default "0";
+			type uint32{
+                range "0..1";}
+
+	}
+	container oam_shm_logger_cfg{
+		leaf wait_interval{
+			description
+            "This object is used to configure OAM_Support_Log_Archival .";
+            default "0";
+			type uint32{
+                range "0..2";}
+		}
+		leaf log_path {
+			description
+            "This object is used to configure log_path.";
+            default "0";
+			type string{
+                length "0..1";}
+		}
+		leaf shm_size {
+			description
+            "This object is used to configure shm_size .";
+            default "5";
+			type uint32{
+                range "0..5";}
+		}
+		leaf log_file_size{
+			description
+            "This object is used to configure log_file_size .";
+            default "10";
+			type uint32{
+                range "0..10";}
+		}
+		leaf log_chunk_count {
+		description
+            "This object is used to configure log_chunk_count .";
+            default "10";
+			type uint32{
+                range "1..65535";}
+		}
+		leaf cpu_bitmap{
+		description
+            "This object is used to configure cpu_bitmap.";
+            default "1";
+			type uint32{
+                range "1..31";}
+		}
+		leaf file_count {
+		description
+            "This object is used to configure file_count .";
+            default "10";
+			type uint32{
+                range "1..10";}
+		}
+	
+	
+	}
+	container Perf_Stats{
+        leaf report_period {
+            description
+            "This object is used to configure cpu_bitmap .";
+            default "60";
+            type uint32{
+                range "1..3600";}
+        }
+        leaf periodic_reporting {
+            description
+            "This object is used to configure cpu_bitmap .";
+            default "60";
+            type uint32{
+                range "0..3600";}
+        }
+
+		leaf cpu_bitmap{
+		description
+            "This object is used to configure cpu_bitmap .";
+            default "60";
+			type uint32{
+                range "1..3600";}
+		}
+		leaf file_count {
+		description
+            "This object is used to configure file_count .";
+            default "0";
+			type uint32{
+                range "0..1";}
+		}
+	}
+	container gNB_admission_control_info {
+ 	leaf max_num_ue {
+ 	    description
+           	 "Maximum number of UEs that can be supported at a time for this gNB";
+           	 default "4096";
+             		type uint32{
+               	 range "0..4096";}
+
+	}
+	leaf max_num_drbs{
+ 	    description
+            	  "Maximum number of bearers that can be supported at a time for this gNB";
+            	  default "4096";
+           	 	type uint32{
+       		  range "0..4096";}
+	}
+	}
+
+	container load_configuration
+	{
+		leaf Enable{
+		description
+            "This object is used to configure Enable .";
+            default "0";
+			type uint32{
+                range "0..1";}
+		}
+		leaf load_chk_periodicity{
+		description
+            "This object is used to configure load_chk_periodicity .";
+            default "0";
+			type uint32{
+                range "0..60";}
+		}
+		leaf overload_chk_periodicity{
+		description
+            "This object is used to configure overload_chk_periodicity .";
+            default "5";
+			type uint32{
+                range "0..5";}
+		}
+	}/*load_configuration*/
+	container CellConfig{
+		container ho_configuration{
+			container spid_table {
+				container default_rat_priority_info{
+					leaf IRAT_PRIORITY_NR{
+						description
+						"This object is used to configure IRAT_PRIORITY_NR .";
+						default "0";
+						type uint32{
+							range "0..4";}
+					}
+					leaf IRAT_PRIORITY_EUTRAN{
+						description
+						"This object is used to configure IRAT_PRIORITY_EUTRAN .";
+						default "1";
+						type uint32{
+							range "0..4";}
+					}
+					leaf IRAT_PRIORITY_UTRAN{
+						description
+						"This object is used to configure IRAT_PRIORITY_UTRAN.";
+						default "2";
+						type uint32{
+							range "0..4";}
+					}
+					leaf IRAT_PRIORITY_GERAN{
+						description
+						"This object is used to configure IRAT_PRIORITY_GERAN .";
+						default "3";
+						type uint32{
+							range "0..4";}
+					}
+					leaf IRAT_PRIORITY_CDMA2000{
+						description
+						"This object is used to configure IRAT_PRIORITY_CDMA2000 .";
+						default "4";
+						type uint32{
+							range "0..4";}
+					}
+					
+				}
+				leaf spid_count {
+					description
+					"This object is used to configure spid_count .";
+					default "3";
+					type uint32{
+						range "1..256";}
+				}
+			container spid_config{
+				leaf spid{
+					description
+					"This object is used to configure spid .";
+					default "3";
+					type uint32{
+						range "1..256";}
+				}
+				leaf rat_count{
+					description
+					"This object is used to configure rat_count .";
+					default "3";
+					type uint32{
+						range "0..4";}
+				}
+				list rat_priority{
+				key "rat_type";
+					leaf rat_type{
+						description
+						"This object is used to configure rat_type .";
+						default "3";
+						type uint32{
+							range "0..4";}
+					}
+					leaf freq_count{
+						description
+						"This object is used to configure freq_count .";
+						default "3";
+						type uint32{
+							range "0..8";}
+					}
+					list freq_priority {
+					key "sib_priority new_priority";
+						leaf sib_priority{
+						description
+						"This object is used to configure sib_priority.";
+						default "3";
+						type uint32{
+							range "0..7";}
+						}
+						leaf new_priority{
+						description
+						"This object is used to configure new_priority .";
+						default "3";
+						type uint32{
+							range "0..7";}
+						}
+					}
+				
+				}/*rat_priority*/
+			
+				
+			}/*spid_config*/
+			}/*spid_table*/
+		}/*ho_configuration*/
+		container admission_control_info{
+			leaf max_num_drbs_for_cell{
+	 			description
+            				"Maximum number of bearers that can be supported at a time for this cell";
+           			 default "2048";
+           	 		type uint32{
+                			range "0..2048";
+ 				}
+                
+			}
+      	       	        leaf max_num_pdus_per_ue{
+				description
+            				"Maximum number of PDUs that can be supported at a time for a UE";
+           			 default "9";
+           	 		type uint32{
+                			range "0..9";}
+	       		}
+ 			leaf max_num_drbs_per_ue{
+				description
+            				"Maximum number of bearers that can be supported at a time for a UE";
+           		 	default "9";
+           	 		type uint32{
+                			range "0..9";}
+			}	
+
+			leaf max_num_gbr_drbs_per_ue {
+				description
+				"This object is used to configure max_num_gbr_drbs_per_ue.";
+				default "8";
+				type uint32{
+					range "0..16";}
+			}
+			leaf max_num_non_gbr_drbs_per_ue {
+				description
+				"This object is used to configure max_num_non_gbr_drbs_per_ue .";
+				default "8";
+				type uint32{
+					range "0..16";}
+			}
+			leaf total_backhaul_capacity {
+				description
+				"This object is used to configure total_backhaul_capacity .";
+				default "4000000";
+				type uint32{
+					range "1..4000000";}
+			}
+			leaf capacity_threshold {
+				description
+				"This object is used to configure capacity_threshold .";
+				default "100";
+				type uint32{
+					range "0..100";}
+			}
+			leaf resource_reserved_for_existing_users {
+				description
+				"This object is used to configure resource_reserved_for_existing_users .";
+				default "3";
+				type uint32{
+					range "0..7";}
+			}
+		
+		}/*admission_control_info*/
+		container load_config {
+			leaf load_level_num_entries {
+				description
+				"This object is used to configure load_level_num_entries .";
+				default "3";
+				type string{
+                    length "0..3";
+			}
+			}
+			container load_level_info {
+			leaf load_level {
+				description
+				"This object is used to configure load_level .";
+				default "3";
+				type string{
+                    length "0..256";
+			}
+			}
+			leaf load_percentage {
+				description
+				"This object is used to configure load_percentage.";
+				default "70";
+				type uint32{
+					range "1..100";}
+			}
+			leaf action{
+				description
+				"This object is used to configure action .";
+				default "70";
+				type uint32{
+					range "0..100";}
+			
+			}
+			leaf num_users{
+				description
+				"This object is used to configure num_users.";
+				default "70";
+				type uint32{
+					range "1..100";}
+			}
+			
+			}/*load_level_info*/
+		}/*load_config*/
+		leaf nbr_en_gNB_ID_bit_len{
+			description
+			"This object is used to configure nbr_en_gNB_ID_bit_len .";
+			default "70";
+			type uint32{
+				range "1..70";}
+			}
+			
+	}/*CellConfig*/
+	
+	container health_monitoring{
+		leaf healthMonitoringTimeInterval {
+			description
+			"This object is used to configure healthMonitoringTimeInterval .";
+			default "5";
+			type uint32{
+				range "0..65535";}
+			}
+		
+		leaf monitoring_interval{
+			description
+			"This object is used to configure monitoring_interval .";
+			default "60000";
+			type uint32{
+				range "0..65535";}
+			}
+		
+		leaf nonresponsive_monitoring_interval{
+		description
+			"This object is used to configure nonresponsive_monitoring_interval .";
+			default "10000";
+			type uint32{
+				range "0..65535";}
+		}
+		
+		leaf max_retries{
+		description
+			"This object is used to configure max_retries .";
+			default "10000";
+			type uint32{
+				range "0..65535";}
+		}
+		
+	}/*health_monitoring*/
+	container gNB_Process_Table {
+		leaf username {
+		description
+			"This object is used to configure username .";
+			default "root";
+			type string{
+				length "0..65535";}
+			
+		}
+		leaf password {
+		description
+			"This object is used to configure password .";
+			default "root";
+			type string{
+				length "0..65535";}
+			
+		}
+		container master_list{
+			leaf num_of_process {
+			description
+			"This object is used to configure num_of_process .";
+			default "root";
+			type string{
+				length "0..65535";}
+			
+			}
+			list process_info {
+			key "process_name process_args";
+			leaf process_name {
+			description
+			"This object is used to configure process_name .";
+			default "SON";
+			type string{
+				length "0..65535";}
+			
+			}
+			leaf process_args {
+			description
+			"This object is used to configure process_args .";
+			default "1 ../cfg/gNodeB_CU_Configuration.cfg";
+			type string{
+				length "0..65535";}
+			
+			}
+			}
+				
+		}/*master_list*/
+		container agent_info_list{
+			leaf num_of_instance{
+			description
+			"This object is used to configure num_of_instance .";
+			default "1";
+			type uint32{
+				range "0..1";}
+			}
+			list instance_info{
+            key "instance_id";
+				leaf instance_id {
+				description
+				"This object is used to configure instance_id .";
+				default "0";
+				type uint32{
+				range "0..2";}
+				}
+			
+				
+				leaf num_of_process {
+				description
+				"This object is used to configure num_of_process .";
+				default "2";
+				type uint32{
+				range "0..2";}
+				}
+			list process_info {
+				key "process_name process_args";
+				leaf process_name {
+				description
+				"This object is used to configure process_name  .";
+				default "SON";
+				type string{
+					length "0..65535";}
+			
+				}
+				leaf process_args {
+				description
+				"This object is used to configure process_args .";
+				default "1 ../cfg/gNodeB_CU_Configuration.cfg";
+				type string{
+					length "0..65535";}
+			
+				}
+			}/*process_info*/
+			}/*instance_info*/
+		
+		}/*agent_info_list*/
+	
+	
+	}/*gNB_Process_Table*/
+	
+	container stack_config {
+		container L2params {
+			leaf num_pdcp_instances {
+				description
+				"This object is used to configure num_pdcp_instances.";
+				default "0";
+				type uint32{
+				range "0..2";}
+			}
+			container PDCPParams {
+				leaf pdcp_index {
+				description
+				"This object is used to configure pdcp_index .";
+				default "0";
+				type uint32{
+				range "0..2";}
+				}
+				leaf IPAddr{
+					description
+						"IPAddr is for F1U User Plane";
+					default "172.16.81.53";
+					type string{
+						length "0..256";} 
+				}
+
+				leaf Cell_Number_Of_Entries {
+				description
+				"This object is used to configure Cell_Number_Of_Entries .";
+				default "1";
+				type uint32{
+				range "0..65535";}
+				}
+				list NRCGI {
+				key "Cell_Identity";
+				leaf PLMNID {
+				description
+				"This object is used to configure PLMN_ID  .";
+				default "123456";
+				type string{
+				length 6;}
+				}
+				leaf Cell_Identity {
+				description
+				"This object is used to configure Cell_Identity .";
+				default "1";
+				type uint32{
+				range "0..16383";}
+				}
+				/*leaf num_ue_supported {
+				description
+				"This object is used to configure num_ue_supported .";
+				default "1";
+				type uint32{
+				range "0..2";}
+				}*/
+				}/*NRCGI*/
+				leaf logCategory {
+					description
+					"This object is used to configure logCategory.";
+					default "1";
+					type uint64{
+						range "0..64424509440";}
+				}
+				container pdcp_timer_config{
+					leaf dataForwardingGuardTimerInterval {
+						description
+						"This object is used to configure dataForwardingGuardTimerInterval .";
+						default "200";
+						type uint32{
+							range "0..65535";}
+					}
+					leaf psr_guard_timer_interval {
+						description
+						"This object is used to configure psr_guard_timer_interval .";
+						default "200";
+						type uint32{
+							range "0..65535";}
+					}
+					
+				}/*pdcp_timer_config*/
+				leaf logLevel{
+					description
+					"This object is used to configure logLevel .";
+					default "200";
+					type uint32{
+						range "0..65535";}
+				}
+				leaf numMasterThreads {
+					description
+					"This object is used to configure numMasterThreads .";
+					default "1";
+					type uint32{
+						range "0..65535";}
+				}
+                leaf numWorkerThreads {
+                    description
+                    "This object is used to configure numMasterThreads .";
+                    default "1";
+                    type uint32{
+                        range "0..65535";}
+                }
+
+				leaf max_bytes_threshold {
+					description
+					"This object is used to configure max_bytes_threshold .";
+					default "1";
+					type uint64{
+						range "0..100000000";}
+				}
+				leaf core_num_for_worker_thread {
+					description
+					"This object is used to configure core_num_for_worker_thread  .";
+					default "1";
+					type uint64{
+						range "0..100000000";}
+				}
+				leaf counter_check_threshhold_bit {
+					description
+					"This object is used to configure counter_check_threshhold_bit .";
+					default "1";
+					type uint64{
+						range "0..100000000";}
+				}
+
+			
+		
+			}/*PDCPParams*/
+			leaf num_egtpu_instances {
+				description
+					"This object is used to configure num_egtpu_instances .";
+					default "1";
+					type uint32{
+						range "0..65535";}
+			}
+			list EGTPUParams {
+			key "egtpu_instance";
+				leaf egtpu_instance {
+				description
+					"This object is used to configure egtpu_instance .";
+					default "0";
+					type uint32{
+						range "0..65535";}
+				}
+				leaf IPAddr{
+					description
+						"IPAddr is for EGTPUParams User Plane";
+					default "172.16.81.53";
+					type string{
+						length "0..256";}
+				}
+
+				leaf Cell_Number_Of_Entries {
+					description
+					"This object is used to configure Cell_Number_Of_Entries .";
+					default "1";
+					type uint32{
+						range "0..65535";}
+			    }
+				list NRCGI {
+				key "Cell_Identity";
+				leaf PLMNID {
+				description
+					"This object is used to configure PLMN_ID .";
+					default "123456";
+					type string{
+						length 6;}
+			    }
+				leaf Cell_Identity {
+				description 
+					"This object is used to configure Cell_Identity .";
+					default "1";
+					type uint32{
+						range "0..16383";}
+			    }
+			/*	leaf num_ue_supported {
+				description
+				"This object is used to configure num_ue_supported .";
+				default "1";
+				type uint32{
+				range "0..2";}
+				}*/
+				}/*NRCGI*/
+				leaf logLevel {
+				description
+				"This object is used to configure logLevel .";
+				default "1";
+				type uint32{
+				range "0..15";}
+				}
+				leaf logCategory {
+				description
+				"This object is used to configure logCategory .";
+				default "1";
+				type uint32{
+				range "0..1023";}
+				}
+				container egtpu_dimension_params {
+					leaf numRabRecinitSize {
+					description
+					"This object is used to configure numRabRecinitSize .";
+					default "10";
+					type uint32{
+						range "0..4096";}
+					}
+					leaf numRabRecstepSize {
+					description
+					"This object is used to configure numRabRecstepSize .";
+					default "5";
+					type uint32{
+						range "0..1024";}
+					}
+					leaf numRabRecmaxSize {
+					description
+					"This object is used to configure numRabRecmaxSize .";
+					default "768";
+					type uint32{
+						range "0..8192";}
+					}
+					leaf NumPeerRec {
+					description
+					"This object is used to configure NumPeerRec .";
+					default "10";
+					type uint32{
+						range "1..48";}
+					}
+				
+				}/*egtpu_dimension_params*/
+				leaf echoReqTimer {
+					description
+					"This object is used to configure echoReqTimer .";
+					default "0";
+					type uint32{
+						range "0..60";}
+				}
+				leaf maxRetry {
+					description
+					"This object is used to configure maxRetry.";
+					default "4";
+					type uint32{
+						range "0..1024";}
+				}
+				leaf x2uDeliveryStatusTriggerTimer {
+					description
+					"This object is used to configure x2uDeliveryStatusTriggerTimer .";
+					default "5";
+					type uint32{
+						range "0..65535";}
+				}
+				leaf x2uDeliveryStatusTriggerPktCnt {
+					description
+					"This object is used to configure x2uDeliveryStatusTriggerPktCnt .";
+					default "5";
+					type uint32{
+						range "0..65535";}
+				}
+				leaf x2uDeliveryStatusTriggerPktSize {
+					description
+					"This object is used to configure x2uDeliveryStatusTriggerPktSize .";
+					default "5";
+					type uint32{
+						range "0..65535";}
+				}
+				leaf max_bytes_threshold {
+					description
+					"This object is used to configure max_bytes_threshold .";
+					default "5";
+					type uint32{
+						range "0..50000000";}
+				}
+				leaf num_receiver_thread {
+					description
+					"This object is used to configure num_receiver_thread .";
+					default "1";
+					type uint32{
+						range "1..10";}
+				}
+				leaf num_worker_thread {
+					description
+					"This object is used to configure num_worker_thread .";
+					default "5";
+					type uint32{
+						range "1..10";}
+				}
+				leaf core_num_of_worker_thread {
+					description
+					"This object is used to configure core_num_of_worker_thread .";
+					default "5";
+					type uint32{
+						range "0..65535";}
+				}
+				
+				
+			}/*EGTPUParams*/
+			leaf num_f1u_instances {
+				description
+				"This object is used to configure num_f1u_instances .";
+				default "1";
+				type uint32{
+					range "0..65535";}
+			}
+			list F1UParams {
+			key "f1u_instance";
+				leaf f1u_instance {
+				description
+				"This object is used to configure f1u_instance .";
+				default "0";
+				type uint32{
+					range "0..65535";}
+				}
+				leaf Cell_Number_Of_Entries {
+				description
+				"This object is used to configure Cell_Number_Of_Entries .";
+				default "1";
+				type uint32{
+					range "0..65535";}
+				}
+				leaf IPAddr{
+				description
+				"IPAddr is for F1U User Plane";
+				default "172.16.81.53";
+           	 		type string{
+                			length "0..256";} 
+				}
+
+				list NRCGI {
+				key "Cell_Identity";
+				leaf PLMNID {
+				description
+				"This object is used to configure PLMN_ID.";
+				default "123456";
+				type string{
+				length 6;}
+				}
+				leaf Cell_Identity {
+				description
+				"This object is used to configure Cell_Identity .";
+				default "1";
+				type uint32{
+				range "0..16383";}
+				}
+				/*leaf num_ue_supported {
+				description
+				"This object is used to configure num_ue_supported.";
+				default "1";
+				type uint32{
+				range "0..2";}
+				}*/
+				}/*NRCGI*/
+				leaf logLevel {
+					description
+					"This object is used to configure logLevel .";
+					default "1";
+					type uint32{
+						range "0..511";}
+				}
+				leaf logCategory {
+					description
+					"This object is used to configure logCategory .";
+					default "1";
+					type uint64{
+						range "0..64424509440";}
+				}
+				container f1u_dimension_params {
+					
+					leaf numRabRecinitSize {
+					description
+					"This object is used to configure numRabRecinitSize .";
+					default "10";
+					type uint64{
+						range "0..64424509440";}
+					
+					}
+					leaf numRabRecstepSize {
+					description
+					"This object is used to configure numRabRecstepSize .";
+					default "10";
+					type uint32{
+						range "0..100";}
+					}
+					leaf numRabRecmaxSize {
+					description
+					"This object is used to configure numRabRecmaxSize .";
+					default "10";
+					type uint64{
+						range "1..768";}
+					}
+					leaf NumPeerRec {
+					description
+					"This object is used to configure NumPeerRec .";
+					default "10";
+					type uint64{
+						range "1..48";}
+					}
+					
+				}/*f1u_dimension_params*/
+				leaf echoReqTimer {
+					description
+					"This object is used to configure echoReqTimer .";
+					default "10";
+					type uint32{
+						range "0..60";}
+				}
+				leaf maxRetry {
+					description
+					"This object is used to configure maxRetry .";
+					default "4";
+					type uint32{
+						range "0..60";}
+				}
+				leaf f1uDeliveryStatusTriggerTimer {
+					description
+					"This object is used to configure f1uDeliveryStatusTriggerTimer.";
+					default "65535";
+					type uint32{
+						range "10..65535";}
+				}
+				leaf f1uDeliveryStatusTriggerPktCnt {
+					description
+					"This object is used to configure f1uDeliveryStatusTriggerPktCnt .";
+					default "100";
+					type uint32{
+						range "10..65535";}
+				}
+				leaf f1uDeliveryStatusTriggerPktSize {
+					description
+					"This object is used to configure f1uDeliveryStatusTriggerPktSize .";
+					default "65535";
+					type uint32{
+						range "10..65535";}
+				}
+				leaf max_bytes_threshold {
+				description
+					"This object is used to configure  max_bytes_threshold .";
+					default "50000000";
+					type uint32{
+						range "10..50000000";}
+				}
+				leaf num_worker_thread {
+				description
+					"This object is used to configure num_worker_thread .";
+					default "10";
+					type uint32{
+						range "1..10";}
+				}
+				leaf core_num_of_worker_thread {
+				description
+					"This object is used to configure core_num_of_worker_thread .";
+					default "10";
+					type uint32{
+						range "1..50000000";}
+				}
+			}/*F1UParams*/
+            leaf max_buffer_size_for_mtu {
+                description
+                    "This object is used to configure max_buffer_size_for_mtu .";
+                    default "1500";
+                    type uint32{
+                        range "1500..9000";}
+                }
+
+		}/*L2params*/
+		container OAMParams {
+			leaf OAM_INIT_TIMER_VALUE {
+				description
+					"This object is used to configure OAM_INIT_TIMER_VALUE .";
+					default "10";
+					type uint32{
+						range "1..20000";}
+				}
+			leaf NROperationalMode {
+				description
+					"This object is used to configure NROperationalMode .";
+					default "0";
+					type string{
+                        length "0..3";
+				}
+			}
+		}/*OAMParams*/
+		container L3Params {
+			container shared_mem_logging_config {
+				leaf SharedMemSize {
+				description
+					"This object is used to configure SharedMemSize .";
+					default "10";
+					type uint32{
+						range "1..10";}
+				}
+				leaf MaxLogFileSize {
+				description
+					"This object is used to configure MaxLogFileSize .";
+					default "10";
+					type uint32{
+						range "1..10";}
+				}
+				leaf LogFilePath {
+				description
+					"This object is used to configure LogFilePath .";
+					default "10";
+					type string{
+						length "1..1024";}
+				}
+				leaf core_no {
+				description
+					"This object is used to configure core_no .";
+					default "10";
+					type uint32{
+						range "0..20000";}
+				}
+				leaf rrcloggerthreadTimer {
+				description
+					"This object is used to configure rrcloggerthreadTimer .";
+					default "50";
+					type uint32{
+						range "50..65535";}
+				}
+			}/*shared_mem_logging_config*/
+			leaf num_uecc_instances{
+			description
+					"This object is used to configure num_uecc_instance .";
+					default "1";
+					type uint32{
+						range "1..65535";}
+			}
+			leaf core_num_mapping{
+			description
+					"This object is used to configure core_num_mapping .";
+					default "1,2";
+					type string;
+			}
+			container RRCparams {
+				leaf nonBroadcastSfnOffset{
+				description
+					"This object is used to configure nonBroadcastSfnOffset .";
+					default "1";
+					type uint32{
+						range "0..1023";}
+			    }
+                leaf logLevel {
+            description
+                     "This object is used to configure logLevel";
+                    default "127";
+                    type uint32{
+                        range "1..127";
+                }
+            }
+
+				leaf maxCellReconfigRetryCount {
+				description
+					"This object is used to configure maxCellReconfigRetryCount .";
+					default "1";
+					type uint32{
+						range "0..1023";}
+			    }
+				container Cell_Traffic_Trace_feature {
+					leaf vendorName {
+					description
+					"This object is used to configure vendorName .";
+					default "abc";
+					type string{
+						length "0..1023";}
+					}
+				}/*Cell_Traffic_Trace_feature*/
+				
+				container guard_timers {
+					leaf UECC_LL_GUARD_TIMER_TIMERID_23_VALUE {
+					description
+					"This object is used to configure UECC_LL_GUARD_TIMER_TIMERID_23_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf UECC_TRG_HO_GUARD_TIMER_TIMERID_24_VALUE {
+					description
+					"This object is used to configure UECC_TRG_HO_GUARD_TIMER_TIMERID_24_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf UECC_UE_CONN_SETUP_GUARD_TIMER_TIMERID_27 {
+					description
+					"This object is used to configure UECC_UE_CONN_SETUP_GUARD_TIMER_TIMERID_27 .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf UECC_RLF_GUARD_TIMER {
+					description
+					"This object is used to configure UECC_RLF_GUARD_TIMER  .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf UECC_CRE_TIMER {
+                             		description
+                                        "This object is used to configure UECC_CRE_TIMER  .";
+                                        default "30535";
+                                        type uint32{
+                                                range "50..65535";}
+                                        }
+					leaf PAGING_RESUME_REQUEST_TIMER{
+	 				description
+					"SA_L3_CSR_161507_E ";
+                                        default "60";
+                                        type uint32{
+                                                range "20..120";}
+                                        }
+					leaf OVERALL_INACTIVE_STATE_UE_RELEASE_TIMER{
+                			description
+               				"Rang 6 to 721 minutes (default: 6 Min)";
+                                        default "6";
+                                        type uint32{
+                                                range "6..721";}
+                                        }
+					leaf CONNECTION_RESUME_GUARD_TIMER{
+					description
+					"Rang 2 to 10 sec (default: 5 sec) ";
+                                        default "5";
+                                        type uint32{
+                                                range "2..10";}
+                                        }
+					leaf DELTA_RNA_UPDATE_GUARD_TIMER_VALUE{
+					description
+					"Rang 5 to 30 sec (default: 15 sec) ";
+                                        default "15";
+                                        type uint32{
+                                                range "5..30";}
+                                        }
+				}/*guard_timers*/
+				container procedural_timers {
+					leaf LLIM_CELL_SETUP_TIMER_TIMERID_1_VALUE {
+					description
+					"This object is used to configure LLIM_CELL_SETUP_TIMER_TIMERID_1_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf LLIM_CREATE_UE_ENTITY_TIMER_TIMERID_3_VALUE {
+					description
+					"This object is used to configure LLIM_CREATE_UE_ENTITY_TIMER_TIMERID_3_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf LLIM_RECONFIG_UE_ENTITY_TIMER_TIMERID_5_VALUE {
+					description
+					"This object is used to configure LLIM_RECONFIG_UE_ENTITY_TIMER_TIMERID_5_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf LLIM_DELETE_UE_ENTITY_TIMER_TIMERID_7_VALUE {
+					description
+					"This object is used to configure LLIM_DELETE_UE_ENTITY_TIMER_TIMERID_7_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf LLIM_CONFIG_UE_SECURITY_TIMER_TIMERID_8_VALUE {
+					description
+					"This object is used to configure LLIM_CONFIG_UE_SECURITY_TIMER_TIMERID_8_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf LLIM_CELL_SUSPEND_UE_ENTITY_TIMER_TIMERID_27_VALUE {
+					description
+					"This object is used to configure LLIM_CELL_SUSPEND_UE_ENTITY_TIMER_TIMERID_27_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf LLIM_REESTABLISH_UE_ENTITY_TIMER_TIMERID_28_VALUE {
+					description
+					"This object is used to configure LLIM_REESTABLISH_UE_ENTITY_TIMER_TIMERID_28_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf LLIM_RECONFIG_SECURITY_UE_ENTITY_TIMER_TIMERID_29_VALUE {
+					description
+					"This object is used to configure LLIM_RECONFIG_SECURITY_UE_ENTITY_TIMER_TIMERID_29_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf LLIM_RESUME_UE_ENTITY_TIMER_TIMERID_30_VALUE {
+					description
+					"This object is used to configure LLIM_RESUME_UE_ENTITY_TIMER_TIMERID_30_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf LLIM_CHANGE_CRNTI_TIMER_TIMERID_32_VALUE {
+					description
+					"This object is used to configure LLIM_CHANGE_CRNTI_TIMER_TIMERID_32_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+                    leaf LLIM_CELL_STOP_TIMER_TIMERID_38_VALUE {
+                    description
+                    "This object is used to configure LLIM_CELL_STOP_TIMER_TIMERID_38_VALUE.";
+                    default "65535";
+                    type uint32{
+                        range "50..65535";}
+                    }
+                     leaf LLIM_CELL_START_TIMER_TIMERID_36_VALUE {
+                    description
+                    "This object is used to configure LLIM_CELL_START_TIMER_TIMERID_36_VALUE.";
+                    default "65535";
+                    type uint32{
+                        range "50..65535";}
+                    }
+
+
+					leaf LLIM_CELL_DELETE_TIMER_TIMERID_39_VALUE {
+					description
+					"This object is used to configure LLIM_CELL_DELETE_TIMER_TIMERID_39_VALUE.";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf CSC_CELL_SETUP_TIMER_TIMERID_0_VALUE {
+					description
+					"This object is used to configure CSC_CELL_SETUP_TIMER_TIMERID_0_VALUE  .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf CSC_CELL_DELETE_TIMER_TIMERID_13_VALUE {
+					description
+					"This object is used to configureCSC_CELL_DELETE_TIMER_TIMERID_13_VALUE  .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf CSC_CELL_START_TIMER_TIMERID_35_VALUE {
+					description
+					"This object is used to configure CSC_CELL_START_TIMER_TIMERID_35_VALUE.";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf CSC_CELL_STOP_TIMER_TIMERID_37_VALUE {
+					description
+					"This object is used to configure CSC_CELL_STOP_TIMER_TIMERID_37_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf CSC_PROCEDURE_GUARD_TIMER_TIMERID_52_VALUE {
+					description
+					"This object is used to configure CSC_PROCEDURE_GUARD_TIMER_TIMERID_52_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf UECC_END_MARKER_IND_TIMER {
+					description
+					"This object is used to configure UECC_END_MARKER_IND_TIMER  .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf UECC_RRC_CONN_RELEASE_TIMER {
+					description
+					"This object is used to configure UECC_RRC_CONN_RELEASE_TIMER  .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf UECC_DC_OVERALL_GUARD_TIMER {
+					description
+					"This object is used to configure UECC_DC_OVERALL_GUARD_TIMER  .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf UECC_PROCEDURE_GUARD_TIMER {
+					description
+					"This object is used to configure UECC_PROCEDURE_GUARD_TIMER .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf rrchealthmonTimer {
+					description
+					"This object is used to configure rrchealthmonTimer .";
+					default "65535";
+					type uint32{
+						range "5..65535";}
+					}
+					leaf UECC_RRC_HO_PREP_TIMER_TIMERID_25_VALUE {
+					description
+					"This object is used to configure UECC_RRC_HO_PREP_TIMER_TIMERID_25_VALUE .";
+					default "65535";
+					type uint32{
+						range "50..65535";}
+					}
+					leaf UECC_RRC_HO_OVERALL_TIMER_TIMERID_26_VALUE {
+					description
+					"This object is used to configure UECC_RRC_HO_OVERALL_TIMER_TIMERID_26_VALUE .";
+					default "65535";
+					type uint32{
+						range "5..65535";}
+					}
+					
+				}/*procedural_timers*/
+				leaf MENB_INACTIVITY_FEATURE {
+					description
+					"This object is used to configure MENB_INACTIVITY_FEATURE.";
+					default "0";
+					type uint32{
+						range "0..1";}
+					}
+				leaf ENABLE_FROM_CU_DU {
+				description
+					"This object is used to configure ENABLE_FROM_CU_DU .";
+					default "0";
+					type uint32{
+						range "0..1";}
+				}
+			}/*RRCparams*/
+			container NGAP {
+                leaf logLevel {
+            description
+                     "This object is used to configure logLevel";
+                    default "127";
+                    type uint32{
+                        range "1..127";
+                }
+            }
+                 leaf ngap_setup_retry_timer {
+                                        description
+                                        "This object is used to configure resource_reserved_for_existing_users .";
+                                        default "65535";
+                                        type uint32{
+                                                range "0..65535";}
+                                }
+                                leaf ngap_setup_retry_count {
+                                        description
+                                        "This object is used to configure resource_reserved_for_existing_users .";
+                                        default "65535";
+                                        type uint32{
+                                                range "0..65535";}
+                                }
+                                leaf ngap_reset_retry_timer {
+                                        description
+                                        "This object is used to configure resource_reserved_for_existing_users .";
+                                        default "65535";
+                                        type uint32{
+                                                range "0..65535";}
+                                }
+                                leaf ngap_reset_retry_count {
+                                description
+                                        "This object is used to configure resource_reserved_for_existing_users .";
+                                        default "5";
+                                        type uint32{
+                                                range "0..10";}
+                                }
+                                 leaf amf_selection_algo {
+                                description
+                                        "This object is used to configure resource_reserved_for_existing_users .";
+                                        default "5";
+                                        type uint32{
+                                                range "0..10";}
+                                }
+                                leaf amf_sctp_conn_recovery_timer {
+                                description
+                                        "This object is used to configure resource_reserved_for_existing_users .";
+                                        default "65535";
+                                        type uint32{
+                                                range "0..65535";}
+                                }
+				
+			        leaf amf_sctp_conn_recovery_retry_count {
+                                description
+                                        "This object is used to configure amf_sctp_conn_recovery_retry_count .";
+                                        default "65535";
+                                        type uint32{
+                                                range "0..65535";}
+                                }
+
+	
+                                leaf ngap_pds_notify_timer {
+                                description
+                                        "This object is used to configure resource_reserved_for_existing_users .";
+                                        default "65535";
+                                        type uint32{
+                                                range "0..65535";}
+                                }
+				leaf f1ap_pws_timer_val{
+				description
+        				"Time in msec to wait for write_replace_warning_response from du";
+					default "65535";
+                                        type uint32{
+                                                range "5000..65535";}
+                                }
+				leaf f1ap_pws_cancel_timer_val{
+				description
+					"Time in msec to wait for PWS Canvel Response from du";
+					default "65535";
+                                        type uint32{
+                                                range "5000..65535";}
+                                }
+				leaf ngap_pws_timer{
+				description
+       	 				"NG PWS Timer Value to guard NG PWS procedure. Value is in milliseconds";
+                                      default "65535";
+                                       type uint32{
+                        	                range "50..65535";}
+                                }	
+				leaf ngap_pws_cancel_timer{
+				description
+				"NG PWS CANCEL Timer Value to guard NG PWS procedure. Value is in milliseconds";
+                                    default "65535";
+                                      type uint32{
+                                                range "50..65535";}
+                                }		
+                        }/*NGAP*/
+                container X2AP {
+                                leaf logLevel {
+                                        description
+                                        "This object is used to configure logLevel  .";
+                                        default "6";
+                                        type string{
+                                            length "0..6";
+                                        }
+
+                                }
+
+				container guard_timers {
+					leaf x2ap_csi_guard_time_val {
+						description
+						"This object is used to configure resource_reserved_for_existing_users .";
+						default "2000";
+						type uint32{
+							range "0..65535";}
+					}
+				}/*guard_timers*/
+				container procedural_timers	{
+					leaf sctp_connect_time_val {
+						description
+						"This object is used to configure sctp_connect_time_val.";
+						default "2000";
+						type uint32{
+							range "0..65535";}
+					}
+					leaf x2ap_time_to_wait_index {
+						description
+						"This object is used to configure x2ap_time_to_wait_index.";
+						default "2000";
+						type uint32{
+							range "0..65535";}
+					}
+					leaf x2ap_setup_retry_time_val {
+						description
+						"This object is used to configure x2ap_setup_retry_time_val .";
+						default "2000";
+						type uint32{
+							range "0..65535";}
+					}
+					leaf sctp_connect_retry_cnt {
+						description
+						"This object is used to configure sctp_connect_retry_cnt .";
+						default "2000";
+						type uint32{
+							range "0..65535";}
+					}
+					leaf x2ap_setup_retry_cnt {
+						description
+						"This object is used to configure x2ap_setup_retry_cnt .";
+						default "5";
+						type uint32{
+							range "0..10";}
+					}
+					leaf gnb_config_update_retry_cnt {
+						description
+						"This object is used to configure gnb_config_update_retry_cnt .";
+						default "5";
+						type uint32{
+							range "0..10";}
+					}
+					leaf gNB_Config_Update_retry_timer_val {
+						description
+						"This object is used to configure gNB_Config_Update_retry_timer_val .";
+						default "2000";
+						type uint32{
+							range "0..65535";}
+					}
+					leaf gNB_Config_Update_time_to_wait_retry_cnt {
+						description
+						"This object is used to configure gNB_Config_Update_time_to_wait_retry_cnt.";
+						default "5";
+						type uint32{
+							range "0..255";}
+					}
+					leaf gNB_Config_Update_time_to_wait_offset {
+						description
+						"This object is used to configure gNB_Config_Update_time_to_wait_offset .";
+						default "2000";
+						type uint32{
+							range "0..65535";}
+					}
+					leaf gnb_x2ap_reset_retry_cnt {
+						description
+						"This object is used to configure gnb_x2ap_reset_retry_cnt.";
+						default "5";
+						type uint32{
+							range "0..10";}
+					}
+					leaf gnb_x2ap_reset_guard_tim_val {
+						description
+						"This object is used to configure gnb_x2ap_reset_guard_tim_val .";
+						default "5000";
+						type uint32{
+							range "0..65535";}
+					}
+					leaf x2_setup_req_w_timer {
+						description
+						"This object is used to configure x2_setup_req_w_timer .";
+						default "5000";
+						type uint32{
+							range "0..65535";}
+					}
+				}/*procedural_timers*/
+			
+			}/*X2AP*/
+			container XNAP {
+                leaf logLevel {
+            description
+                     "This object is used to configure logLevel";
+                    default "127";
+                    type uint32{
+                        range "1..127";
+                }
+            }
+				container guard_timers {
+					leaf xnap_csi_guard_time_val {
+						description
+						"This object is used to configure xnap_csi_guard_time_val .";
+						default "2000";
+						type uint32{
+							range "50..65535";}
+					}
+				}/*guard_timers*/
+				container procedural_timers {
+					leaf sctp_connect_time_val {
+						description
+						"This object is used to configure sctp_connect_time_val .";
+						default "2000";
+						type uint32{
+							range "50..65535";}
+					}
+					leaf xnap_time_to_wait_index {
+						description
+						"This object is used to configure xnap_time_to_wait_index .";
+						default "0";
+						type uint32{
+							range "0..5";}
+					}
+					leaf xnap_setup_retry_time_val {
+						description
+						"This object is used to configure  xnap_setup_retry_time_val .";
+						default "65535";
+						type uint32{
+							range "50..65535";}
+					}
+					leaf sctp_connect_retry_cnt {
+						description
+						"This object is used to configure sctp_connect_retry_cnt.";
+						default "5";
+						type uint32{
+							range "0..255";}
+					}
+					leaf xnap_setup_retry_cnt {
+						description
+						"This object is used to configure xnap_setup_retry_cnt.";
+						default "5";
+						type uint32{
+							range "0..10";}
+					}
+					leaf gnb_config_update_retry_cnt {
+						description
+						"This object is used to configure gnb_config_update_retry_cnt.";
+						default "5";
+						type uint32{
+							range "0..10";}
+					}
+					leaf gNB_Config_Update_retry_timer_val {
+						description
+						"This object is used to configure gNB_Config_Update_retry_timer_val .";
+						default "65535";
+						type uint32{
+							range "50..65535";}
+					}
+					leaf gNB_Config_Update_time_to_wait_retry_cnt {
+						description
+						"This object is used to configure gNB_Config_Update_time_to_wait_retry_cnt .";
+						default "0";
+						type uint32{
+							range "0..255";}
+					}
+					leaf gNB_Config_Update_time_to_wait_offset {
+						description
+						"This object is used to configure gNB_Config_Update_time_to_wait_offset .";
+						default "65535";
+						type uint32{
+							range "50..65535";}
+					}
+					leaf gnb_xnap_reset_retry_cnt {
+						description
+						"This object is used to configure gnb_xnap_reset_retry_cnt .";
+						default "5";
+						type uint32{
+							range "0..65535";}
+					}
+					leaf gnb_xnap_reset_guard_tim_val {
+						description
+						"This object is used to configure gnb_xnap_reset_guard_tim_val .";
+						default "5";
+						type uint32{
+							range "0..65535";}
+					}
+                    leaf gnb_xnap_removal_guard_tim_val {
+                        description
+                        "This object is used to configure gnb_xnap_removal_guard_tim_val .";
+                        default "5";
+                        type uint32{
+                            range "0..65535";}
+                    }
+
+					leaf xn_setup_req_w_timer {
+						description
+						"This object is used to configure xn_setup_req_w_timer .";
+						default "5";
+						type uint32{
+							range "0..65535";}
+					}
+				}/*procedural_timers*/
+			
+			}/*XNAP*/
+			container F1AP {
+				leaf cu_config_update_retry_count {
+					description
+						"This object is used to configure cu_config_update_retry_count .";
+						default "2";
+						type uint32{
+							range "0..5";}
+				}
+				leaf cu_config_update_retry_timer_val {
+					description
+						"This object is used to configure cu_config_update_retry_timer_val .";
+						default "5";
+						type uint32{
+							range "0..65535";}
+				}
+				leaf cu_reset_retry_count {
+					description
+						"This object is used to configure cu_reset_retry_count .";
+						default "2";
+						type uint32{
+							range "0..5";}
+				}
+				leaf cu_reset_guard_timer_val {
+					description
+						"This object is used to configure cu_reset_guard_timer_val .";
+						default "5";
+						type uint32{
+							range "0..65535";}
+				}
+				leaf f1ap_pws_timer_val{
+					description
+						"PWS changes start";
+						default "65535";
+                                        	type uint32{
+                                                	range "5000..65535";}
+                               	}
+				leaf f1ap_pws_cancel_timer_val{
+					description
+						"Time in msec to wait for PWS Canvel Response from du";
+						default "65535";
+                                        	type uint32{
+                                                	range "5000..65535";}
+                               	}
+                leaf f1ap_health_mon_timer_int {
+                    description
+                        "This object is used to configure f1ap_f1_setup_retry_count .";
+                        default "2";
+                        type uint32{
+                            range "0..9";}
+                }
+
+				leaf f1ap_f1_setup_retry_count {
+					description
+						"This object is used to configure f1ap_f1_setup_retry_count .";
+						default "2";
+						type uint32{
+							range "0..9";}
+				}
+				leaf f1_setup_timer_val {
+					description
+						"This object is used to configure f1_setup_timer_val .";
+						default "5";
+						type uint32{
+							range "0..65535";}
+				}
+				leaf f1ap_time_to_wait_offset {
+					description
+						"This object is used to configure f1ap_time_to_wait_offset .";
+						default "2";
+						type uint32{
+							range "0..5";}
+				}
+				leaf f1_setup_req_w_timer {
+					description
+						"This object is used to configure resource_reserved_for_existing_users .";
+						default "5";
+						type uint32{
+							range "0..65535";}
+				}
+                leaf logLevel {
+            description
+                     "This object is used to configure logLevel";
+                    default "127";
+                    type uint32{
+                        range "1..127";
+                }
+            }
+	
+				leaf numDU {
+					description
+						"This object is used to configure numDU .";
+						default "1";
+						type uint32{
+							range "1..31";}
+				}
+				list du_CommInfo {
+				key "du_index CellNumberOfEntries";
+					leaf IPAddr {
+					description
+						"This object is used to configure IPAddr .";
+						default "5";
+						type string{
+							length "0..1024";}
+					}
+					leaf du_index {
+						description
+						"This object is used to configure du_index .";
+						default "1111";
+						type uint64{
+							range "0..68719476735";}
+					}
+					leaf CellNumberOfEntries {
+						description
+						"This object is used to configure CellNumberOfEntries.";
+						default "1";
+						type uint64{
+							range "0..1024";}
+					}
+					list NR-CGI {
+					key "CellIdentity";
+					leaf PLMNID {
+						description
+						"This object is used to configure PLMNID .";
+						default "123456";
+						type string{
+							length 6;}
+					}
+					leaf CellIdentity {
+						description
+						"This object is used to configure CellIdentity .";
+						default "3333";
+						type uint64{
+							range "0..16383";}
+					
+					}
+					}/*NR-CGI*/
+				}/*du_CommInfo*/
+                leaf DeltaTimerVal {
+                description
+                        "This object is used to configure DeltaTimerVal .";
+                        default "3333";
+                        type uint64{
+                            range "0..16383";}
+
+                    }
+
+				
+			}/*F1AP*/
+		}/*L3Params*/
+		container RRMparams {
+			leaf RRMCoreNum {
+				description
+						"This object is used to configure RRMCoreNum.";
+						default "0";
+						type uint64{
+							range "0..16383";}
+					
+					}
+			leaf log_on_off {
+				description
+						"This object is used to configure log_on_off.";
+						default "0";
+						type uint64{
+							range "0..1";}
+					
+			}
+            leaf logLevel {
+            description
+                     "This object is used to configure logLevel";
+                    default "127";
+                    type uint32{
+                        range "1..127";
+                }
+            }
+			container shm_logger_cfg {
+				leaf wait_interval {
+					description
+						"This object is used to configure wait_interval .";
+						default "2";
+						type uint64{
+							range "0..5";}
+					
+				}
+				leaf log_path {
+					description
+						"This object is used to configure log_path .";
+						default "0";
+						type string;
+							
+					
+				}
+				leaf shm_size {
+					description
+						"This object is used to configure shm_size .";
+						default "2";
+						type uint64{
+							range "0..5";}
+					
+				}
+			
+				leaf log_file_size {
+					description
+						"This object is used to configure log_file_size .";
+						default "2";
+						type uint64{
+							range "0..100";}
+					
+				}
+				leaf log_chunk_count {
+				description
+						"This object is used to configure log_chunk_count .";
+						default "100";
+						type uint32{
+							range "50..65535";}
+				}
+				leaf cpu_bitmap {
+					description
+						"This object is used to configure cpu_bitmap .";
+						default "1";
+						type uint64{
+							range "1..31";}
+					
+				}
+				leaf file_count {
+					description
+						"This object is used to configure file_count.";
+						default "10";
+						type uint32{
+							range "1..10";}
+					
+				}
+			}/*shm_logger_cfg*/
+			container operator_info {
+				leaf immediate_start_needed {
+					description
+						"This object is used to configure immediate_start_needed .";
+						default "1";
+						type uint32{
+							range "0..1";}
+					
+				}
+				container measurement_priority_info {
+					leaf rsrp_trigger_quantity {
+						description
+						"This object is used to configure rsrp_trigger_quantity .";
+						default "1";
+						type uint64{
+							range "1..31";}
+					
+					}
+					leaf rsrq_trigger_quantity {
+					description
+						"This object is used to configure rsrq_trigger_quantity .";
+						default "1";
+						type uint64{
+							range "1..31";}
+					
+					}
+					leaf sinr_trigger_quantity {
+					description
+						"This object is used to configure sinr_trigger_quantity .";
+						default "1";
+						type uint64{
+							range "1..31";}
+					
+					}
+					}/*measurement_priority_info*/
+					leaf DEFAULT_MEAS_TO_CONFIG {
+					description
+						"This object is used to configure DEFAULT_MEAS_TO_CONFIG .";
+						default "1";
+						type uint64{
+							range "0..31";}
+					
+					}
+					leaf MEAS_TO_CONFIG_AT_A2 {
+						description
+						"This object is used to configure MEAS_TO_CONFIG_AT_A2 .";
+						default "1";
+						type uint64{
+							range "1..31";}
+					
+					}
+					leaf dasa_scell_selection {
+					description
+						"This object is used to configure dasa_scell_selection.";
+						default "1";
+						type uint64{
+							range "0..31";}
+					
+					}
+					leaf ul_ca_supported {
+						description
+						"This object is used to configure ul_ca_supported.";
+						default "0";
+						type uint32{
+							range "0..31";}
+					
+					}
+					leaf dl_ca_supported {
+					description
+						"This object is used to configure dl_ca_supported .";
+						default "0";
+						type uint32{
+							range "0..31";}
+					
+					}
+					leaf ca_band_on_uecap {
+						description
+						"This object is used to configure ca_band_on_uecap .";
+						default "0";
+						type uint32{
+							range "0..31";}
+					
+					}
+                    leaf EPSFallbackSupported {
+                        description
+                        "This object is used to configure EPSFallbackSupported .";
+                        default "0";
+                        type uint32{
+                            range "0..31";}
+
+                    }
+		    leaf eps_fallback_B1_event_timer {
+			description
+        		"This is used for configuring B1 event timer";  
+			default "3000";
+                        type uint32{
+                            range "1000..5000";}
+                    }
+		    leaf Max_Sib_Size {	
+		    	description
+			"EPS_Fallback_change_E";
+			default "372";
+                        type uint32{
+             	           range "241..372";}
+                    }
+
+					}/*operator_info*/
+					container procedural_timers {
+					
+						leaf action {
+							description
+							"This object is used to configure action .";
+							default "0";
+							type uint32{
+								range "0..100";}
+					
+						}
+						leaf gNB_meas_ue_release_timer {
+							description
+							"This object is used to configure gNB_meas_ue_release_timer.";
+							default "5";
+							type uint32{
+								range "0..65535";}
+						}
+					}/*procedural_timers*/
+				
+				
+				
+		}/*RRMparams*/
+		container SONParams {
+		
+			leaf log_on_off {
+				description
+				"This object is used to configure log_on_off .";
+				default "0";
+				type uint32{
+					range "0..1";}
+					
+			}
+            leaf logLevel {
+            description
+                     "This object is used to configure logLevel";
+                    default "127";
+                    type uint32{
+                        range "1..127";
+                }
+            }
+			container son_es_params {
+			
+				leaf es_enable_disable {
+					description
+				"This object is used to configure es_enable_disabl .";
+				default "0";
+				type uint32{
+					range "0..1";}
+					
+				}
+				leaf interval {
+				description
+							"This object is used to configure interval .";
+							default "5";
+							type uint32{
+								range "0..65535";}
+				}
+				leaf threshold_value {
+					description
+					"This object is used to configure threshold_value  .";
+					default "5";
+					type uint32{
+						range "0..255";}
+				}
+				leaf auto_switch_on_off {
+					description
+					"This object is used to configure auto_switch_on_off .";
+					default "5";
+					type uint32{
+						range "0..255";}
+				}
+			}/*son_es_params*/
+			leaf mro_enable_disable {
+				description
+				"This object is used to configure mro_enable_disable .";
+				default "0";
+				type uint32{
+					range "0..1";}
+					
+			}
+			leaf mlb_enable_disable {
+				description
+				"This object is used to configure  mlb_enable_disable .";
+				default "0";
+				type uint32{
+					range "0..1";}
+					
+			}
+			leaf NMMSupported {
+				description
+				"This object is used to configure NMMSupported .";
+				default "0";
+				type uint32{
+					range "0..1";}
+					
+			}
+			leaf TNLDiscoveryEnabled {
+				description
+				"This object is used to configure TNLDiscoveryEnabled .";
+				default "0";
+				type uint32{
+					range "0..1";}
+					
+			}
+			container son_oam_nr_Menb_add_req {
+				container Menb_ip_addr_list {
+				leaf num_Menb_ip_addr {
+					description
+				"This object is used to configure num_Menb_ip_addr .";
+				default "0";
+				type uint32{
+					range "0..1";}
+					
+				}
+				list Menb_ip_info {
+				key "Menb_ip_addr";
+				leaf Menb_ip_addr {
+				description
+				"This object is used to configure Menb_ip_addr .";
+				default "0";
+				type string{
+					length "0..1024";}
+					
+				}
+				}/*Menb_ip_info*/
+				}/*Menb_ip_addr_list*/
+                }/*son_oam_nr_Menb_add_req*/
+				container Global_enb_id_list {
+				leaf num_Global_id {
+					description
+					"This object is used to configure num_Global_id .";
+					default "0";
+					type uint32{
+						range "0..1";}
+					
+				}
+				container GlobalEnbId {
+				leaf macroEnbId {
+				description
+				"This object is used to configure macroEnbId .";
+				default "16";
+				type uint32{
+					range "0..1024";}
+					
+				}
+				leaf homeEnbId {
+				description
+				"This object is used to configure homeEnbId.";
+				default "0";
+				type uint32{
+					range "0..1111";}
+					
+				}
+				}/*GlobalEnbId*/
+				}/*Global_enb_id_list*/
+				container oam_nr_gnb_add_req {
+					container gnb_nbr_list {
+							leaf gnb_nbr_list_size {
+							description
+							"This object is used to configure macroEnbId .";
+							default "16";
+							type string{
+								length "0..1024";}
+					
+							}
+                            container gnb_nbr_info {
+                             leaf gnb_type {
+                            description
+                            "This object is used to configure gnb_type .";
+                            default "1";
+                            type uint32{
+                                range "0..1024";}
+
+                            }
+
+							leaf gnb_id {
+							description
+							"This object is used to configure gnb_id .";
+							default "1";
+							type uint32{
+								range "0..1024";}
+					
+							}
+							leaf PLMNID {
+							description
+							"This object is used to configure PLMNID .";
+							default "123456";
+							type string{
+								length 6;}
+					
+							}
+							leaf myAddr {
+							description
+							"This object is used to configure myAddr.";
+							default "1";
+							type string{
+								length "0..1024";}
+					
+							}
+							leaf TAC {
+							description
+							"This object is used to configure TAC .";
+							default "1";
+							type uint32{
+								range "0..65535";}
+					
+							}
+                            leaf xn_ho_status {
+                            description
+                            "This object is used to configure xn_ho_status .";
+                            default "1";
+                            type uint32{
+                                range "1..255";}
+
+                            }
+
+							leaf xn_connection_status {
+							description
+							"This object is used to configure xn_connection_status .";
+							default "1";
+							type uint32{
+								range "1..255";}
+					
+							}
+                        }
+					}/*gnb_nbr_list*/
+				}/*oam_nr_gnb_add_req*/
+			container son_oam_nr_enb_add_req{
+			container enb_nbr_list {
+				leaf enb_nbr_list_size {
+					description
+					"This object is used to configure enb_nbr_list_size .";
+					default "1";
+					type uint32{
+						range "0..255";}
+					
+				}
+				container enb_nbr_info {
+						leaf enb_type {
+							description
+							"This object is used to configure enb_type .";
+							default "16";
+							type string{
+								length "0..1024";}
+					
+							}
+							leaf enb_id {
+							description
+							"This object is used to configure enb_id .";
+							default "1";
+							type uint32{
+								range "0..1024";}
+					
+							}
+							leaf PLMNID {
+							description
+							"This object is used to configure PLMNID .";
+							default "123456";
+							type string{
+								length 6;}
+					
+							}
+							leaf myAddr {
+							description
+							"This object is used to configure myAddr .";
+							default "1";
+							type string{
+								length "0..1024";}
+					
+							}
+							leaf TAC {
+							description
+							"This object is used to configure TAC .";
+							default "1";
+							type uint32{
+								range "0..65535";}
+					
+							}
+							leaf x2_ho_status {
+							description
+							"This object is used to configure x2_ho_status .";
+							default "1";
+							type uint32{
+								range "1..255";}
+					
+							}
+							leaf x2_connection_status {
+							description
+							"This object is used to configure xn_connection_status .";
+							default "1";
+							type uint32{
+								range "1..255";}
+					
+							}
+				
+				}/*enb_nbr_info*/
+			}/*enb_nbr_list*/
+			}/*son_oam_nr_Menb_add_req*/
+			leaf ConfilctWithSecondDegreeNBR {
+			description
+			"This object is used to configure ConfilctWithSecondDegreeNBR .";
+			default "1";
+			type uint32{
+				range "0..1";}
+					
+			}
+			leaf NRAddWaitTimer {
+			description
+			"This object is used to configure NRAddWaitTimer.";
+			default "1";
+			type uint32{
+				range "0..65535";}
+					
+			}
+			leaf ConflictDetectionBackoffTimer {
+			description
+			"This object is used to configure ConflictDetectionBackoffTimer  .";
+			default "1";
+			type uint32{
+				range "0..65535";}
+					
+			}
+			container son_oam_anr_neighbor_default_config_req {
+				leaf nr_status {
+				description
+				"This object is used to configure nr_status .";
+				default "1";
+				type uint32{
+					range "0..1";}
+					
+				}
+				leaf ho_status {
+				description
+				"This object is used to configure ho_status .";
+				default "1";
+				type uint32{
+					range "1..255";}
+					
+				}
+				leaf x2_status {
+				description
+				"This object is used to configure x2_status .";
+				default "1";
+				type uint32{
+					range "1..255";}
+					
+				}
+				leaf csg_cell_intf_scheme {
+				description
+				"This object is used to configure csg_cell_intf_scheme .";
+				default "2";
+				type uint32{
+					range "1..255";}
+					
+				}
+				leaf pico_cell_intf_scheme {
+				description
+				"This object is used to configure pico_cell_intf_scheme .";
+				default "2";
+				type string{
+				length "0..2";	
+				}
+				}
+				leaf macro_cell_intf_scheme {
+				description
+				"This object is used to configure macro_cell_intf_scheme .";
+				default "2";
+				type string{
+				    length "0..2";	
+				}
+				}
+			}/*son_oam_anr_neighbor_default_config_req*/
+			container son_nr_params {
+			
+				leaf anr_global_mode {
+				description
+				"This object is used to configure anr_global_mode .";
+				default "2";
+				type string{
+                    length "0..2";
+				}
+				}
+                leaf anr_mode {
+                description
+                "This object is used to configure anr_mode .";
+                default "2";
+                type string{
+                    length "0..2";
+                }
+                }
+                leaf anr_max_ue_supported {
+                description
+                "This object is used to configure anr_max_ue_supported .";
+                default "2";
+                type string{
+                    length "0..2";
+                }
+                }
+                leaf anr_prepration_timer {
+                description
+                "This object is used to configure anr_prepration_timer .";
+                default "2";
+                type string{
+                    length "0..40";
+                }
+                }
+                leaf anr_apply_to_all_ue {
+                description
+                "This object is used to configure anr_apply_to_all_ue .";
+                default "2";
+                type string{
+                    length "0..40";
+                }
+                }
+                leaf ul_throughput_threshold {
+                description
+                "This object is used to configure ul_throughput_threshold .";
+                default "2";
+                type string{
+                    length "0..40";
+                }
+                }
+                leaf dl_throughput_threshold {
+                description
+                "This object is used to configure dl_throughput_threshold .";
+                default "2";
+                type string{
+                    length "0..40";
+                }
+                }
+		leaf anr_supported_interfreq{
+		description
+		"it is used for enabling inter frequency support";
+                default "0";
+                type uint32{
+                    range "0..30";} 
+                }
+    		leaf anr_supported_intrafreq{
+		description
+		" it is used for enabling intra frequency support";
+                default "1";
+                type uint32{
+                    range "1..30";} 
+ 		}
+		leaf X_VENDOR_ANR_LONG_DRX_CYCLE{
+		description
+	         "DRX profile for ANR";
+                default "5";
+                type string{
+                    length "1..30";} 
+		} 
+		leaf X_VENDOR_ANR_SHORT_DRX_CYCLE{
+		description
+		 "Refer to Short DRX Cycle Length IE in 38.473 vf30";
+                default "5";
+                type string{
+                    length "1..30";} 
+		} 
+		leaf X_VENDOR_ANR_SHORT_DRX_CYCLE_TIMER{
+		description
+		 "Refer to Short DRX Cycle Timer IE in 38.473 vf30";
+                default "2";
+                type uint32{
+                    range "2..30";} 
+		}          
+
+			}/*son_nr_params*/
+		}/*SONParams*/
+		container E2Params {
+            leaf logLevel {
+            description
+                     "This object is used to configure logLevel";
+                    default "127";
+                    type uint32{
+                        range "1..127";
+                }
+            }
+		}/*E2Params*/
+	}/*stack_config*/
+	}/*gNodeBParams*/
+}
+}

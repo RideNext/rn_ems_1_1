@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-netconf-notifications-api">
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-api/4.0.4/xml/features</repository>
+    <feature name="odl-netconf-notifications-api" description="OpenDaylight :: Netconf :: Notification :: Api" version="4.0.4">
+        <details>odl-netconf-notifications-api</details>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-api</feature>
+        <bundle>mvn:org.opendaylight.netconf/netconf-notifications-api/4.0.4</bundle>
+    </feature>
+</features>

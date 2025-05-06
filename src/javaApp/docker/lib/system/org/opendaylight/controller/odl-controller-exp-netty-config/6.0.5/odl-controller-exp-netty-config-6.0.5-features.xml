@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-controller-exp-netty-config">
+    <repository>mvn:org.opendaylight.odlparent/odl-netty-4/11.0.3/xml/features</repository>
+    <feature name="odl-controller-exp-netty-config" description="OpenDaylight :: Controller :: Experimental :: Netty Configuration" version="6.0.5">
+        <details>Common configuration for Netty resources</details>
+        <feature version="[11,12)">odl-netty-4</feature>
+        <bundle>mvn:org.opendaylight.controller/netty-event-executor-config/0.17.5</bundle>
+        <bundle>mvn:com.google.guava/guava/31.1-jre</bundle>
+        <bundle>mvn:com.google.guava/failureaccess/1.0.1</bundle>
+        <bundle>mvn:org.checkerframework/checker-qual/3.12.0</bundle>
+        <bundle>mvn:org.opendaylight.controller/netty-threadgroup-config/0.17.5</bundle>
+        <bundle>mvn:org.opendaylight.controller/netty-timer-config/0.17.5</bundle>
+        <bundle>mvn:org.opendaylight.controller/threadpool-config-api/0.17.5</bundle>
+        <bundle>mvn:org.opendaylight.controller/threadpool-config-impl/0.17.5</bundle>
+    </feature>
+</features>

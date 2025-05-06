@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-controller-mdsal-common-6.0.5">
+    <repository>mvn:org.opendaylight.mdsal/odl-mdsal-common/10.0.5/xml/features</repository>
+    <repository>mvn:org.opendaylight.mdsal/odl-mdsal-binding-runtime/10.0.5/xml/features</repository>
+    <feature name="odl-controller-mdsal-common" description="OpenDaylight :: MDSAL :: Common" version="6.0.5">
+        <details>odl-controller-mdsal-common</details>
+        <feature version="[10,11)">odl-mdsal-common</feature>
+        <feature version="[10,11)">odl-mdsal-binding-runtime</feature>
+        <bundle>mvn:org.opendaylight.controller/sal-common-util/6.0.5</bundle>
+    </feature>
+</features>

@@ -1,0 +1,7 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Apr 12 12:53:22 IST 2024
+pax-web-features-8.0.11-context-jetty.xml>=
+pax-web-features-8.0.11-config-tomcat.xml>=
+pax-web-features-8.0.11-config-undertow.xml>=
+pax-web-features-8.0.11-config-jetty.xml>=
+pax-web-features-8.0.11-context-tomcat.xml>=

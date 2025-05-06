@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-yangtools-common">
+    <repository>mvn:org.opendaylight.yangtools/odl-yangtools-util/9.0.5/xml/features</repository>
+    <feature name="odl-yangtools-common" description="OpenDaylight :: Yangtools :: Common definitions" version="9.0.5">
+        <details>Common YANG-related definitions</details>
+        <feature version="9.0.5" prerequisite="false" dependency="false">odl-yangtools-util</feature>
+        <bundle>mvn:org.opendaylight.yangtools/yang-common/9.0.5</bundle>
+    </feature>
+</features>

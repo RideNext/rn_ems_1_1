@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-extras-6.0.5">
+    <feature name="odl-jolokia" description="Jolokia JMX/HTTP bridge" version="6.0.5">
+        <details>odl-jolokia</details>
+        <configfile finalname="/etc/org.jolokia.osgi.cfg">mvn:org.opendaylight.controller/odl-jolokia-osgi/6.0.5/cfg/configuration</configfile>
+        <feature>http</feature>
+        <bundle>mvn:org.jolokia/jolokia-osgi/1.7.1</bundle>
+        <bundle>mvn:com.googlecode.json-simple/json-simple/1.1.1</bundle>
+    </feature>
+</features>

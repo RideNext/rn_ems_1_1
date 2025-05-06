@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-mdsal-bytebuddy">
+    <feature name="odl-mdsal-bytebuddy" description="OpenDaylight :: MD-SAL :: ByteBuddy" version="10.0.5">
+        <details>byte-buddy</details>
+        <bundle>mvn:net.bytebuddy/byte-buddy/1.12.13</bundle>
+    </feature>
+</features>

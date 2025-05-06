@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="sdnr-wt-devicemanager-o-ran-sc-oran-feature">
+    <feature name="sdnr-wt-devicemanager-o-ran-sc-oran-feature" description="ccsdk-features :: sdnr-wt-devicemanager-o-ran-sc-oran-feature" version="1.5.1">
+        <details>Root POM to be used in place of odlparent for CCSDK based projects</details>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/sdnr-wt-devicemanager-ridenext-oran-provider/1.5.1</bundle>
+        <bundle>mvn:org.opendaylight.netconf/callhome-model/4.0.4</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/rfc7317-ietf-system/1.5.1</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/rfc8341/1.5.1</bundle>
+        <bundle>mvn:org.opendaylight.mdsal.binding.model.ietf/rfc6991-ietf-yang-types/10.0.5</bundle>
+        <bundle>mvn:org.onap.ccsdk.features.sdnr.wt/iana-crypt-hash/1.5.1</bundle>
+        <bundle>mvn:org.opendaylight.mdsal.binding.model.ietf/rfc6991-ietf-inet-types/10.0.5</bundle>
+        <bundle>mvn:org.opendaylight.mdsal.model/ietf-type-util/10.0.5</bundle>
+        <bundle>mvn:org.opendaylight.mdsal/mdsal-binding-spec-util/10.0.5</bundle>
+        <bundle>mvn:org.opendaylight.mdsal/yang-binding/10.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/concepts/9.0.5</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/util/9.0.5</bundle>
+        <bundle>mvn:tech.pantheon.triemap/triemap/1.2.0</bundle>
+        <bundle>mvn:org.opendaylight.yangtools/yang-common/9.0.5</bundle>
+        <bundle>mvn:com.google.guava/guava/31.1-jre</bundle>
+        <bundle>mvn:com.google.guava/failureaccess/1.0.1</bundle>
+        <bundle>mvn:org.checkerframework/checker-qual/3.12.0</bundle>
+    </feature>
+</features>

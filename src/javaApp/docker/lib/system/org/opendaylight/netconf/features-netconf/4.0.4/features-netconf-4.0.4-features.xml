@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="features-netconf">
+    <repository>mvn:org.opendaylight.netconf/odl-aaa-netconf-plugin/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-aaa-netconf-plugin-no-cluster/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-all/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-api/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-client/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-impl/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-mapping-api/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-mdsal/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-netty-util/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-notifications-api/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-notifications-impl/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-ssh/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-tcp/4.0.4/xml/features</repository>
+    <repository>mvn:org.opendaylight.netconf/odl-netconf-util/4.0.4/xml/features</repository>
+    <feature name="features-netconf" description="features-netconf" version="4.0.4">
+        <details>features-netconf</details>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-aaa-netconf-plugin</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-aaa-netconf-plugin-no-cluster</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-all</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-api</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-client</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-impl</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-mapping-api</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-mdsal</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-netty-util</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-notifications-api</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-notifications-impl</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-ssh</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-tcp</feature>
+        <feature version="4.0.4" prerequisite="false" dependency="false">odl-netconf-util</feature>
+    </feature>
+</features>

@@ -1,0 +1,177 @@
+################################################################################
+# Copyright (C) 2024 RideNext Software Solutions. Pvt Ltd
+# Copyright 2021 highstreet technologies GmbH
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+version: '3.8'
+
+x-common_env: &common_env
+    IPv6_ENABLED: ${IPv6_ENABLED}
+    SSH_CONNECTIONS: ${SSH_CONNECTIONS}
+    TLS_CONNECTIONS: ${TLS_CONNECTIONS}
+    NTS_NF_MOUNT_POINT_ADDRESSING_METHOD: ${NTS_NF_MOUNT_POINT_ADDRESSING_METHOD}
+
+    NTS_HOST_IP: ${NTS_HOST_IP}
+    NTS_HOST_BASE_PORT: ${NTS_HOST_BASE_PORT}
+    NTS_HOST_NETCONF_SSH_BASE_PORT: ${NTS_HOST_NETCONF_SSH_BASE_PORT}
+    NTS_HOST_NETCONF_TLS_BASE_PORT: ${NTS_HOST_NETCONF_TLS_BASE_PORT}
+    NTS_HOST_TRANSFER_FTP_BASE_PORT: ${NTS_HOST_TRANSFER_FTP_BASE_PORT}
+    NTS_HOST_TRANSFER_SFTP_BASE_PORT: ${NTS_HOST_TRANSFER_SFTP_BASE_PORT}
+
+    SDN_CONTROLLER_PROTOCOL: ${SDN_CONTROLLER_PROTOCOL}
+    SDN_CONTROLLER_IP: ${SDNC_OAM_IPv6}
+    SDN_CONTROLLER_PORT: ${SDNC_REST_PORT}
+    SDN_CONTROLLER_CALLHOME_IP: ${SDNC_OAM_IPv6}
+    SDN_CONTROLLER_CALLHOME_PORT: ${SDN_CONTROLLER_CALLHOME_PORT}
+    SDN_CONTROLLER_USERNAME: ${ADMIN_USERNAME}
+    SDN_CONTROLLER_PASSWORD: ${ADMIN_PASSWORD}
+
+    VES_COMMON_HEADER_VERSION: ${VES_COMMON_HEADER_VERSION}
+    VES_ENDPOINT_PROTOCOL: ${VES_ENDPOINT_PROTOCOL}
+    VES_ENDPOINT_IP: ${VES_COLLECTOR_OAM_IPv6}
+    VES_ENDPOINT_PORT: ${VES_ENDPOINT_PORT}
+    VES_ENDPOINT_AUTH_METHOD: ${VES_ENDPOINT_AUTH_METHOD}
+    VES_ENDPOINT_USERNAME: ${VES_ENDPOINT_USERNAME}
+    VES_ENDPOINT_PASSWORD: ${VES_ENDPOINT_PASSWORD}
+
+    ##
+    ## FEATURE: "YES" Value means feature enabled 
+    #           "NO" means ; feay=ture diabled
+    #  EVENT:  "POS" means, send success event
+    #          "NEG" send the falilure event
+    ##
+x-du_env: &du_env
+    NTS_NF_STANDALONE_START_FEATURES: "datastore-populate ves-heartbeat ves-file-ready ves-pnf-registration ves-o1-pnf-registration web-cut-through sw_mgnt"
+    NTS_VES_FILE_NOTIFY_DURATION: 300
+    NTS_VES_FILE_NOTIFY_FEATURE: "YES"
+    NTS_VES_FILE_DIR: "/opt/dev/deploy/data/pmxml"
+    NTS_VES_FTP_FILE_PATH: "sftp://rnacumos:test123@192.168.128.77:22/home/rnacumos/Manish/rn-ems/exec/networkElement/ntsim-ng-o-du/pmxml/"
+    NTS_SW_MGNT_FEATURE: "YES"
+    NTS_SW_DWLOAD_STATUS_EVNT: "POS"
+    NTS_SW_INSTALL_STATUS_EVNT: "POS"
+    NTS_SW_ACTIVE_STATUS_EVNT: "POS"
+
+x-ru-env: &ru_env
+    NTS_NF_STANDALONE_START_FEATURES: "datastore-populate netconf-call-home web-cut-through"
+
+x-topo-env: &topo_env
+    NTS_NF_STANDALONE_START_FEATURES: "datastore-populate netconf-call-home web-cut-through"
+
+x-nf: &common_nf
+    stop_grace_period: 5m
+    cap_add:
+    - SYS_ADMIN
+    - SYS_PTRACE
+
+services:
+  ntsim-ng-o-du-12031:
+    <<: *common_nf
+    image: ${GNB_IMAGE}
+    container_name: ntsim-ng-o-du-12031-830
+    hostname: Tejas-Gnb-12031
+    volumes:
+        - ./ntsim-ng-o-du/config.json:/opt/dev/ntsim-ng/config/config.json
+        - ./ntsim-ng-o-du/o-ran-sc-du-hello-world-running.xml:/opt/dev/deploy/data/o-ran-sc-du-hello-world-running.xml
+        - ./ntsim-ng-o-du/o-ran-sc-du-hello-world-operational.xml:/opt/dev/deploy/data/o-ran-sc-du-hello-world-operational.xml
+        - ./ntsim-ng-o-du/pmxml:/opt/dev/deploy/data/pmxml
+        - ./ntsim-ng-o-du/sw_inv.xml:/opt/dev/deploy/data/sw_inv.xml
+        - ./ntsim-ng-o-du/prop_inv.xml:/opt/dev/deploy/data/prop_inv.xml
+    environment:
+        <<: *common_env
+        <<: *du_env
+
+  ntsim-ng-o-du-12032:
+    <<: *common_nf
+    image: ${GNB_IMAGE}
+    container_name: ntsim-ng-o-du-12032-830
+    hostname: Tejas-Gnb-12032
+    volumes:
+        - ./ntsim-ng-o-du/config.json:/opt/dev/ntsim-ng/config/config.json
+        - ./ntsim-ng-o-du/o-ran-sc-du-hello-world-running.xml:/opt/dev/deploy/data/o-ran-sc-du-hello-world-running.xml
+        - ./ntsim-ng-o-du/o-ran-sc-du-hello-world-operational.xml:/opt/dev/deploy/data/o-ran-sc-du-hello-world-operational.xml
+        - ./ntsim-ng-o-du/pmxml:/opt/dev/deploy/data/pmxml
+        - ./ntsim-ng-o-du/sw_inv.xml:/opt/dev/deploy/data/sw_inv.xml
+        - ./ntsim-ng-o-du/prop_inv.xml:/opt/dev/deploy/data/prop_inv.xml
+    environment:
+        <<: *common_env
+        <<: *du_env
+
+  ntsim-ng-o-du-12033:
+    <<: *common_nf
+    image: ${GNB_IMAGE}
+    container_name: ntsim-ng-o-du-12033-830
+    hostname: Tejas-Gnb-12033
+    volumes:
+        - ./ntsim-ng-o-du/config.json:/opt/dev/ntsim-ng/config/config.json
+        - ./ntsim-ng-o-du/o-ran-sc-du-hello-world-running.xml:/opt/dev/deploy/data/o-ran-sc-du-hello-world-running.xml
+        - ./ntsim-ng-o-du/o-ran-sc-du-hello-world-operational.xml:/opt/dev/deploy/data/o-ran-sc-du-hello-world-operational.xml
+        - ./ntsim-ng-o-du/pmxml:/opt/dev/deploy/data/pmxml
+        - ./ntsim-ng-o-du/sw_inv.xml:/opt/dev/deploy/data/sw_inv.xml
+        - ./ntsim-ng-o-du/prop_inv.xml:/opt/dev/deploy/data/prop_inv.xml
+    environment:
+        <<: *common_env
+        <<: *du_env
+
+  ntsim-ng-o-du-12034:
+    <<: *common_nf
+    image: ${GNB_IMAGE}
+    container_name: ntsim-ng-o-du-12034-830
+    hostname: Tejas-Gnb-12034
+    volumes:
+        - ./ntsim-ng-o-du/config.json:/opt/dev/ntsim-ng/config/config.json
+        - ./ntsim-ng-o-du/o-ran-sc-du-hello-world-running.xml:/opt/dev/deploy/data/o-ran-sc-du-hello-world-running.xml
+        - ./ntsim-ng-o-du/o-ran-sc-du-hello-world-operational.xml:/opt/dev/deploy/data/o-ran-sc-du-hello-world-operational.xml
+        - ./ntsim-ng-o-du/pmxml:/opt/dev/deploy/data/pmxml
+        - ./ntsim-ng-o-du/sw_inv.xml:/opt/dev/deploy/data/sw_inv.xml
+        - ./ntsim-ng-o-du/prop_inv.xml:/opt/dev/deploy/data/prop_inv.xml
+    environment:
+        <<: *common_env
+        <<: *du_env
+
+  ntsim-ng-o-du-12035:
+    <<: *common_nf
+    image: ${GNB_IMAGE}
+    container_name: ntsim-ng-o-du-12035-830
+    hostname: Tejas-Gnb-12035
+    volumes:
+        - ./ntsim-ng-o-du/config.json:/opt/dev/ntsim-ng/config/config.json
+        - ./ntsim-ng-o-du/o-ran-sc-du-hello-world-running.xml:/opt/dev/deploy/data/o-ran-sc-du-hello-world-running.xml
+        - ./ntsim-ng-o-du/o-ran-sc-du-hello-world-operational.xml:/opt/dev/deploy/data/o-ran-sc-du-hello-world-operational.xml
+        - ./ntsim-ng-o-du/pmxml:/opt/dev/deploy/data/pmxml
+        - ./ntsim-ng-o-du/sw_inv.xml:/opt/dev/deploy/data/sw_inv.xml
+        - ./ntsim-ng-o-du/prop_inv.xml:/opt/dev/deploy/data/prop_inv.xml
+    environment:
+        <<: *common_env
+        <<: *du_env
+
+  ntsim-ng-o-du-12036:
+    <<: *common_nf
+    image: ${GNB_IMAGE}
+    container_name: ntsim-ng-o-du-12036-830
+    hostname: Tejas-Gnb-12036
+    volumes:
+        - ./ntsim-ng-o-du/config.json:/opt/dev/ntsim-ng/config/config.json
+        - ./ntsim-ng-o-du/o-ran-sc-du-hello-world-running.xml:/opt/dev/deploy/data/o-ran-sc-du-hello-world-running.xml
+        - ./ntsim-ng-o-du/o-ran-sc-du-hello-world-operational.xml:/opt/dev/deploy/data/o-ran-sc-du-hello-world-operational.xml
+        - ./ntsim-ng-o-du/pmxml:/opt/dev/deploy/data/pmxml
+        - ./ntsim-ng-o-du/sw_inv.xml:/opt/dev/deploy/data/sw_inv.xml
+        - ./ntsim-ng-o-du/prop_inv.xml:/opt/dev/deploy/data/prop_inv.xml
+    environment:
+        <<: *common_env
+        <<: *du_env
+      
+networks:
+    default:
+        external:
+            name: oam

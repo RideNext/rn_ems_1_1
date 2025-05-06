@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-karaf-feat-jetty">
+    <feature name="odl-karaf-feat-jetty" description="ODL :: odlparent :: odl-karaf-feat-jetty" version="11.0.3">
+        <details>odl-karaf-feat-jetty</details>
+        <feature prerequisite="false" dependency="false">war</feature>
+    </feature>
+</features>

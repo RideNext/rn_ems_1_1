@@ -1,0 +1,54 @@
+{
+"supported_formats": [".zip", ".tgz", ".gz", ".enc"],
+  "software_version_Config" : [
+ {
+	"deviceType": "gNodeB",
+   
+    "enable_software_version_check" : "false",	
+   
+    "versions": [
+      {
+        "version": "rel1.0",
+        "compatibleReleases": ["EMS-1.0.1.tar.gz","1.1", "1.2"]
+      },
+      {
+        "version": "rel2.0",
+        "compatibleReleases": ["*"]   
+      }    		
+    ]
+  },
+  {
+	"deviceType": "RRU",					
+    "enable_software_version_check" : "false",	
+	
+    "versions": [
+      {
+        "version": "rel1.0", 		
+        "compatibleReleases": ["*"]
+      },
+      {
+        "version": "rel2.0",
+        "compatibleReleases": ["1.1"]       
+      }
+    ]
+
+  },
+  {
+	"deviceType": "RRH-Hybrid",		
+	"enable_software_version_check" : "false",	
+    
+	"versions": [
+      {
+        "version": "rel1.0", 		
+        "compatibleReleases": ["*"]
+      },
+      {
+        "version": "rel2.0",
+        "compatibleReleases": ["1.1"]       
+      }
+    ]
+
+  }
+]
+   
+}

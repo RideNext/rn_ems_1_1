@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="odl-jakarta-activation-api">
+    <feature name="odl-jakarta-activation-api" description="OpenDaylight :: jakarta.activation-api" version="11.0.3">
+        <details>Jakarta EE jakarta.activation-api</details>
+        <bundle>mvn:jakarta.activation/jakarta.activation-api/1.2.2</bundle>
+    </feature>
+</features>
