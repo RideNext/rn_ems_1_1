@@ -249,7 +249,7 @@ class EdituserServerDialogComponent extends React.Component<EdituserServerDialog
           
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         {/* Left side: Available Roles */}
-        <FormControl style={{ width: '45%' }}>
+        <FormControl style={{ width: '42%' }}>
   <InputLabel id="available-roles-label">Available Roles</InputLabel>
   <Select
     labelId="available-roles-label"
@@ -275,13 +275,13 @@ class EdituserServerDialogComponent extends React.Component<EdituserServerDialog
 </FormControl>
 
  
-<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: '25px' }}>
+<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: '11px' }}>
   <Button onClick={this.moveToMappedRoles} style={{ backgroundColor: 'green', color: 'white', marginBottom: '10px' }}>&gt;</Button>
   <Button onClick={this.moveToAvailableRoles} style={{ backgroundColor: 'green', color: 'white' }}>&lt;</Button>
 </div>
 
 
-<FormControl style={{ width: '45%' }}>
+<FormControl style={{ width: '42%' }}>
   <InputLabel id="mapped-roles-label">Mapped Roles</InputLabel>
   <Select
     labelId="mapped-roles-label"

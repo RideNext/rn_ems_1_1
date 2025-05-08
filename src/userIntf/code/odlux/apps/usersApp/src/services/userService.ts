@@ -1,6 +1,6 @@
 /**
  * ============LICENSE_START========================================================================
- * master : ccsdk feature sdnr wt odlux
+ * onap : ccsdk feature sdnr wt odlux
  * =================================================================================================
  * Copyright (C) 2019 highstreet technologies GmbH Intellectual Property. All rights reserved.
  * =================================================================================================
@@ -183,14 +183,14 @@ if(updateroleData.editype=="mapped"){
         updateroleData['availableRoles '].map(async (data:any)=>{
           
            // Step 3: Update role mappings
-        const updateRoleMappingsResponse = await fetch(`${baseUri}/admin/realms/master/users/${server.id}/role-mappings/realm`, {
+        const updateRoleMappingsResponse = await fetch(`${baseUri}/admin/realms/onap/users/${server.id}/role-mappings/realm`, {
           method: "POST",
           headers: {
               'Authorization': 'Bearer ' + accessToken,
               'Content-Type': 'application/json',
               'Accept': 'application/json'
           },
-          body: JSON.stringify([{"id":data.id,"name":data.name,"description":"xyz","composite":false,"clientRole":false,"containerId":"master"}])
+          body: JSON.stringify([{"id":data.id,"name":data.name,"description":"xyz","composite":false,"clientRole":false,"containerId":"onap"}])
       });
 
         
@@ -222,14 +222,14 @@ if(updateroleData.editype=="mapped"){
         updateroleData['mappedRoles'].map(async (data:any)=>{
           
           // Step 3: Update role mappings
-       const updateRoleMappingsResponse = await fetch(`${baseUri}/admin/realms/master/users/${server.id}/role-mappings/realm`, {
+       const updateRoleMappingsResponse = await fetch(`${baseUri}/admin/realms/onap/users/${server.id}/role-mappings/realm`, {
          method: "DELETE",
          headers: {
              'Authorization': 'Bearer ' + accessToken,
              'Content-Type': 'application/json',
              'Accept': 'application/json'
          },
-         body: JSON.stringify([{"id":data.id,"name":data.name,"description":"xyz","composite":false,"clientRole":false,"containerId":"master"}])
+         body: JSON.stringify([{"id":data.id,"name":data.name,"description":"xyz","composite":false,"clientRole":false,"containerId":"onap"}])
      });
 
        
@@ -263,6 +263,7 @@ if(updateroleData.editype=="mapped"){
     }
 
     return result;
+         
 }
 
 
@@ -291,7 +292,7 @@ if(updateroleData.editype=="mapped"){
     };
 
     const tokenUri = `${baseUri}/realms/master/protocol/openid-connect/token`;
-    const userUri = `${baseUri}/admin/realms/master/users/${server.id}`;
+    const userUri = `${baseUri}/admin/realms/onap/users/${server.id}`;
 
     try {
         const tokenResponse = await axios.post(tokenUri, authData, { headers: tokenHeaders });
@@ -309,7 +310,7 @@ if(updateroleData.editype=="mapped"){
             temporary: false
         };
 
-        const passwordResetUri = `${baseUri}/admin/realms/master/users/${server.id}/reset-password`;
+        const passwordResetUri = `${baseUri}/admin/realms/onap/users/${server.id}/reset-password`;
 
         const updateUserResponse = await fetch(passwordResetUri, {
             method: 'PUT',
@@ -357,7 +358,7 @@ if(updateroleData.editype=="mapped"){
     };
   
     const uri1 =  (baseUri) + '/realms/master/protocol/openid-connect/token';
-    const uri2 =  (baseUri) + '/admin/realms/master/users/'+ server.id;
+    const uri2 =  (baseUri) + '/admin/realms/onap/users/'+ server.id;
     let respose :any;
     await axios.post(uri1, data2, {
         headers: tokenHeaders,
