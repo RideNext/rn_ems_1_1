@@ -23,14 +23,10 @@
     "performanceApp",
     "inventoryApp",
     "eventLogApp",
-    "auditLogApp",
     "mediatorApp",
     "users",
     "profiles",
-    "preprovider",
-    "softwareManagementApp",
     "helpApp",
-    
     ],
     function (app,connectApp,
       faultApp,
@@ -39,12 +35,9 @@
       performanceApp,
       inventoryApp,
       eventLogApp,
-      auditLogApp,
       mediatorApp,
       users,
       profiles,
-      preprovider,
-      softwareManagementApp,
       helpApp,
       
       ) {
@@ -54,14 +47,10 @@
     configurationApp.register();
     performanceApp.register();
     inventoryApp.register();
-    auditLogApp.register();
     mediatorApp.register();
     users.register();
     profiles.register();
-    preprovider.register();
-    softwareManagementApp.register();
     helpApp.register();
-    
       app("./app.tsx").runApplication();
     });
   </script>

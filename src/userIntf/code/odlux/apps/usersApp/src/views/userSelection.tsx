@@ -2,8 +2,6 @@
  * ============LICENSE_START========================================================================
  * ONAP : ccsdk feature sdnr wt odlux
  * =================================================================================================
- * Copyright (C) 2024 RideNext Software Solutions. Pvt Ltd.  All rights reserved
- * =================================================================================================
  * Copyright (C) 2019 highstreet technologies GmbH Intellectual Property. All rights reserved.
  * =================================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -75,6 +73,13 @@ const emptyuserServer: userServer = {
   username: "",
   password: "",
   confirmPassword: "",
+  mappedRoles:[""],
+  availableRoles: [""],
+  maproleid: [""],
+  avlroleid: [""],
+  //userId: "",
+  mappedGroups: "",
+  edittype:""
  // newPassword: "",
 };
 
@@ -127,9 +132,16 @@ class userServerSelectionComponent extends React.Component<userServerSelectionCo
           { property: "firstName", title: "First Name", type: ColumnType.text },
           { property: "lastName", title: "Last Name", type: ColumnType.text },
           { property: "email", title: "Email", type: ColumnType.text },
+          { property: "mappedRoles", title: "Role", type: ColumnType.text },
+          { property: "mappedGroups", title: "Group", type: ColumnType.text },
+          { property: "availableRoles", title: "availableRoles", type: ColumnType.text },
           {
             property: "actions", title: "Actions", type: ColumnType.custom, customControl: ({ rowData }) => (
+
+              
+              
               <div className={classes.spacer}>
+               
 
                  
                 <Tooltip disableInteractive title={"Edit"} ><IconButton
@@ -148,7 +160,7 @@ class userServerSelectionComponent extends React.Component<userServerSelectionCo
                   size="large"><DeleteIcon /></IconButton></Tooltip>
                   
               </div>
-            )
+          )
           }
         ]} onHandleClick={this.onSelectuserServer} />
       <EdituserServerDialog
@@ -182,6 +194,7 @@ class userServerSelectionComponent extends React.Component<userServerSelectionCo
   private onEdituserServer = (event: React.MouseEvent<HTMLElement>, server: userServer) => {
     event.preventDefault();
     event.stopPropagation();
+    
     this.setState({
       userServerEditorMode: EdituserServerDialogMode.EdituserServer,
       userServerToEdit: server,

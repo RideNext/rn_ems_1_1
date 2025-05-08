@@ -75,7 +75,7 @@ export const getAccessPolicyByUrl = (url: string) => {
 /** Sends a rest request to the given path and reports the server state. 
  *  @returns An object with the server state, a message and the data or undefined in case of a json parse error.
  */
-export async function requestRestExt<TData>(path: string = '', initParam: RequestInit = {}, authenticate: boolean = true, isResource: boolean = false): Promise<{ status: number; message?: string; data: TData | null | undefined }> {
+export async function requestRestExt<TData>(path: string = '', initParam: RequestInit = {}, authenticate: boolean = true, isResource: boolean = false): Promise<{ status: number; message?: string; data: any | null | undefined }> {
 
   const result: { status: number; message?: string; data: TData | null } = {
     status: -1,
@@ -109,70 +109,226 @@ export async function requestRestExt<TData>(path: string = '', initParam: Reques
     });
   }
   var fetchResult
-  if (uri.includes('users')) { //Get User Data
-    var apibaseurl = (window as any).configs.apibaseurl;
+  // if (uri.includes('users')) { //Get User Data
+  //   var apibaseurl = (window as any).configs.apibaseurl;
 
+  //   const data2 = {
+  //     client_id: 'admin-cli',
+  //     grant_type: 'password',
+  //     username: "admin",
+  //     password: 'Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U'
+  //   }
+
+  //   const customHeaders = {
+  //     "Content-Type": "application/json",
+  //     "Access-Control-Allow-Origin": "*"
+  //   };
+  //   const tokenHeaders = {
+  //     'Authorization': 'Basic ' + btoa("admin" + ':' + "admin"),
+  //     'content-type': 'application/x-www-form-urlencoded',
+  //     'accept': 'application/json'
+  //   };
+  //   // const uri4 = (baseUri) + '/realms/master/protocol/openid-connect/token';
+  //   // const uri1 = (baseUri) + '/admin/realms/onap/users';
+
+    
+  //   let respose: any;
+  //   await axios.post(uri4, data2, {
+  //     headers: tokenHeaders,
+  //   }).then((res: any) => {
+  //     //console.log(res);
+  //     respose = res;
+  //   }).catch((err: { message: any; }) => {
+  //     console.log(err);
+  //     return {
+  //       ...result,
+  //       status: 404,
+  //       message: err && err.message || String(err),
+  //       data: undefined,
+  //     };
+  //   })
+
+  //   try {
+  //     fetchResult = await fetch(uri1, {
+  //       headers: {
+  //         'content-type': 'application/json',
+  //         'accept': 'application/json',
+  //         'Authorization': 'bearer ' + respose.data.access_token
+  //       }
+  //     })
+
+  //     const contentType = fetchResult.headers.get('Content-Type') || fetchResult.headers.get('content-type');
+  //     const data = await fetchResult.json() as TData;
+  //     return {
+  //       ...result,
+  //       status: fetchResult.status,
+  //       message: fetchResult.statusText,
+  //       data: data,
+  //     };
+  //   } catch (error) {
+  //     return {
+  //       ...result,
+  //       status: fetchResult ? fetchResult.status : 404,
+  //       message: error && error.message || String(error),
+  //       data: undefined,
+  //     };
+  //   }
+  // }
+
+  if (uri.includes('users')) {
+    const apibaseurl = (window as any).configs.apibaseurl;
+ 
     const data2 = {
       client_id: 'admin-cli',
       grant_type: 'password',
       username: "admin",
       password: 'Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U'
-    }
-
-    const customHeaders = {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*"
     };
+ 
     const tokenHeaders = {
       'Authorization': 'Basic ' + btoa("admin" + ':' + "admin"),
       'content-type': 'application/x-www-form-urlencoded',
       'accept': 'application/json'
     };
-    const uri4 = (baseUri) + '/realms/master/protocol/openid-connect/token';
-    const uri1 = (baseUri) + '/admin/realms/onap/users';
-    let respose: any;
-    await axios.post(uri4, data2, {
-      headers: tokenHeaders,
-    }).then((res: any) => {
-      //console.log(res);
-      respose = res;
-    }).catch((err: { message: any; }) => {
-      console.log(err);
-      return {
-        ...result,
-        status: 404,
-        message: err && err.message || String(err),
-        data: undefined,
-      };
-    })
-
+ 
+    const uri4 = (baseUri) + ('/' + '/realms/master/protocol/openid-connect/token').replace(/\/{2,}/i, '/');
+    const uri1 = (baseUri) + ('/' + '/admin/realms/onap/users').replace(/\/{2,}/i, '/');
+ 
+    let response: any;
+ 
     try {
+      await axios.post(uri4, data2, { headers: tokenHeaders })
+        .then((res) => {
+          response = res;
+        })
+        .catch((err) => {
+          console.log(err);
+          return {
+            ...result,
+            status: 404,
+            message: err && err.message || String(err),
+            data: null,
+          };
+        });
+ 
       fetchResult = await fetch(uri1, {
         headers: {
           'content-type': 'application/json',
           'accept': 'application/json',
-          'Authorization': 'bearer ' + respose.data.access_token
+          'Authorization': 'bearer ' + response.data.access_token
         }
-      })
-
+      });
+ 
       const contentType = fetchResult.headers.get('Content-Type') || fetchResult.headers.get('content-type');
-      const data = await fetchResult.json() as TData;
+     
+      const userListData = await fetchResult.json();
+ 
+      const userDataWithMappedRolesAndMappedGroupsArray: TData[] = [];
+ 
+      for (const userData of userListData) {
+       
+        const userId = userData.id;
+ 
+        const newTokenResponse = await axios.post(uri4, data2, { headers: tokenHeaders });
+        const newAccessToken = newTokenResponse.data.access_token;
+ 
+        const uri5 = (baseUri) + ('/' + '/admin/realms/onap/users/' + userId + '/role-mappings/realm').replace(/\/{2,}/i, '/');
+        const mappedRolesResult = await fetch(uri5, { headers: { 'content-type': 'application/json', 'accept': 'application/json', 'Authorization': 'bearer ' + newAccessToken } });
+ 
+        if (!mappedRolesResult.ok) {
+          console.error('Failed to fetch user roles:', mappedRolesResult.status, mappedRolesResult.statusText);
+          return {
+            ...result,
+            status: mappedRolesResult.status,
+            message: 'Failed to fetch user roles',
+            data: null,
+          };
+        }
+ 
+        const mappedRolesData = await mappedRolesResult.json();
+        const mappedRoleNames = mappedRolesData.map((role :any ) => role.name);
+        const roleId=mappedRolesData.map((role :any ) => role.id);
+ 
+        const AvailableroleIdAndRole: any[] = []; // Initialize an empty array
+ 
+ 
+        mappedRolesData.forEach((role: any, index: number) => {
+          AvailableroleIdAndRole.push({
+        name: role.name,
+        id: roleId[index]
+    });
+});
+ 
+        const uri6 = (baseUri) + ('/' + '/admin/realms/onap/users/' + userId + '/groups').replace(/\/{2,}/i, '/');
+        const mappedGroupsResult = await fetch(uri6, { headers: { 'content-type': 'application/json', 'accept': 'application/json', 'Authorization': 'bearer ' + newAccessToken } });
+ 
+        if (!mappedGroupsResult.ok) {
+          console.error('Failed to fetch user groups:', mappedGroupsResult.status, mappedGroupsResult.statusText);
+          return {
+            ...result,
+            status: mappedGroupsResult.status,
+            message: 'Failed to fetch user groups',
+            data: null,
+          };
+        }
+ 
+        const mappedGroupsData = await mappedGroupsResult.json();
+        const mappedGroupNames = mappedGroupsData.map((group: any) => group.name);
+ 
+        const availableRolesUri = (baseUri) + ('/' + '/admin/realms/onap/users/' + userId + '/role-mappings/realm/available').replace(/\/{2,}/i, '/');
+        const availableRolesResult = await fetch(availableRolesUri, { headers: { 'content-type': 'application/json', 'accept': 'application/json', 'Authorization': 'bearer ' + newAccessToken } });
+ 
+        if (!availableRolesResult.ok) {
+          console.error('Failed to fetch available roles:', availableRolesResult.status, availableRolesResult.statusText);
+          return {
+            ...result,
+            status: availableRolesResult.status,
+            message: 'Failed to fetch available roles',
+            data: null,
+          };
+        }
+ 
+        const availableRolesData = await availableRolesResult.json();
+        const availableRoleNames = availableRolesData.map((role: any,index:number) => role.name);
+        const avlroleId=availableRolesData.map((role :any ) => role.id);
+        const roleIdAndRole: any[] = []; // Initialize an empty array
+ 
+ 
+        availableRolesData.forEach((role: any, index: number) => {
+            roleIdAndRole.push({
+                name: role.name,
+                id: avlroleId[index]
+            });
+        });
+        // Output the populated array
+ 
+        userData.mappedRoles = mappedRoleNames;
+       // userData.mappedRoles = mappedRoleId;
+        userData.mappedGroups = mappedGroupNames;
+        userData.availableRoles = availableRoleNames;
+        userData.maproleid=roleId;
+        userData.avlroleid = avlroleId;
+        userData.roleIdAndRole=roleIdAndRole;
+        userData.AvailableroleIdAndRole=AvailableroleIdAndRole;
+        userData.edittype=null;
+        userDataWithMappedRolesAndMappedGroupsArray.push(userData);
+      }
+ 
       return {
         ...result,
         status: fetchResult.status,
         message: fetchResult.statusText,
-        data: data,
+        data: userDataWithMappedRolesAndMappedGroupsArray || null,
       };
     } catch (error) {
       return {
         ...result,
         status: fetchResult ? fetchResult.status : 404,
         message: error && error.message || String(error),
-        data: undefined,
+        data: null,
       };
     }
   }
-
   else if (uri.includes('basic_config')) { //Get system performance
     let respose: any;
     const url = baseUri + '/basic_config/_search'
@@ -486,7 +642,6 @@ export async function requestRestExt<TData>(path: string = '', initParam: Reques
       };
     }
   }
-
   else if (uri.includes('du_config')) { //Get system performance
     let respose: any;
     const url = baseUri + '/du_config/_search'

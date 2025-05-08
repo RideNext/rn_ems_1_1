@@ -1,8 +1,6 @@
 /**
  * ============LICENSE_START========================================================================
- * ONAP : ccsdk feature sdnr wt odlux
- * =================================================================================================
- * Copyright (C) 2024 RideNext Software Solutions. Pvt Ltd.  All rights reserved
+ * master : ccsdk feature sdnr wt odlux
  * =================================================================================================
  * Copyright (C) 2019 highstreet technologies GmbH Intellectual Property. All rights reserved.
  * =================================================================================================
@@ -17,18 +15,30 @@
  * the License.
  * ============LICENSE_END==========================================================================
  */
+import * as $ from 'jquery';
 
 import { requestRest, formEncode } from '../../../../framework/src/services/restService';
 import { userServer, userServerVersionInfo, userConfig, userServerDevice, userConfigResponse } from '../models/userServer';
 import { PostResponse, DeleteResponse, Result } from '../../../../framework/src/models';
 import axios from 'axios';
+import { access } from 'fs';
+import { group } from 'console';
+import { post } from 'jquery/dist/jquery.slim';
 
 //export const userServerResourcePath = "usersApp-server";
 export const userServerResourcePath = "usersAppTest-server";
 
 type userServerResponse<TData> = { code: number, data: TData };
 type IndexableuserServer = userServer & { [key: string]: any; };
-
+/* 
+type UserData = userServer & {
+  mappedRoles: string[];
+  userIds: string[];
+}; */
+interface UpdateuserResponse {
+  success: boolean;
+  message: string;
+}
   
 /**/
 
@@ -77,16 +87,16 @@ class UserService {
       'content-type': 'application/x-www-form-urlencoded',
       'accept': 'application/json'
   };
-  
+   
     const uri4 =  (baseUri) +  '/realms/master/protocol/openid-connect/token';
     const uri1 =  (baseUri) + '/admin/realms/onap/users';
     let respose :any;
     await axios.post(uri4, data2, {
         headers: tokenHeaders,
-        }).then((res: any) => {
+        }).then((res) => {
           //console.log(res);
           respose=res;
-      }).catch((err: any) => {
+      }).catch((err) => {
           console.log(err);
       })
 
@@ -108,66 +118,153 @@ class UserService {
     //const result = await requestRest<PostResponse>(path, { method: "GET", body: JSON.stringify({ input: insertdata }) });
     return result || null;
   }
+
+  
    
   /**
     * Updates data into the user servers table.
     */
-  public async updateuserServer(server: IndexableuserServer): Promise<PostResponse | null> {
-    //alert('updateuserServer');
-    const baseUri = `${ window.location.origin }`;
-    let result = null;
-    const updatedata = { 
-    "firstName" : server.firstName,
-    "lastName"   :server.lastName,
-    "email"  : server.email,
-    "username": server.username,
-    //"password": server.password,
-   // "confirmPassword": server.confirmPassword
-    }
-        
-    const data2 = {
-      client_id:'admin-cli',
-      grant_type: 'password',
-      username: "admin",
-      password: 'Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U' 
-    }
-
-    const tokenHeaders = {
-      'Authorization': 'Basic ' + btoa("admin"+ ':' + "admin"),
-      'content-type': 'application/x-www-form-urlencoded',
-      'accept': 'application/json'
-  };
+   
   
-    const uri4 =  (baseUri) + '/realms/master/protocol/openid-connect/token';
-    const uri1 =  (baseUri) +  '/admin/realms/onap/users/'+server.id;
-    let respose :any;
-    await axios.post(uri4, data2, {
-        headers: tokenHeaders,
-        }).then((res: any) => {
-          //console.log(res);
-          respose=res;
-      }).catch((err: any) => {
-          console.log(err);
-      })
 
-    await fetch(uri1, {
-      method:"put",
-      headers: {
-            'content-type': 'application/json',
-            'accept': 'application/json',
-            'Authorization': 'bearer ' + respose.data.access_token
-        },
-        body: JSON.stringify(updatedata)
-      }).then((res) => {
-        //console.log(res);
-        result=res;
-    }).catch((err) => {
-        console.log(err);
-    })
+  public async updateuserServer(server: IndexableuserServer): Promise<PostResponse | null> {
+    const baseUri = window.location.origin;
+    let result: PostResponse | null = null;
+    const updateData = { 
+        "firstName": server.firstName,
+        "lastName": server.lastName,
+        "email": server.email,
+        "username": server.username,
+       // "mappedRoles": server.mappedRoles,
+       // "availableRoles": server.availableRoles
+    };
+   const updateroleData = {
+      "mappedRoles": server.mappedRoles,
+      "availableRoles ": server.availableRoles,
+      "maproleid"  : server.maproleid,
+      "avlroleid" : server.avlroleid,
+      "editype": server.edittype
+    } 
 
-    //const result = await requestRest<PostResponse>(path, { method: "POST", body: JSON.stringify({ input: data }) });
-    return result || null;
-  }
+    try {
+        // Step 1: Get access token
+        const tokenResponse = await axios.post(`${baseUri}/realms/master/protocol/openid-connect/token`, {
+            client_id: 'admin-cli',
+            grant_type: 'password',
+            username: 'admin',
+            password: 'Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U'
+        }, {
+            headers: {
+                'Authorization': 'Basic ' + btoa("admin" + ':' + "admin"),
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json'
+            }
+        });
+        
+        const accessToken = tokenResponse.data.access_token;
+
+        // Step 2: Update user details
+        const updateUserResponse = await fetch(`${baseUri}/admin/realms/onap/users/${server.id}`, {
+            method: "PUT",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(updateData)
+        });
+
+         // Step 3: Prepare role mappings payload
+          
+           console.log("updateroleData",updateroleData)
+
+if(updateroleData.editype=="mapped"){
+
+        updateroleData['availableRoles '].map(async (data:any)=>{
+          
+           // Step 3: Update role mappings
+        const updateRoleMappingsResponse = await fetch(`${baseUri}/admin/realms/master/users/${server.id}/role-mappings/realm`, {
+          method: "POST",
+          headers: {
+              'Authorization': 'Bearer ' + accessToken,
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+          },
+          body: JSON.stringify([{"id":data.id,"name":data.name,"description":"xyz","composite":false,"clientRole":false,"containerId":"master"}])
+      });
+
+        
+
+        // Check if all requests were successful
+        if (updateUserResponse.ok && updateRoleMappingsResponse.ok) {
+            result = {
+                _index: '', // Add appropriate values here
+                _type: '', // Add appropriate values here
+                _id: '', // Add appropriate values here
+                _shards: { total: 0, successful: 0, failed: 0 }, // Add appropriate values here
+                created: true,
+                message: 'Success'
+            };
+        } else {
+            console.error("Failed to update user or role mappings");
+            result = {
+                _index: '', // Add appropriate values here
+                _type: '', // Add appropriate values here
+                _id: '', // Add appropriate values here
+                _shards: { total: 0, successful: 0, failed: 0 }, // Add appropriate values here
+                created: false,
+                message: 'Failed to update user or role mappings'
+            };
+        }
+      })}
+      else if(updateroleData.editype=="available"){
+
+        updateroleData['mappedRoles'].map(async (data:any)=>{
+          
+          // Step 3: Update role mappings
+       const updateRoleMappingsResponse = await fetch(`${baseUri}/admin/realms/master/users/${server.id}/role-mappings/realm`, {
+         method: "DELETE",
+         headers: {
+             'Authorization': 'Bearer ' + accessToken,
+             'Content-Type': 'application/json',
+             'Accept': 'application/json'
+         },
+         body: JSON.stringify([{"id":data.id,"name":data.name,"description":"xyz","composite":false,"clientRole":false,"containerId":"master"}])
+     });
+
+       
+
+       // Check if all requests were successful
+       if (updateUserResponse.ok && updateRoleMappingsResponse.ok) {
+           result = {
+               _index: '', // Add appropriate values here
+               _type: '', // Add appropriate values here
+               _id: '', // Add appropriate values here
+               _shards: { total: 0, successful: 0, failed: 0 }, // Add appropriate values here
+               created: true,
+               message: 'Success'
+           };
+       } else {
+           console.error("Failed to update user or role mappings");
+           result = {
+               _index: '', // Add appropriate values here
+               _type: '', // Add appropriate values here
+               _id: '', // Add appropriate values here
+               _shards: { total: 0, successful: 0, failed: 0 }, // Add appropriate values here
+               created: false,
+               message: 'Failed to update user or role mappings'
+           };
+       }
+     })}
+        
+      
+    } catch (error) {
+        console.error("Error occurred:", error);
+    }
+
+    return result;
+}
+
 
   /**
     * Reset  data into the user servers table.
@@ -194,7 +291,7 @@ class UserService {
     };
 
     const tokenUri = `${baseUri}/realms/master/protocol/openid-connect/token`;
-    const userUri = `${baseUri}/admin/realms/onap/users/${server.id}`;
+    const userUri = `${baseUri}/admin/realms/master/users/${server.id}`;
 
     try {
         const tokenResponse = await axios.post(tokenUri, authData, { headers: tokenHeaders });
@@ -212,7 +309,7 @@ class UserService {
             temporary: false
         };
 
-        const passwordResetUri = `${baseUri}/admin/realms/onap/users/${server.id}/reset-password`;
+        const passwordResetUri = `${baseUri}/admin/realms/master/users/${server.id}/reset-password`;
 
         const updateUserResponse = await fetch(passwordResetUri, {
             method: 'PUT',
@@ -260,14 +357,14 @@ class UserService {
     };
   
     const uri1 =  (baseUri) + '/realms/master/protocol/openid-connect/token';
-    const uri2 =  (baseUri) + '/admin/realms/onap/users/'+ server.id;
+    const uri2 =  (baseUri) + '/admin/realms/master/users/'+ server.id;
     let respose :any;
     await axios.post(uri1, data2, {
         headers: tokenHeaders,
-        }).then((res: any) => {
+        }).then((res) => {
           //console.log(res);
           respose=res;
-      }).catch((err: any) => {
+      }).catch((err) => {
           console.log(err);
       })
 
@@ -309,6 +406,13 @@ class UserService {
         username: firstResult.username,
         password: firstResult.password,
         confirmPassword: firstResult.confirmPassword,
+        mappedRoles: firstResult.mappedRoles,
+        mappedGroups: firstResult.mappedGroups,
+        availableRoles: firstResult.availableRoles,
+        maproleid: firstResult.maproleid,
+        avlroleid: firstResult.avlroleid,
+        edittype:firstResult.edittype
+        //userId: firstResult.userId,
        // newPassword: firstResult.newPassword
       }
     }

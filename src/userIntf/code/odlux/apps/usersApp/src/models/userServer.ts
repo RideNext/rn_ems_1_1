@@ -2,8 +2,6 @@
  * ============LICENSE_START========================================================================
  * ONAP : ccsdk feature sdnr wt odlux
  * =================================================================================================
- * Copyright (C) 2024 RideNext Software Solutions. Pvt Ltd.  All rights reserved
- * =================================================================================================
  * Copyright (C) 2019 highstreet technologies GmbH Intellectual Property. All rights reserved.
  * =================================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -25,6 +23,13 @@ export type userServer = {
    username :string;
    password :string;
    confirmPassword :string;
+   mappedRoles: string[];
+   mappedGroups: string;
+   availableRoles: string[];
+   maproleid : string[];
+   avlroleid: string[];
+   edittype:String
+  // userId: string;
   //newPassword :string;
     
 } 
@@ -84,3 +89,8 @@ export type userServerDevice = {
   version: string;
   xml: string;      // NeXMLFile
 }
+
+/*type UserData = userServer & {
+   roles: string[];
+   userIds: string;
+};*/

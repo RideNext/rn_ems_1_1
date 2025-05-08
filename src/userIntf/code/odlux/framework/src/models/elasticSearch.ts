@@ -76,7 +76,9 @@ type ActionResponse ={
 }
 
 export type PostResponse = ActionResponse & {
-  created: boolean
+  created: boolean,
+  message:string
+
 }
 
 export type DeleteResponse = ActionResponse & {
